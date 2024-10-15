@@ -8,4 +8,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_yoshino/Scenes/Title.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/_yoshino/Scenes/Tutorial.unity
+    guid: ff2eea554b6499a40b727194cb800747
+  - enabled: 1
+    path: Assets/_yoshino/Scenes/Play.unity
+    guid: 835050f0877aa6a4aa0c9097edce35f7
+  - enabled: 1
+    path: Assets/_yoshino/Scenes/Result.unity
+    guid: 75fb217c6bb779743b2eebcfc2828b53
+  - enabled: 1
+    path: Assets/_yoshino/Scenes/Over.unity
+    guid: 491161ef8cf5f8e4ba6c005c7f4c6629
   m_configObjects: {}

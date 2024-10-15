@@ -10,16 +10,22 @@ public class GameManager : MonoBehaviour
 
     public enum STATE_SCENE
     {
-        TITLE,    // タイトル画面
-        TUTORIAL, // チュートリアル画面
-        EASY,     // 初級
-        NORMAL,   // 中級
-        HARD,     // 上級
-        RANKING,  // ランキング
-        OVER,     // ゲームオーバー
-        NONE,     // 何もなし
+        TITLE = 0,    // タイトル画面
+        TUTORIAL = 1, // チュートリアル画面
+        PLAY = 2,     // プレイ画面
+        RANKING = 3,  // ランキング
+        OVER = 4,     // ゲームオーバー
+        NONE,         // 何もなし
     }
     private STATE_SCENE state_scene;
+    public enum STATE_LEVEL
+    {
+        NONE,   // プレイ画面以外
+        EASY,   // 初級
+        NORMAL, // 中級
+        HARD,   // 上級
+    }
+    private STATE_LEVEL state_level;
 
     [SerializeField] Image imgFade;
     private bool isChangingScene;
@@ -39,8 +45,8 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        // タイトルスタート
         state_scene = STATE_SCENE.NONE;
+        state_level = STATE_LEVEL.NONE;
 
         imgFade.fillAmount = 1; // フェードイン
         isChangingScene = false;
@@ -49,6 +55,13 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // nullチェック
+        if (imgFade == null)
+        {
+            Debug.LogError("imgFadeをinspectorで設定していません");
+            return;
+        }
+
         if (isChangingScene)
         {
             if (imgFade.fillAmount >= 1)
@@ -76,13 +89,11 @@ public class GameManager : MonoBehaviour
     /// 次のシーンを設定する
     /// </summary>
     /// <param name="_state_scene">次のシーン</param>
-    public void SetNextScene(STATE_SCENE _state_scene = STATE_SCENE.NONE)
+    public void SetNextScene(STATE_SCENE _state_scene = STATE_SCENE.NONE, STATE_LEVEL _state_level = STATE_LEVEL.NONE)
     {
         // nullチェック
-        if(STATE_SCENE.NONE == _state_scene )
-        {
-            return;
-        }
+        if (STATE_SCENE.NONE == _state_scene) return;
+        if (_state_scene == STATE_SCENE.PLAY && _state_level == STATE_LEVEL.NONE) return;
 
         state_scene = _state_scene;
         isChangingScene = true;
