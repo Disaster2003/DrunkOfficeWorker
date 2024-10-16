@@ -59,6 +59,7 @@ public class AnimationSample : MonoBehaviour
         }
         else
         {
+            // アニメーションのインターバル中
             intervalAnimation += Time.deltaTime;
         }
     }

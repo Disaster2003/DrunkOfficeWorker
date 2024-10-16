@@ -27,15 +27,15 @@ public class GameManager : MonoBehaviour
     }
     private STATE_LEVEL state_level;
 
-    [SerializeField] Image imgFade;
-    private bool isChangingScene;
+    [SerializeField] Image imgFade; // フェード用画像
+    private bool isChangingScene;   // シーン遷移するかどうか
 
     // Start is called before the first frame update
     void Start()
     {
-        // Singleton
         if (instance == null)
         {
+            // Singleton
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
