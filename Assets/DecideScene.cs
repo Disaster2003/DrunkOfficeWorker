@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem; //新Inputシステムの利用に必要
+using UnityEngine.UI;
 
 public class DecideScene : MonoBehaviour
 {
+    [SerializeField] Image imgFade;
+
     [SerializeField] GameManager.STATE_SCENE state_scene;
     [SerializeField] GameManager.STATE_LEVEL state_level;
 
@@ -23,6 +26,8 @@ public class DecideScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GetComponent<Rigidbody2D>().gravityScale = 0;
+
         if (state_scene == GameManager.STATE_SCENE.TITLE || state_scene == GameManager.STATE_SCENE.TUTORIAL)
         {
             isSelected = true;
@@ -43,6 +48,11 @@ public class DecideScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(imgFade.fillAmount == 0)
+        {
+            GetComponent<Rigidbody2D>().gravityScale = 1;
+        }
+
         if (isSelected)
         {
             if (Time.time % 1 <= 0.5f)

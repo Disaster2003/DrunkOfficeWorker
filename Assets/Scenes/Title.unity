@@ -295,6 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6ba152b1176a77409eb4e6e621fcaac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imgFade: {fileID: 2051417775}
   state_scene: 3
   state_level: 0
   upButton: {fileID: 300804225}
@@ -476,6 +477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6ba152b1176a77409eb4e6e621fcaac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imgFade: {fileID: 2051417775}
   state_scene: 2
   state_level: 2
   upButton: {fileID: 1309976265}
@@ -1047,6 +1049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6ba152b1176a77409eb4e6e621fcaac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imgFade: {fileID: 2051417775}
   state_scene: 1
   state_level: 0
   upButton: {fileID: 2106179535}
@@ -1228,6 +1231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6ba152b1176a77409eb4e6e621fcaac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imgFade: {fileID: 2051417775}
   state_scene: 2
   state_level: 1
   upButton: {fileID: 1309976265}
@@ -1594,6 +1598,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2051417775 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3349398426892826850, guid: aece77d90e5bbe44280912f153b0e3b9, type: 3}
+  m_PrefabInstance: {fileID: 1658890012}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2106179535
 GameObject:
   m_ObjectHideFlags: 0
@@ -1766,6 +1781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6ba152b1176a77409eb4e6e621fcaac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  imgFade: {fileID: 2051417775}
   state_scene: 2
   state_level: 3
   upButton: {fileID: 1370255551}
