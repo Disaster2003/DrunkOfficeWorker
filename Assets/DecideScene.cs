@@ -6,22 +6,30 @@ using UnityEngine.InputSystem; // 新Inputシステムの利用に必要
 
 public class DecideScene : MonoBehaviour
 {
-    [SerializeField] Image imgFade; // フェード用画像
+    [SerializeField, Header("フェードイン/アウト用画像")]
+    private Image imgFade;
 
-    [SerializeField] GameManager.STATE_SCENE state_scene;
-    [SerializeField] GameManager.STATE_LEVEL state_level;
+    [SerializeField, Header("遷移先の状態")]
+    private GameManager.STATE_SCENE state_scene;
+    [SerializeField, Header("遷移先の難易度")]
+    private GameManager.STATE_LEVEL state_level;
 
-    [SerializeField] GameObject upButton;   // 上入力した時の切り替わり先ボタン
-    [SerializeField] GameObject downButton; // 下入力した時の切り替わり先ボタン
-    [SerializeField] GameObject leftButton; // 左入力した時の切り替わり先ボタン
-    [SerializeField] GameObject rightButton;// 右入力した時の切り替わり先ボタン
+    [SerializeField, Header("上入力した時の切り替わり先ボタン")]
+    private GameObject upButton;
+    [SerializeField, Header("下入力した時の切り替わり先ボタン")]
+    private GameObject downButton;
+    [SerializeField, Header("左入力した時の切り替わり先ボタン")]
+    private GameObject leftButton;
+    [SerializeField, Header("右入力した時の切り替わり先ボタン")]
+    private GameObject rightButton;
     public bool isSelecting; // true = 選ばれている、false = 選ばれていない
 
-    private InputControl IC;           // インプットアクションを定義
-    private Vector2 direction;         // 移動方向
-    public float intervalButtonChange; // ボタン切り替えのインターバル
+    private InputControl IC; // インプットアクションを定義
+    private Vector2 directionMove;
+    public float intervalButtonChange;
 
-    [SerializeField] GameObject highlight; // 選択時のハイライト
+    [SerializeField, Header("ボタン選択時のハイライト")]
+    private GameObject highlight;
 
     // Start is called before the first frame update
     void Start()
@@ -40,11 +48,13 @@ public class DecideScene : MonoBehaviour
         }
 
         IC = new InputControl(); // インプットアクションを取得
-        IC.Player.Direction.performed += OnDirection; // 全てのアクションにイベントを登録
+        IC.Player.Direction.performed += OnReserveDirection; // 全てのアクションにイベントを登録
         IC.Player.Decide.started += OnDecide;
         IC.Enable(); // インプットアクションを機能させる為に有効化する。
-        direction = Vector2.zero; // 移動方向の初期化
-        intervalButtonChange = 0; // インターバルの初期化
+
+
+        directionMove = Vector2.zero; // 移動方向の初期化
+        intervalButtonChange = 0;     // ボタン切り替え間隔の初期化
     }
 
     // Update is called once per frame
@@ -82,38 +92,41 @@ public class DecideScene : MonoBehaviour
         }
     }
 
-    private void OnDirection(InputAction.CallbackContext context)
+    /// <summary>
+    /// 入力方向を受け取る
+    /// </summary>
+    private void OnReserveDirection(InputAction.CallbackContext context)
     {
         if (!isSelecting) return;
 
         // nullチェック
-        direction = context.ReadValue<Vector2>();
-        if (direction == Vector2.zero) return;
+        directionMove = context.ReadValue<Vector2>();
+        if (directionMove == Vector2.zero) return;
 
         if (intervalButtonChange <= 0)
         {
-            if (direction.x > 0)
+            if (directionMove.x > 0)
             {
                 // 右のボタンに切り替え
-                ChangeSelectButton(rightButton);
+                SwitchSelectButton(rightButton);
                 return;
             }
-            if (direction.x < 0)
+            if (directionMove.x < 0)
             {
                 // 左のボタンに切り替え
-                ChangeSelectButton(leftButton);
+                SwitchSelectButton(leftButton);
                 return;
             }
-            if (direction.y > 0)
+            if (directionMove.y > 0)
             {
                 // 上のボタンに切り替え
-                ChangeSelectButton(upButton);
+                SwitchSelectButton(upButton);
                 return;
             }
-            if (direction.y < 0)
+            if (directionMove.y < 0)
             {
                 // 下のボタンに切り替え
-                ChangeSelectButton(downButton);
+                SwitchSelectButton(downButton);
                 return;
             }
         }
@@ -123,9 +136,11 @@ public class DecideScene : MonoBehaviour
     /// ボタン選択を切り替える
     /// </summary>
     /// <param name="kindButton">ボタンの種類</param>
-    private void ChangeSelectButton(GameObject kindButton)
+    private void SwitchSelectButton(GameObject kindButton)
     {
         if (kindButton == null) return;
+
+        // 選択の切り替え
         isSelecting = false;
         kindButton.GetComponent<DecideScene>().isSelecting = true;
         kindButton.GetComponent<DecideScene>().intervalButtonChange = 0.1f;
@@ -138,6 +153,7 @@ public class DecideScene : MonoBehaviour
     private void OnDecide(InputAction.CallbackContext context)
     {
         if (!isSelecting) return;
+
         GameManager.GetInstance().SetNextScene(state_scene, state_level);
     }
 }

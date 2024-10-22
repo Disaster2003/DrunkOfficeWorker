@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class AnimationSample : MonoBehaviour
 {
-    SpriteRenderer spriteRenderer;
-    [SerializeField] Sprite[] sample;
+    private SpriteRenderer spriteRenderer;
+    [SerializeField, Header("アニメーション画像")]
+    private Sprite[] sampleArray;
     private float intervalAnimation;
 
     // Start is called before the first frame update
     void Start()
     {
+        // 画像の初期化
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = sample[0];
+        spriteRenderer.sprite = sampleArray[0];
+
+        // アニメーション間隔の初期化
         intervalAnimation = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Animation(sample);
+        Animation(sampleArray);
     }
 
     /// <summary>

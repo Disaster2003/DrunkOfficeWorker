@@ -27,15 +27,16 @@ public class GameManager : MonoBehaviour
     }
     private STATE_LEVEL state_level;
 
-    [SerializeField] Image imgFade; // フェード用画像
-    private bool isChangingScene;   // シーン遷移するかどうか
+    [SerializeField, Header("フェードイン/アウト用画像")]
+    private Image imgFade;
+    private bool isChangingScene; // true = シーン遷移する, false = シーン遷移しない
 
     // Start is called before the first frame update
     void Start()
     {
         if (instance == null)
         {
-            // Singleton
+            // インスタンスの生成
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
@@ -45,11 +46,12 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        // 状態の初期化
         state_scene = STATE_SCENE.NONE;
         state_level = STATE_LEVEL.NONE;
 
         imgFade.fillAmount = 1; // フェードイン
-        isChangingScene = false;
+        isChangingScene = false;// シーン遷移状態の初期化
     }
 
     // Update is called once per frame
@@ -92,9 +94,10 @@ public class GameManager : MonoBehaviour
     public void SetNextScene(STATE_SCENE _state_scene = STATE_SCENE.NONE, STATE_LEVEL _state_level = STATE_LEVEL.NONE)
     {
         // nullチェック
-        if (STATE_SCENE.NONE == _state_scene) return;
+        if (_state_scene == STATE_SCENE.NONE) return;
         if (_state_scene == STATE_SCENE.PLAY && _state_level == STATE_LEVEL.NONE) return;
 
+        // 遷移先の決定
         state_scene = _state_scene;
         isChangingScene = true;
     }
