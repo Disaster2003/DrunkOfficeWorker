@@ -58,7 +58,6 @@ public class AnimationSample : MonoBehaviour
                     // ‰æ‘œ‚ğ•ÏX‚·‚é
                     spriteRenderer.sprite = _sprite[0];
                 }
-
             }
         }
         else
