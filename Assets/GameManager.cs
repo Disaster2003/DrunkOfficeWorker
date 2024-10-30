@@ -50,8 +50,9 @@ public class GameManager : MonoBehaviour
         state_scene = STATE_SCENE.NONE;
         state_level = STATE_LEVEL.NONE;
 
-        imgFade.fillAmount = 1; // フェードイン
-        isChangingScene = false;// シーン遷移状態の初期化
+        // シーン遷移状態の初期化
+        imgFade.fillAmount = 1;
+        isChangingScene = false;
     }
 
     // Update is called once per frame
@@ -93,6 +94,8 @@ public class GameManager : MonoBehaviour
     /// <param name="_state_scene">次のシーン</param>
     public void SetNextScene(STATE_SCENE _state_scene = STATE_SCENE.NONE, STATE_LEVEL _state_level = STATE_LEVEL.NONE)
     {
+        if(isChangingScene) return;
+
         // nullチェック
         if (_state_scene == STATE_SCENE.NONE) return;
         if (_state_scene == STATE_SCENE.PLAY && _state_level == STATE_LEVEL.NONE) return;

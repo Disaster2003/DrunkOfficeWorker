@@ -171,7 +171,6 @@ public class PlayerComponent : MonoBehaviour
             state_player = STATE_PLAYER.WAIT;
             rigidBody2D.velocity = Vector2.zero;
             rigidBody2D.gravityScale = 0;
-            return;
         }
     }
 }

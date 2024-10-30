@@ -9,19 +9,15 @@ public class DecideScene : MonoBehaviour
     [SerializeField, Header("フェードイン/アウト用画像")]
     private Image imgFade;
 
-    [SerializeField, Header("遷移先の状態")]
-    private GameManager.STATE_SCENE state_scene;
-    [SerializeField, Header("遷移先の難易度")]
-    private GameManager.STATE_LEVEL state_level;
+    [Header("遷移先の状態・難易度")]
+    [SerializeField] private GameManager.STATE_SCENE state_scene;
+    [SerializeField] private GameManager.STATE_LEVEL state_level;
 
-    [SerializeField, Header("上入力した時の切り替わり先ボタン")]
-    private GameObject upButton;
-    [SerializeField, Header("下入力した時の切り替わり先ボタン")]
-    private GameObject downButton;
-    [SerializeField, Header("左入力した時の切り替わり先ボタン")]
-    private GameObject leftButton;
-    [SerializeField, Header("右入力した時の切り替わり先ボタン")]
-    private GameObject rightButton;
+    [Header("上下左右入力した時の切り替わり先ボタン")]
+    [SerializeField] private GameObject upButton;
+    [SerializeField] private GameObject downButton;
+    [SerializeField] private GameObject leftButton;
+    [SerializeField] private GameObject rightButton;
     public bool isSelecting; // true = 選ばれている、false = 選ばれていない
 
     private InputControl IC; // インプットアクションを定義
@@ -34,7 +30,8 @@ public class DecideScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<Rigidbody2D>().gravityScale = 0; // 重力OFF
+        // 重力OFF
+        GetComponent<Rigidbody2D>().gravityScale = 0;
 
         if (state_scene == GameManager.STATE_SCENE.TITLE || state_scene == GameManager.STATE_SCENE.TUTORIAL)
         {

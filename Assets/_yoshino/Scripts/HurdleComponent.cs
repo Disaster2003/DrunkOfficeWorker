@@ -8,21 +8,35 @@ public class HurdleComponent : MonoBehaviour
     PlayerComponent.STATE_PLAYER state_player;
     private bool isSuccessInputKey; // true = キー入力成功, false = キー入力未成功
 
+    [SerializeField, Header("障害物画像")]
+    private Sprite[] spritesHurdle;
+
     // Start is called before the first frame update
     void Start()
     {
         isSuccessInputKey = false;
+
+        // 画像の設定
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = spritesHurdle[Random.Range(0, spritesHurdle.Length)];
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (transform.position.x > 5)
+        {
+            // カメラ内へ移動
+            transform.Translate(-Time.deltaTime, 0, 0);
+            return;
+        }
+
         if(state_player == PlayerComponent.STATE_PLAYER.JUMP)
         {
-            if (isSuccessInputKey)
+            if (transform.childCount == 0)
             {
                 // プレイヤーの下を通過させる
-                transform.Translate(10 * Time.deltaTime, 0, 0);
+                transform.Translate(10 * -Time.deltaTime, 0, 0);
             }
         }
     }
