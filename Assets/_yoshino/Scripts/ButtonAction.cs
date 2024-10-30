@@ -6,9 +6,10 @@ using UnityEngine.UI;
 
 public class ButtonAction : MonoBehaviour
 {
-    private InputControl IC; // インプットアクションを定義
-    [SerializeField] private Image imgInputGauge;
     [SerializeField] private Sprite[] UI_Button;
+    [SerializeField] private Image imgInputGauge;
+
+    private InputControl IC; // インプットアクションを定義
 
     private enum KIND_BUTTON
     {
@@ -20,37 +21,42 @@ public class ButtonAction : MonoBehaviour
     [SerializeField, Header("チュートリアル用ボタンアクションの選択")]
     private KIND_BUTTON kind_button;
     private float timerPushLong;
+    private bool isPushed; // true = 押下中, false = not 押下
     private int countPush;
-    private bool isPushed;
 
     // Start is called before the first frame update
     void Start()
     {
-        IC = new InputControl(); // インプットアクションを取得
+        int rand = Random.Range(0, 4);
+
+        // 画像の初期化
+        GetComponent<Image>().sprite = UI_Button[rand];
         imgInputGauge.fillAmount = 0;
 
-        int rand = Random.Range(0, 4);
-        GetComponent<Image>().sprite = UI_Button[rand];
+        // インプットアクションを取得
+        IC = new InputControl();
+        // アクションにイベントを登録
         switch (rand)
         {
             case 0:
-                IC.Player.UpKey.started += InputButton; // アクションにイベントを登録
-                IC.Player.UpKey.canceled += ReleaseButton; // アクションにイベントを登録
+                IC.Player.UpKey.started += InputButton;
+                IC.Player.UpKey.canceled += ReleaseButton;
                 break;
             case 1:
-                IC.Player.DownKey.started += InputButton; // アクションにイベントを登録
-                IC.Player.DownKey.canceled += ReleaseButton; // アクションにイベントを登録
+                IC.Player.DownKey.started += InputButton;
+                IC.Player.DownKey.canceled += ReleaseButton;
                 break;
             case 2:
-                IC.Player.LeftKey.started += InputButton; // アクションにイベントを登録
-                IC.Player.LeftKey.canceled += ReleaseButton; // アクションにイベントを登録
+                IC.Player.LeftKey.started += InputButton;
+                IC.Player.LeftKey.canceled += ReleaseButton;
                 break;
             case 3:
-                IC.Player.RightKey.started += InputButton; // アクションにイベントを登録
-                IC.Player.RightKey.canceled += ReleaseButton; // アクションにイベントを登録
+                IC.Player.RightKey.started += InputButton;
+                IC.Player.RightKey.canceled += ReleaseButton;
                 break;
         }
-        IC.Enable(); // インプットアクションを機能させる為に有効化する。
+        // インプットアクションの有効化
+        IC.Enable();
 
         if (kind_button == KIND_BUTTON.NONE)
         {
@@ -129,6 +135,7 @@ public class ButtonAction : MonoBehaviour
 
     private void OnDestroy()
     {
+        // インプットアクションの無効化
         IC.Disable();
     }
 }

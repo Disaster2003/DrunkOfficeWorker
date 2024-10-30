@@ -6,7 +6,6 @@ public class HurdleComponent : MonoBehaviour
 {
     [SerializeField, Header("キー入力の成功時のプレイヤーがするアクション")]
     PlayerComponent.STATE_PLAYER state_player;
-    private bool isSuccessInputKey; // true = キー入力成功, false = キー入力未成功
 
     [SerializeField, Header("障害物画像")]
     private Sprite[] spritesHurdle;
@@ -14,8 +13,6 @@ public class HurdleComponent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isSuccessInputKey = false;
-
         // 画像の設定
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = spritesHurdle[Random.Range(0, spritesHurdle.Length)];
