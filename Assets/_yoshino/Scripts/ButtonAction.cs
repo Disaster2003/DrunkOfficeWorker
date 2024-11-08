@@ -11,6 +11,8 @@ public class ButtonAction : MonoBehaviour
 
     private InputControl IC; // インプットアクションを定義
 
+    [SerializeField] private GameObject imgBeforeButton;
+
     private enum KIND_BUTTON
     {
         NONE,       // 未選択
@@ -86,6 +88,22 @@ public class ButtonAction : MonoBehaviour
             timerPushLong += Time.deltaTime;
             imgInputGauge.fillAmount = timerPushLong / 0.5f;
         }
+
+        if (imgBeforeButton != null) return;
+
+        if (transform.position.x > 5)
+        {
+            // ボタンをずらす
+            transform.Translate(-Time.deltaTime, 0, 0);
+            return;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        // インプットアクションの無効化
+        IC.Disable();
+        Destroy(imgInputGauge.gameObject);
     }
 
     /// <summary>
@@ -99,6 +117,8 @@ public class ButtonAction : MonoBehaviour
             Debug.LogError("ボタンアクションが未選択です");
             return;
         }
+
+        if (imgBeforeButton != null) return;
 
         switch (kind_button)
         {
@@ -125,17 +145,10 @@ public class ButtonAction : MonoBehaviour
         timerPushLong = 0;
         isPushed = false;
 
-
         if (countPush > 5)
         {
             // 自身の破壊
             Destroy(gameObject);
         }
-    }
-
-    private void OnDestroy()
-    {
-        // インプットアクションの無効化
-        IC.Disable();
     }
 }
