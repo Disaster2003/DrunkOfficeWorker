@@ -10,6 +10,7 @@ public class PlayerComponent : MonoBehaviour
         TACKLE, // タックル
         JUMP,   // ジャンプ
     }
+    [SerializeField]
     private STATE_PLAYER state_player;
 
     [Header("プレイヤーの特定位置")]
@@ -41,7 +42,7 @@ public class PlayerComponent : MonoBehaviour
 
         // 画像の初期化
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = spritesPlayerWait[0];
+        // spriteRenderer.sprite = spritesPlayerWait[0];
         timerAnimation = 0;
 
         // 回転不可
@@ -67,7 +68,7 @@ public class PlayerComponent : MonoBehaviour
                 if (transform.position.x < 0)
                 {
                     // 走行
-                    transform.Translate(Time.deltaTime, 0, 0);
+                    transform.Translate(5 * Time.deltaTime, 0, 0);
                     PlayerAnimation(spritesPlayerRun);
                 }
                 else
@@ -116,6 +117,8 @@ public class PlayerComponent : MonoBehaviour
     /// <param name="sprites">アニメーションする画像配列</param>
     private void PlayerAnimation(Sprite[] sprites)
     {
+        if(sprites == null) return;
+
         if (timerAnimation >= INTERVAL_ANIMATION)
         {
             // インターバルの初期化
@@ -161,10 +164,10 @@ public class PlayerComponent : MonoBehaviour
         {
             // ジャンプ
             isJumped = true;
-            rigidBody2D.AddForce(Vector2.up, ForceMode2D.Impulse);
+            rigidBody2D.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
             rigidBody2D.gravityScale = 1;
         }
-        else if (transform.position.y <= positionStart.y)
+        else if (transform.position.y < positionStart.y)
         {
             // 着地
             isJumped = false;

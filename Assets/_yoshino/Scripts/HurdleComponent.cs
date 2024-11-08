@@ -5,7 +5,7 @@ using UnityEngine;
 public class HurdleComponent : MonoBehaviour
 {
     [SerializeField, Header("キー入力の成功時のプレイヤーがするアクション")]
-    PlayerComponent.STATE_PLAYER state_player;
+    private PlayerComponent.STATE_PLAYER state_player;
 
     [SerializeField, Header("障害物画像")]
     private Sprite[] spritesHurdle;
@@ -32,11 +32,21 @@ public class HurdleComponent : MonoBehaviour
         {
             if (transform.childCount == 0)
             {
-                // プレイヤーの下を通過させる
-                transform.Translate(10 * -Time.deltaTime, 0, 0);
+                if (transform.position.x < -10)
+                {
+                    // 自身の破棄
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    // プレイヤーの下を通過させる
+                    transform.Translate(10 * -Time.deltaTime, 0, 0);
+                }
             }
         }
     }
+
+    public PlayerComponent.STATE_PLAYER GetPlayerState() {  return state_player; }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -44,8 +54,8 @@ public class HurdleComponent : MonoBehaviour
         {
             // 左上にぶっ飛ばす
             Vector2 topLeft = Vector2.up + Vector2.left;
-            GetComponent<Rigidbody2D>().AddForce(topLeft, ForceMode2D.Impulse);
-            GetComponent<Rigidbody2D>().AddTorque(360, ForceMode2D.Impulse);
+            GetComponent<Rigidbody2D>().AddForce(topLeft * 10, ForceMode2D.Impulse);
+            GetComponent<Rigidbody2D>().AddTorque(180, ForceMode2D.Impulse);
         }
     }
 }

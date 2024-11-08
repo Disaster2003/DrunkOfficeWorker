@@ -838,7 +838,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -870,11 +870,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1056747122}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7820f971bcec0c4199260f1c8344b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state_player: 0
   positionStart: {x: -5, y: 0}
   position_xGoalTackle: 5
   spritesPlayerWait: []
@@ -1127,7 +1128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03d6a46c597f5a24fbc8c09c5151b1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state_player: 2
+  state_player: 1
   spritesHurdle:
   - {fileID: -992429338, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
   - {fileID: 1080876447, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}

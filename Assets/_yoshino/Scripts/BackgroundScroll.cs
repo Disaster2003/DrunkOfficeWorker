@@ -19,13 +19,15 @@ public class BackgroundScroll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(transform.position.x <= position_xGoal)
+        if (GameObject.FindGameObjectWithTag("Hurdle")) return;
+
+        // ”wŒi‚ÌƒXƒNƒ[ƒ‹
+        transform.Translate(10 * -Time.deltaTime, 0, 0);
+
+        if (transform.position.x <= position_xGoal)
         {
             // ‰ŠúˆÊ’u‚Ö
             transform.position = positionInitialize;
         }
-
-        // ”wŒi‚ÌƒXƒNƒ[ƒ‹
-        transform.Translate(10 * -Time.deltaTime, 0, 0);
     }
 }
