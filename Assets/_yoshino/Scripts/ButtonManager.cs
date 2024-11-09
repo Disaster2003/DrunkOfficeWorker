@@ -9,14 +9,11 @@ public class ButtonManager : MonoBehaviour
     {
         if (transform.childCount == 0)
         {
+            // プレイヤーの状態設定
+            FindObjectOfType<PlayerComponent>().SetPlayerState(GetComponentInParent<HurdleComponent>().GetPlayerState());
+
             // 自身の破壊
             Destroy(gameObject);
         }
-    }
-
-    private void OnDestroy()
-    {
-        // プレイヤーの状態設定
-        FindObjectOfType<PlayerComponent>().SetPlayerState(GetComponentInParent<HurdleComponent>().GetPlayerState());
     }
 }
