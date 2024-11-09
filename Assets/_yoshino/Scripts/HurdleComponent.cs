@@ -21,6 +21,13 @@ public class HurdleComponent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (transform.position.x < -10)
+        {
+            // 自身の破棄
+            Destroy(gameObject);
+            return;
+        }
+
         if (transform.position.x > 5)
         {
             // カメラ内へ移動
@@ -32,16 +39,8 @@ public class HurdleComponent : MonoBehaviour
         {
             if (transform.childCount == 0)
             {
-                if (transform.position.x < -10)
-                {
-                    // 自身の破棄
-                    Destroy(gameObject);
-                }
-                else
-                {
-                    // プレイヤーの下を通過させる
-                    transform.Translate(10 * -Time.deltaTime, 0, 0);
-                }
+                // プレイヤーの下を通過させる
+                transform.Translate(10 * -Time.deltaTime, 0, 0);
             }
         }
     }

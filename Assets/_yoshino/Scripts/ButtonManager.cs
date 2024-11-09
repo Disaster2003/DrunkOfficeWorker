@@ -17,6 +17,6 @@ public class ButtonManager : MonoBehaviour
     private void OnDestroy()
     {
         // ƒvƒŒƒCƒ„[‚Ìó‘Ôİ’è
-        GameObject.Find("Player").GetComponent<PlayerComponent>().SetPlayerState(GetComponentInParent<HurdleComponent>().GetPlayerState());
+        FindObjectOfType<PlayerComponent>().SetPlayerState(GetComponentInParent<HurdleComponent>().GetPlayerState());
     }
 }
