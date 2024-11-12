@@ -12,12 +12,18 @@ public class Ranking : MonoBehaviour
     // ランキングの格納
     private int[] rankTimes = new int[6];
 
+    [SerializeField, Header("初期化ボタン")]
+    private bool isRest = false;
+
+    [SerializeField, Header("テスト")]
+    private bool isTest = false;
+
     // 今回の時間
-    [SerializeField]
-    private int newTime;
+    [SerializeField, Header("(Test時)新しいランク")]
+    private int newTime = 0;
 
     /// <summary>
-    /// Updateの前に呼び出される
+    /// スタートイベント
     /// </summary>
     private void Start()
     {
@@ -26,9 +32,13 @@ public class Ranking : MonoBehaviour
         RenderRanking();
     }
 
+    /// <summary>
+    /// 更新イベント
+    /// </summary>
     private void Update()
     {
-        if(Input.GetKey(KeyCode.Escape) && Input.GetKeyDown(KeyCode.Return))
+        // ランキングの初期化
+        if((Input.GetKey(KeyCode.Escape) && Input.GetKeyDown(KeyCode.Return)) || isRest)
         {
             for (int i = 1; i < rankTimes.Length; i++)
             {
@@ -65,7 +75,10 @@ public class Ranking : MonoBehaviour
         }
 
         // 新しいタイムを取得
-        //newTime = (int)Timer.get_timer;
+        if (isTest)
+        {
+            newTime = (int)Timer.get_timer;
+        }
     }
 
     /// <summary>
