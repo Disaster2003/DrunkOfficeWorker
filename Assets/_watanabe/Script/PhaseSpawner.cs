@@ -11,7 +11,17 @@ public class PhaseSpawner : MonoBehaviour
     private Vector3 instancePos;
 
     // 生成した数
-    public int count{ get; private set; }
+    [SerializeField, Header("確認用いじらないで")]
+    private int count;
+
+    // 生成した数のゲッター
+    public int get_count{ get { return count; } }
+
+    private void Start()
+    {
+        // テスト用
+        //Instance();
+    }
 
     /// <summary>
     /// 生成する
@@ -32,6 +42,9 @@ public class PhaseSpawner : MonoBehaviour
             // 生成カウントを進める
             count++;
         }
+
+        // テスト用
+        //Invoke("Instance", 2);
     }
 
 }
