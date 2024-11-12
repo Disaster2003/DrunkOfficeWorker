@@ -11,17 +11,29 @@ public class Timer : MonoBehaviour
     [SerializeField, Header("タイマーテキスト")]
     private Text txtTimer;
 
+    [SerializeField, Header("背景を暗くするコンポーネント")]
+    private BackGroundDarkken bgd;
+
     [SerializeField, Header("制限時間")]
     private float time = 30;
 
-    [SerializeField, Header("")]
-    private BackGroundDarkken bgd;
+    // タイマー
+    static private float timer = 0;
 
-    // 
-    private float timer;
+    // タイマーのゲッターランキングで呼び出す
+    static public float get_timer
+    {
+        get
+        {
+            return timer;
+        }
+    }
 
     // 最大時間
     readonly public static double timeMax = 86400;
+
+    // タイマーを止める
+    bool isStop = false;
 
     /// <summary>
     /// 時間に変換
@@ -65,6 +77,14 @@ public class Timer : MonoBehaviour
     }
 
     /// <summary>
+    /// タイマーを動かすのを止める
+    /// </summary>
+    public void Stop()
+    {
+        isStop = true;
+    }
+
+    /// <summary>
     /// スタートイベント
     /// </summary>
     private void Start()
@@ -78,15 +98,18 @@ public class Timer : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        // 制限時間が無くなるまで時間を減らす
-        if (timer <= 0)
+        if (isStop)
         {
-            timer = 0;
-        }
-        else
-        {
-            // 時間を減らす
-            timer -= Time.deltaTime;
+            // 制限時間が無くなるまで時間を減らす
+            if (timer <= 0)
+            {
+                timer = 0;
+            }
+            else
+            {
+                // 時間を減らす
+                timer -= Time.deltaTime;
+            }
         }
 
         if (bgd)

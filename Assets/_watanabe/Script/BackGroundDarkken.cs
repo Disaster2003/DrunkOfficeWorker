@@ -11,13 +11,18 @@ public class BackGroundDarkken : MonoBehaviour
     [SerializeField, Header("暗くする画像")]
     private Image imgBackGround;
 
-    [SerializeField, Header("補間度合い"), Range(0, 0.5f)]
-    float test_t;
+    [SerializeField, Header("テストモード")]
+    private bool isTest;
+
+    [SerializeField, Header("(Test時)補間度合い"), Range(0, 0.5f)]
+    private float test_t;
 
     private void Update()
     {
-        // テスト用
-        //Darkken(test_t);
+        if (isTest)
+        {
+            Darkken(test_t);
+        }
     }
 
     /// <summary>

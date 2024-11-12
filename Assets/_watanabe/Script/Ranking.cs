@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// ランキングコンポーネント
+/// </summary>
 public class Ranking : MonoBehaviour
 {
     [SerializeField, Header("スコアを表示するテキスト")]
@@ -31,7 +30,7 @@ public class Ranking : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.Escape) && Input.GetKeyDown(KeyCode.Return))
         {
-            for (int i = 1; i < rankTimes.Length - 1; i++)
+            for (int i = 1; i < rankTimes.Length; i++)
             {
                 PlayerPrefs.SetInt("R" + i, 0);
             }
@@ -47,22 +46,26 @@ public class Ranking : MonoBehaviour
         //アプリのデータ領域が存在するか
         if (PlayerPrefs.HasKey("R1"))
         {
-            for (int i = 1; i < rankTimes.Length - 1; i++)
+            for (int i = 1; i < rankTimes.Length; i++)
             {
                 // データ領域の読み込み
                 rankTimes[i] = PlayerPrefs.GetInt("R" + i);
+                Debug.Log(rankTimes[i]);
             }
             Debug.Log("データ領域を読み込みました");
         }
         else
         {
-            for (int i = 1; i < rankTimes.Length - 1; i++)
+            for (int i = 1; i < rankTimes.Length; i++)
             {
                 rankTimes[i] = rankTimes[i] = 0;
                 PlayerPrefs.SetInt("R" + i, 0);
             }
             Debug.Log("データ領域を初期化しました");
         }
+
+        // 新しいタイムを取得
+        //newTime = (int)Timer.get_timer;
     }
 
     /// <summary>
@@ -71,15 +74,9 @@ public class Ranking : MonoBehaviour
     private void RankingCheck()
     {
         int newRank = 0; // まず今回のスコアを最下位と仮定する
-        bool isDuplicate = false; // 同じスコアがあるかチェック用
 
-        for (int idx = 0; idx < rankTimes.Length - 1; idx++)
+        for (int idx = 1; idx < rankTimes.Length; idx++)
         { // 昇順 1...3
-            if (rankTimes[idx] == newTime)
-            {
-                isDuplicate = true; // 同じスコアがあった
-                break;
-            }
             if (rankTimes[idx] < newTime)
             {
                 newRank = idx; // 新しいランクとして判定する
@@ -87,14 +84,15 @@ public class Ranking : MonoBehaviour
             }
         }
 
+        // 同じスコアがなく、または新しいランクが見つかったら
         if (newRank != 0)
         { //0位のままでなかったらランクイン確定
-            for (int idx = rankTimes.Length - 1; idx > newRank; idx--)
+            for (int idx = rankTimes.Length-1; idx > newRank; idx--)
             {
                 rankTimes[idx] = rankTimes[idx - 1]; //繰り下げ処理
             }
             rankTimes[newRank] = newTime; //新ランクに登録
-            for (int idx = 1; idx <= rankTimes.Length - 1; idx++)
+            for (int idx = 1; idx < rankTimes.Length; idx++)
             {
                 PlayerPrefs.SetInt("R" + idx, rankTimes[idx]); //データ領域に保存
             }
@@ -108,7 +106,7 @@ public class Ranking : MonoBehaviour
     {
         for (int idx = 0; idx < txt_ranks.Length; idx++)
         {
-            int totalTime = rankTimes[idx];
+            int totalTime = rankTimes[idx+1];
             if (totalTime > 0)
             {
                 totalTime = (int)(Timer.timeMax - totalTime);

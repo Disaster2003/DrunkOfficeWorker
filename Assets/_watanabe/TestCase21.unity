@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &15465879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,7 +158,7 @@ MonoBehaviour:
   - {fileID: 1483348827}
   - {fileID: 206914538}
   - {fileID: 1299533949}
-  newTime: 25
+  newTime: 30
 --- !u!4 &15465881
 Transform:
   m_ObjectHideFlags: 0
@@ -443,7 +443,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &694666935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,8 +457,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   txtTimer: {fileID: 1094344369}
-  time: 30
   bgd: {fileID: 1293294583}
+  time: 30
 --- !u!4 &694666936
 Transform:
   m_ObjectHideFlags: 0
@@ -736,13 +736,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1293294584}
   - component: {fileID: 1293294583}
+  - component: {fileID: 1293294585}
   m_Layer: 0
   m_Name: Test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1293294583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -750,13 +751,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1293294582}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7b3b309a24616d468428b45653834ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   darkColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   imgBackGround: {fileID: 1575921473}
+  isTest: 0
   test_t: 0
 --- !u!4 &1293294584
 Transform:
@@ -773,6 +775,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1293294585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293294582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5c87a923ae71e748baf0654ceeace5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pfb_Object:
+  - {fileID: 759285223786992221, guid: a1eddcc845588ca4ab748429d5f19888, type: 3}
+  instancePos: {x: 0, y: 0, z: 0}
+  count: 0
+  isTest: 0
 --- !u!1 &1299533948
 GameObject:
   m_ObjectHideFlags: 0

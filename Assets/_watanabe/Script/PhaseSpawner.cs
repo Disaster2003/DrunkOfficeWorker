@@ -17,10 +17,15 @@ public class PhaseSpawner : MonoBehaviour
     // 生成した数のゲッター
     public int get_count{ get { return count; } }
 
+    [SerializeField, Header("テスト用")]
+    private bool isTest;
+
     private void Start()
     {
-        // テスト用
-        //Instance();
+        if (isTest)
+        {
+            Instance();
+        }
     }
 
     /// <summary>
@@ -43,8 +48,10 @@ public class PhaseSpawner : MonoBehaviour
             count++;
         }
 
-        // テスト用
-        //Invoke("Instance", 2);
+        if (isTest)
+        {
+            Invoke("Instance", 2);
+        }
     }
 
 }
