@@ -98,7 +98,7 @@ public class Timer : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (isStop)
+        if (!isStop)
         {
             // 制限時間が無くなるまで時間を減らす
             if (timer <= 0)
