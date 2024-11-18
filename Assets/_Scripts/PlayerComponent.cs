@@ -57,12 +57,12 @@ public class PlayerComponent : MonoBehaviour
         switch(state_player)
         {
             case STATE_PLAYER.WAIT:
-                // 開始位置へ向かう
-                transform.position = Vector2.MoveTowards(transform.position, positionStart, Time.deltaTime);
-
                 // 待機/走行アニメーション
                 float distance = Vector2.Distance(transform.position, positionStart);
                 PlayerAnimation(distance < 0.1f ? spritesPlayerWait : spritesPlayerRun);
+
+                // 開始位置へ向かう
+                transform.position = Vector2.MoveTowards(transform.position, positionStart, Time.deltaTime);
                 break;
             case STATE_PLAYER.TACKLE:
                 if (transform.position.x < 0)
@@ -73,15 +73,8 @@ public class PlayerComponent : MonoBehaviour
                 }
                 else
                 {
-                    if(transform.position.x >= position_xGoalTackle)
-                    {
-                        // タックル終了
-                        state_player = STATE_PLAYER.WAIT;
-                        return;
-                    }
-
                     // タックル
-                    transform.Translate(2 * Time.deltaTime, 0, 0);
+                    transform.Translate(10 * Time.deltaTime, 0, 0);
                     PlayerAnimation(spritesPlayerTackle);
                 }
                 break;
@@ -175,5 +168,11 @@ public class PlayerComponent : MonoBehaviour
             rigidBody2D.velocity = Vector2.zero;
             rigidBody2D.gravityScale = 0;
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.GetInstance().SetNextScene(GameManager.STATE_SCENE.RANKING);
+        GameManager.GetInstance().StartChangingScene();
     }
 }

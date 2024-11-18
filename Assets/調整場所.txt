@@ -1,0 +1,5 @@
+タイトル
+・PlayerTitleAnimation PositionTarget(画面外へ向かう場所)とSpeed Move(向かうスピード)
+
+チュートリアル
+・

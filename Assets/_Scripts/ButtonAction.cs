@@ -91,7 +91,7 @@ public class ButtonAction : MonoBehaviour
 
         if (imgBeforeButton != null) return;
 
-        if (transform.position.x > 5)
+        if (transform.position.x > 10)
         {
             // ƒ{ƒ^ƒ“‚ð‚¸‚ç‚·
             transform.Translate(-Time.deltaTime, 0, 0);

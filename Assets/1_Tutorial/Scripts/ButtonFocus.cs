@@ -5,6 +5,7 @@ using UnityEngine;
 public class ButtonFocus : MonoBehaviour
 {
     SpriteRenderer spriteRenderer;
+    [SerializeField] private Color colorFocus;
 
     // Start is called before the first frame update
     void Start()
@@ -22,13 +23,19 @@ public class ButtonFocus : MonoBehaviour
             return;
         }
 
-        if (GameObject.FindGameObjectWithTag("Hurdle"))
+        GameObject hurdle = GameObject.FindGameObjectWithTag("Hurdle");
+        if (hurdle)
         {
-            spriteRenderer.color = new Color(0, 0, 0, 0.5f);
-        }
-        else
-        {
-            spriteRenderer.color = Color.clear;
+            if (hurdle.transform.childCount == 0)
+            {
+                // “§–¾‰»
+                spriteRenderer.color = Color.clear;
+            }
+            else
+            {
+                // •s“§–¾
+                spriteRenderer.color = colorFocus;
+            }
         }
     }
 }
