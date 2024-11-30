@@ -18,7 +18,9 @@ public class SpawnerTutorial : MonoBehaviour
     {
         if (!GameObject.FindGameObjectWithTag("Hurdle"))
         {
+            // 自身の破棄
             if (indexSpawn >= hurdleTutorial.Length) Destroy(gameObject);
+            // スポーン
             else HurdleSpawn();
         }
     }

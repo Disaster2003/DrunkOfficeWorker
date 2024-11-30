@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PhaseSpawner : MonoBehaviour
+public class SpawnerPlay : MonoBehaviour
 {
     [SerializeField, Header("生成するプレハブ")]
     private GameObject[] pfb_Object;
@@ -15,16 +15,17 @@ public class PhaseSpawner : MonoBehaviour
     private int count;
 
     // 生成した数のゲッター
-    public int get_count{ get { return count; } }
+    public int GetCount{ get { return count; } }
 
-    [SerializeField, Header("テスト用")]
-    private bool isTest;
-
-    private void Start()
+    // Update is called once per frame
+    void Update()
     {
-        if (isTest)
+        if (!GameObject.FindGameObjectWithTag("Hurdle"))
         {
-            Instance();
+            // 自身の破棄
+            if (count >= 10) Destroy(gameObject);
+            // スポーン
+            else HurdleSpawn();
         }
     }
 
@@ -32,14 +33,14 @@ public class PhaseSpawner : MonoBehaviour
     /// 生成する
     /// 他のところから読んでもらう
     /// </summary>
-    public void Instance()
+    private void HurdleSpawn()
     {
         // プレハブが存在していれば
         if (pfb_Object.Length > 0)
         {
             // 一応配列に対応して乱数を生成する
             // いらなかったら変更して
-            int i = Random.Range(0, pfb_Object.Length-1);
+            int i = Random.Range(0, pfb_Object.Length);
 
             // 生成して
             Instantiate(pfb_Object[i], instancePos, Quaternion.identity);
@@ -47,11 +48,5 @@ public class PhaseSpawner : MonoBehaviour
             // 生成カウントを進める
             count++;
         }
-
-        if (isTest)
-        {
-            Invoke("Instance", 2);
-        }
     }
-
 }

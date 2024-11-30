@@ -8,7 +8,6 @@ using UnityEngine.UI;
 /// </summary>
 public class Timer : MonoBehaviour
 {
-    [SerializeField, Header("タイマーテキスト")]
     private Text txtTimer;
 
     [SerializeField, Header("背景を暗くするコンポーネント")]
@@ -18,7 +17,7 @@ public class Timer : MonoBehaviour
     private float time = 30;
 
     // タイマー
-    static private float timer = 0;
+    private static float timer = 0;
 
     // タイマーのゲッターランキングで呼び出す
     static public float get_timer
@@ -89,6 +88,8 @@ public class Timer : MonoBehaviour
     /// </summary>
     private void Start()
     {
+        txtTimer = GetComponent<Text>();
+
         // 値を初期化
         timer = time;
     }

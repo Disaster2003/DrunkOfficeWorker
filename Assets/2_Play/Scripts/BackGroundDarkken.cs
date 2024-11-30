@@ -9,7 +9,7 @@ public class BackGroundDarkken : MonoBehaviour
     private Color darkColor = new Color(0.5f, 0.5f, 0.5f, 1);
 
     [SerializeField, Header("暗くする画像")]
-    private Image imgBackGround;
+    private SpriteRenderer spriteRenderer;
 
     [SerializeField, Header("テストモード")]
     private bool isTest;
@@ -17,7 +17,13 @@ public class BackGroundDarkken : MonoBehaviour
     [SerializeField, Header("(Test時)補間度合い"), Range(0, 0.5f)]
     private float test_t;
 
-    private void Update()
+    // Start is called before the first frame update
+    void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+        private void Update()
     {
         if (isTest)
         {
@@ -32,10 +38,6 @@ public class BackGroundDarkken : MonoBehaviour
     /// <param name="t">補間度合い</param>
     public void Darkken(float t)
     {
-        if(!imgBackGround)
-        {
-            Debug.Log(gameObject.name + "に暗くする画像が割り振られていないよ");
-        }
-        imgBackGround.color = Color.Lerp(Color.white, darkColor, t);
+        spriteRenderer.color = Color.Lerp(Color.white, darkColor, t);
     }
 }

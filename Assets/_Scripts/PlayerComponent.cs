@@ -15,7 +15,6 @@ public class PlayerComponent : MonoBehaviour
 
     [Header("プレイヤーの特定位置")]
     [SerializeField] private Vector2 positionStart;
-    [SerializeField] private float position_xGoalTackle;
 
     private SpriteRenderer spriteRenderer;
     [Header("プレイヤーのアニメーション画像配列")]
