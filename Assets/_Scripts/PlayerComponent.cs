@@ -164,6 +164,7 @@ public class PlayerComponent : MonoBehaviour
             // ’…’n
             isJumped = false;
             state_player = STATE_PLAYER.WAIT;
+            transform.position = new Vector3(transform.position.x, positionStart.y);
             rigidBody2D.velocity = Vector2.zero;
             rigidBody2D.gravityScale = 0;
         }

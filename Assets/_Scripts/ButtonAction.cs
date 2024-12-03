@@ -27,6 +27,8 @@ public class ButtonAction : MonoBehaviour
     private bool isPushed; // true = 押下中, false = not 押下
     private int countPush;
 
+    private bool isButtonFirst;
+
     private static Dictionary<KIND_BUTTON, int> numberGenerate = new Dictionary<KIND_BUTTON, int>();
 
     // Start is called before the first frame update
@@ -63,6 +65,13 @@ public class ButtonAction : MonoBehaviour
         // インプットアクションの有効化
         IC.Enable();
 
+        // 押下状態の初期化
+        timerPushLong = 0;
+        countPush = 0;
+        isPushed = false;
+
+        isButtonFirst = imgBeforeButton == null ? true : false;
+
         if (kind_button == KIND_BUTTON.NONE)
         {
             if (numberGenerate.Count == 0)
@@ -98,11 +107,6 @@ public class ButtonAction : MonoBehaviour
             while (true);
             kind_button = (KIND_BUTTON)rand;
         }
-
-        // 押下状態の初期化
-        timerPushLong = 0;
-        countPush = 0;
-        isPushed = false;
     }
 
     // Update is called once per frame
@@ -121,13 +125,17 @@ public class ButtonAction : MonoBehaviour
             imgInputGauge.fillAmount = timerPushLong / 0.5f;
         }
 
-        if (imgBeforeButton != null) return;
+        if (imgBeforeButton != null || isButtonFirst) return;
 
-        if (transform.position.x > 10)
+        if (transform.position.x > 5)
         {
             // ボタンをずらす
             transform.Translate(-Time.deltaTime, 0, 0);
-            return;
+            transform.parent.transform.position = transform.position;
+        }
+        else
+        {
+            transform.position = new Vector3(5, 1);
         }
     }
 
@@ -135,7 +143,7 @@ public class ButtonAction : MonoBehaviour
     {
         // インプットアクションの無効化
         IC.Disable();
-        Destroy(imgInputGauge.gameObject);
+        Destroy(transform.parent.gameObject);
     }
 
     /// <summary>
