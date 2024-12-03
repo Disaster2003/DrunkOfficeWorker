@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.InputSystem; // 新Inputシステムの利用に必要
 using UnityEngine.UI;
@@ -25,6 +26,8 @@ public class ButtonAction : MonoBehaviour
     private float timerPushLong;
     private bool isPushed; // true = 押下中, false = not 押下
     private int countPush;
+
+    private static Dictionary<KIND_BUTTON, int> numberGenerate = new Dictionary<KIND_BUTTON, int>();
 
     // Start is called before the first frame update
     void Start()
@@ -62,8 +65,37 @@ public class ButtonAction : MonoBehaviour
 
         if (kind_button == KIND_BUTTON.NONE)
         {
+            if (numberGenerate.Count == 0)
+            {
+
+                // csvの読み込み
+                TextAsset csvFile = Resources.Load("level_adjust") as TextAsset; // ResourcesにあるCSVファイルを格納
+                StringReader reader = new StringReader(csvFile.text); // TextAssetをStringReaderに変換
+                List<string[]> csvData = new List<string[]>(); // CSVファイルの中身を入れるリスト
+                while (reader.Peek() != -1)
+                {
+                    string line = reader.ReadLine(); // 1行ずつ読み込む
+                    csvData.Add(line.Split(',')); // csvDataリストに追加する
+                }
+
+                // データ代入
+                int levelIndex = (int)GameManager.GetInstance().GetLevelState();
+                numberGenerate[KIND_BUTTON.PUSH] = int.Parse(csvData[levelIndex][2]);
+                numberGenerate[KIND_BUTTON.PUSH_LONG] = int.Parse(csvData[levelIndex][3]);
+                numberGenerate[KIND_BUTTON.PUSH_REPEAT] = int.Parse(csvData[levelIndex][4]);
+            }
+
             // ボタンアクションの選択
-            rand = Random.Range(1, 4);
+            do
+            {
+                rand = Random.Range(1, 4);
+                if (numberGenerate[(KIND_BUTTON)rand] > 0)
+                {
+                    numberGenerate[(KIND_BUTTON)rand]--;
+                    break;
+                }
+            }
+            while (true);
             kind_button = (KIND_BUTTON)rand;
         }
 

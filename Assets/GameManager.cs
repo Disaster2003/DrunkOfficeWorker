@@ -106,7 +106,13 @@ public class GameManager : MonoBehaviour
 
         // 遷移先の決定
         state_scene = _state_scene;
+        state_level = _state_level;
     }
+
+    /// <summary>
+    /// 難易度を取得する
+    /// </summary>
+    public STATE_LEVEL GetLevelState() { return state_level; }
 
     /// <summary>
     /// シーンの切り替えを開始する

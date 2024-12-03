@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class Parameter : MonoBehaviour
 {
     public Vector2 startPoint = new Vector2(0, 0); // 開始地点の座標
     public Vector2 endPoint = new Vector2(10, 0);  // 終了地点の座標
