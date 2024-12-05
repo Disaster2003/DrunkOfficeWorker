@@ -765,7 +765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c85ffedd6dc6db49b78c093b3f5e0a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionTarget: {x: 10, y: -3}
+  position_xGoal: 11
   speedMove: 1
 --- !u!1 &1626620760
 GameObject:

@@ -16,18 +16,17 @@ public class ButtonAction : MonoBehaviour
 
     private enum KIND_BUTTON
     {
-        NONE,       // 未選択
-        PUSH,       // 押下
-        PUSH_LONG,  // 長押し
-        PUSH_REPEAT,// 連打
+        NONE,               // 未選択
+        PUSH,               // 押下
+        PUSH_LONG,          // 長押し
+        PUSH_REPEAT_THREE,  // 3連打
+        PUSH_REPEAT_FIVE,   // 5連打
     }
     [SerializeField, Header("チュートリアル用ボタンアクションの選択")]
     private KIND_BUTTON kind_button;
     private float timerPushLong;
     private bool isPushed; // true = 押下中, false = not 押下
     private int countPush;
-
-    private bool isButtonFirst;
 
     private static Dictionary<KIND_BUTTON, int> numberGenerate = new Dictionary<KIND_BUTTON, int>();
 
@@ -70,8 +69,6 @@ public class ButtonAction : MonoBehaviour
         countPush = 0;
         isPushed = false;
 
-        isButtonFirst = imgBeforeButton == null ? true : false;
-
         if (kind_button == KIND_BUTTON.NONE)
         {
             if (numberGenerate.Count == 0)
@@ -91,7 +88,8 @@ public class ButtonAction : MonoBehaviour
                 int levelIndex = (int)GameManager.GetInstance().GetLevelState();
                 numberGenerate[KIND_BUTTON.PUSH] = int.Parse(csvData[levelIndex][2]);
                 numberGenerate[KIND_BUTTON.PUSH_LONG] = int.Parse(csvData[levelIndex][3]);
-                numberGenerate[KIND_BUTTON.PUSH_REPEAT] = int.Parse(csvData[levelIndex][4]);
+                numberGenerate[KIND_BUTTON.PUSH_REPEAT_THREE] = int.Parse(csvData[levelIndex][4]);
+                numberGenerate[KIND_BUTTON.PUSH_REPEAT_FIVE] = int.Parse(csvData[levelIndex][5]);
             }
 
             // ボタンアクションの選択
@@ -123,19 +121,6 @@ public class ButtonAction : MonoBehaviour
             // ボタンを押下中は経過時間を加算
             timerPushLong += Time.deltaTime;
             imgInputGauge.fillAmount = timerPushLong / 0.5f;
-        }
-
-        if (imgBeforeButton != null || isButtonFirst) return;
-
-        if (transform.position.x > 5)
-        {
-            // ボタンをずらす
-            transform.Translate(-Time.deltaTime, 0, 0);
-            transform.parent.transform.position = transform.position;
-        }
-        else
-        {
-            transform.position = new Vector3(5, 1);
         }
     }
 
@@ -169,7 +154,8 @@ public class ButtonAction : MonoBehaviour
             case KIND_BUTTON.PUSH_LONG:
                 isPushed = true;
                 break;
-            case KIND_BUTTON.PUSH_REPEAT:
+            case KIND_BUTTON.PUSH_REPEAT_THREE:
+            case KIND_BUTTON.PUSH_REPEAT_FIVE:
                 countPush++;
                 break;
         }
@@ -180,15 +166,36 @@ public class ButtonAction : MonoBehaviour
     /// </summary>
     private void ReleaseButton(InputAction.CallbackContext context)
     {
-        // ボタンを押していないと経過時間はゼロ
-        imgInputGauge.fillAmount = 0;
-        timerPushLong = 0;
-        isPushed = false;
-
-        if (countPush > 5)
+        switch (kind_button)
         {
-            // 自身の破壊
-            Destroy(gameObject);
+            case KIND_BUTTON.PUSH_LONG:
+                // ボタンを押していないと経過時間はゼロ
+                imgInputGauge.fillAmount = 0;
+                timerPushLong = 0;
+                isPushed = false;
+                break;
+            case KIND_BUTTON.PUSH_REPEAT_THREE:
+                if(countPush >= 3)
+                {
+                    // 自身の破壊
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    imgInputGauge.fillAmount = countPush / 3.0f;
+                }
+                break;
+            case KIND_BUTTON.PUSH_REPEAT_FIVE:
+                if (countPush >= 5)
+                {
+                    // 自身の破壊
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    imgInputGauge.fillAmount = countPush / 5.0f;
+                }
+                break;
         }
     }
 }

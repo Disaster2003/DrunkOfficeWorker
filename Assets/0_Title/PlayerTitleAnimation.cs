@@ -5,7 +5,7 @@ using UnityEngine.InputSystem; // 新Inputシステムの利用に必要
 
 public class PlayerTitleAnimation : MonoBehaviour
 {
-    public Vector2 positionTarget;
+    public float position_xGoal;
     private bool isMove = false;
 
     private InputControl IC; // インプットアクションを定義
@@ -25,10 +25,7 @@ public class PlayerTitleAnimation : MonoBehaviour
     {
         if (isMove)
         {
-            // 現在地を取得
-            Vector2 currentPosition = transform.position;
-
-            if (Vector2.Distance(currentPosition, positionTarget) < 0.1f)
+            if (transform.position.x > position_xGoal)
             {
                 // 自身の破棄
                 Destroy(gameObject);
@@ -36,7 +33,7 @@ public class PlayerTitleAnimation : MonoBehaviour
             }
 
             // 移動
-            transform.position = Vector3.MoveTowards(currentPosition, positionTarget, speedMove * Time.deltaTime);
+            transform.Translate(speedMove * Time.deltaTime, 0, 0);
         }
     }
 
