@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class ButtonManager : MonoBehaviour
@@ -12,6 +13,7 @@ public class ButtonManager : MonoBehaviour
     {
         switch(GameManager.GetInstance().GetLevelState())
         {
+            case GameManager.STATE_LEVEL.NONE: 
             case GameManager.STATE_LEVEL.EASY:
                 buttons[0].SetActive(true);
                 break;
@@ -48,6 +50,17 @@ public class ButtonManager : MonoBehaviour
 
             // é©êgÇÃîjâÛ
             Destroy(gameObject);
+        }
+        else
+        {
+            int cnt = 0;
+            foreach (GameObject btn in buttons)
+            {
+                if (btn == null) cnt++;
+                else break;       
+            }
+
+            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(3 - cnt, transform.localPosition.y), Time.deltaTime);
         }
     }
 }
