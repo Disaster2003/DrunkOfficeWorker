@@ -12,10 +12,10 @@ public class SpawnerPlay : MonoBehaviour
 
     // 生成した数
     [SerializeField, Header("確認用いじらないで")]
-    private int count;
+    private static int count;
 
     // 生成した数のゲッター
-    public int GetCount{ get { return count; } }
+    public static int GetCount{ get { return count; } }
 
     // Update is called once per frame
     void Update()
