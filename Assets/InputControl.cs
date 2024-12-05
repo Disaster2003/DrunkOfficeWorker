@@ -28,15 +28,6 @@ public partial class @InputControl: IInputActionCollection2, IDisposable
             ""id"": ""bde2b925-1b0e-4106-bc1d-3c90b454b0f2"",
             ""actions"": [
                 {
-                    ""name"": ""Direction"",
-                    ""type"": ""Value"",
-                    ""id"": ""dcc76d3f-b83d-4e7a-a8a3-26ec952e64fb"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""UpKey"",
                     ""type"": ""Button"",
                     ""id"": ""cac3b310-e1db-4be1-8aa5-76bf8e92d678"",
@@ -83,83 +74,6 @@ public partial class @InputControl: IInputActionCollection2, IDisposable
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""9eb1d4a0-4fca-49b3-aa8e-86648ba99fbf"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Direction"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""de595c8e-7cbd-4c0c-b4d2-d892bfd44f71"",
-                    ""path"": ""<Gamepad>/dpad"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Direction"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""d393a63a-17fb-40dd-b511-2edb9b61b7c7"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Direction"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""f7b4bb9d-fb1d-4335-ba4e-9b3ab7a08354"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Direction"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""6c4784eb-23a1-4ec5-b3dd-f842acdc0dbd"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Direction"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""add1590e-318a-46d7-b0f9-92236c9b78b4"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Direction"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""11b7add2-45d2-4049-b475-7cf0b899d223"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Direction"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
                 {
                     ""name"": """",
                     ""id"": ""36b990a6-1af8-4a14-871d-371fee30c328"",
@@ -240,7 +154,7 @@ public partial class @InputControl: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""feffc5ce-4797-4de9-95c3-3d27a576c78c"",
-                    ""path"": ""<Keyboard>/downArrow"",
+                    ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -277,7 +191,6 @@ public partial class @InputControl: IInputActionCollection2, IDisposable
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_Direction = m_Player.FindAction("Direction", throwIfNotFound: true);
         m_Player_UpKey = m_Player.FindAction("UpKey", throwIfNotFound: true);
         m_Player_DownKey = m_Player.FindAction("DownKey", throwIfNotFound: true);
         m_Player_LeftKey = m_Player.FindAction("LeftKey", throwIfNotFound: true);
@@ -344,7 +257,6 @@ public partial class @InputControl: IInputActionCollection2, IDisposable
     // Player
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-    private readonly InputAction m_Player_Direction;
     private readonly InputAction m_Player_UpKey;
     private readonly InputAction m_Player_DownKey;
     private readonly InputAction m_Player_LeftKey;
@@ -354,7 +266,6 @@ public partial class @InputControl: IInputActionCollection2, IDisposable
     {
         private @InputControl m_Wrapper;
         public PlayerActions(@InputControl wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Direction => m_Wrapper.m_Player_Direction;
         public InputAction @UpKey => m_Wrapper.m_Player_UpKey;
         public InputAction @DownKey => m_Wrapper.m_Player_DownKey;
         public InputAction @LeftKey => m_Wrapper.m_Player_LeftKey;
@@ -369,9 +280,6 @@ public partial class @InputControl: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
-            @Direction.started += instance.OnDirection;
-            @Direction.performed += instance.OnDirection;
-            @Direction.canceled += instance.OnDirection;
             @UpKey.started += instance.OnUpKey;
             @UpKey.performed += instance.OnUpKey;
             @UpKey.canceled += instance.OnUpKey;
@@ -391,9 +299,6 @@ public partial class @InputControl: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(IPlayerActions instance)
         {
-            @Direction.started -= instance.OnDirection;
-            @Direction.performed -= instance.OnDirection;
-            @Direction.canceled -= instance.OnDirection;
             @UpKey.started -= instance.OnUpKey;
             @UpKey.performed -= instance.OnUpKey;
             @UpKey.canceled -= instance.OnUpKey;
@@ -428,7 +333,6 @@ public partial class @InputControl: IInputActionCollection2, IDisposable
     public PlayerActions @Player => new PlayerActions(this);
     public interface IPlayerActions
     {
-        void OnDirection(InputAction.CallbackContext context);
         void OnUpKey(InputAction.CallbackContext context);
         void OnDownKey(InputAction.CallbackContext context);
         void OnLeftKey(InputAction.CallbackContext context);

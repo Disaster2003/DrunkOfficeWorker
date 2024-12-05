@@ -42,12 +42,11 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("GameManagerのStartが複数回読み込まれています");
-            return;
+            Destroy(gameObject);
         }
 
         // 状態の初期化
-        state_scene = STATE_SCENE.NONE;
+        state_scene = (STATE_SCENE)SceneManager.GetActiveScene().buildIndex;
         state_level = STATE_LEVEL.NONE;
 
         // シーン遷移状態の初期化
@@ -100,8 +99,23 @@ public class GameManager : MonoBehaviour
         if (_state_scene == STATE_SCENE.NONE) return;
         if (_state_scene == STATE_SCENE.PLAY && _state_level == STATE_LEVEL.NONE) return;
 
+        if (state_scene == STATE_SCENE.RANKING || state_scene == STATE_SCENE.OVER)
+        {
+            isChangingScene = true;
+        }
+
         // 遷移先の決定
         state_scene = _state_scene;
-        isChangingScene = true;
+        state_level = _state_level;
     }
+
+    /// <summary>
+    /// 難易度を取得する
+    /// </summary>
+    public STATE_LEVEL GetLevelState() { return state_level; }
+
+    /// <summary>
+    /// シーンの切り替えを開始する
+    /// </summary>
+    public void StartChangingScene() { isChangingScene = true; }
 }
