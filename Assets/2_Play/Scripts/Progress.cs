@@ -18,15 +18,21 @@ public class Progress : MonoBehaviour
             return;
         }
 
-        //// ¬‚İ‚É—h‚ê‚é“®‚«‚ğPerlinNoise‚Å‰Á‚¦‚é
-        //shakeTime += Time.deltaTime * shakeFrequency;
-        //float shakeOffset = Mathf.PerlinNoise(shakeTime, 0) * shakeAmplitude * 2f - shakeAmplitude; // -shakeAmplitude ‚Å—h‚ê‚ª-U•~+U•‚Ì”ÍˆÍ‚Å¬‚İ‚É“®‚­
-        //transform.position += new Vector3(0, shakeOffset);
+        // Œ»İ‚ÌˆÊ’u‚ğüŒ`•âŠÔ‚ÅŒvZ
+        Vector3 positionTarget = new Vector3(-position_Goal.x + SpawnerPlay.GetCount * 100, transform.localPosition.y);
+        Vector3 positionNew = Vector3.Lerp(transform.localPosition, positionTarget, Time.deltaTime);
+
+        //if(Vector3.Distance(transform.localPosition, positionTarget) < 0.1f)
+        //{
+        // ¬‚İ‚É—h‚ê‚é“®‚«‚ğPerlinNoise‚Å‰Á‚¦‚é
+        shakeTime += Time.deltaTime * shakeFrequency;
+        float shakeOffset = Mathf.PerlinNoise(shakeTime, 0) * shakeAmplitude * 2f - shakeAmplitude; // -shakeAmplitude ‚Å—h‚ê‚ª-U•~+U•‚Ì”ÍˆÍ‚Å¬‚İ‚É“®‚­
+        positionNew.y += shakeOffset;
 
         // V‚µ‚¢ˆÊ’u‚É—h‚ê‚ÌƒIƒtƒZƒbƒg‚ğ‰Á‚¦‚é
-        Vector3 positionTarget = new Vector3(-position_Goal.x + SpawnerPlay.GetCount * 100, transform.localPosition.y/* + shakeOffset*/);
+        positionNew.y += shakeOffset;
 
-        // Œ»İ‚ÌˆÊ’u‚ğüŒ`•âŠÔ‚ÅŒvZ
-        transform.localPosition = Vector3.Lerp(transform.localPosition, positionTarget, Time.deltaTime);
+        transform.localPosition = positionNew;
+        //}
     }
 }
