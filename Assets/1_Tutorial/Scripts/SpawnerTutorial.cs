@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class SpawnerTutorial : MonoBehaviour
 {
-    [SerializeField] private GameObject[] hurdleTutorial;
+    [SerializeField, Header("チュートリアル用Prefab")]
+    private GameObject[] hurdleTutorial;
     private int indexSpawn;
 
     // Start is called before the first frame update
@@ -16,13 +17,12 @@ public class SpawnerTutorial : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameObject.FindGameObjectWithTag("Hurdle"))
-        {
-            // 自身の破棄
-            if (indexSpawn >= hurdleTutorial.Length) Destroy(gameObject);
-            // スポーン
-            else HurdleSpawn();
-        }
+        if (GameObject.FindGameObjectWithTag("Hurdle")) return;
+
+        // 自身の破棄
+        if (indexSpawn >= hurdleTutorial.Length) Destroy(gameObject);
+        // スポーン
+        else HurdleSpawn();
     }
 
     /// <summary>

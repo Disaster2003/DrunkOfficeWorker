@@ -96,8 +96,16 @@ public class GameManager : MonoBehaviour
         if(isChangingScene) return;
 
         // nullチェック
-        if (_state_scene == STATE_SCENE.NONE) return;
-        if (_state_scene == STATE_SCENE.PLAY && _state_level == STATE_LEVEL.NONE) return;
+        if (_state_scene == STATE_SCENE.NONE)
+        {
+            Debug.LogError("遷移先のシーンが未設定です");
+            return;
+        }
+        if (_state_scene == STATE_SCENE.PLAY && _state_level == STATE_LEVEL.NONE)
+        {
+            Debug.LogError("遷移先の難易度が未設定です");
+            return;
+        }
 
         if (state_scene == STATE_SCENE.RANKING || state_scene == STATE_SCENE.OVER)
         {

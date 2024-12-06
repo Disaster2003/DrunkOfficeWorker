@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ButtonFocus : MonoBehaviour
 {
-    SpriteRenderer spriteRenderer;
-    [SerializeField] private Color colorFocus;
+    private SpriteRenderer spriteRenderer;
+    [SerializeField, Header("ボタンに注目させるための背景色")]
+    private Color colorFocus;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,7 @@ public class ButtonFocus : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // nullチェック
         if(spriteRenderer == null)
         {
             Debug.LogError("SpriteRendererコンポーネントが未取得です");
@@ -24,18 +26,17 @@ public class ButtonFocus : MonoBehaviour
         }
 
         GameObject hurdle = GameObject.FindGameObjectWithTag("Hurdle");
-        if (hurdle)
+        if (!hurdle) return;
+
+        if (hurdle.transform.childCount == 0)
         {
-            if (hurdle.transform.childCount == 0)
-            {
-                // 透明化
-                spriteRenderer.color = Color.clear;
-            }
-            else
-            {
-                // 不透明
-                spriteRenderer.color = colorFocus;
-            }
+            // 透明化
+            spriteRenderer.color = Color.clear;
+        }
+        else
+        {
+            // 不透明化
+            spriteRenderer.color = colorFocus;
         }
     }
 }

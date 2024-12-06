@@ -21,18 +21,20 @@ public class DecideScene : MonoBehaviour
     }
 
     /// <summary>
-    /// 遷移先のシーンを決定する
+    /// 決定ボタンの押下処理
     /// </summary>
-    /// <param name="context">ボタン入力</param>
+    /// <param name="context">決定ボタン</param>
     private void OnDecide(InputAction.CallbackContext context)
     {
         if (gameObject != EventSystem.current.currentSelectedGameObject) return;
 
+        // 遷移先のシーンを決定する
         GameManager.GetInstance().SetNextScene(state_scene, state_level);
     }
 
     private void OnDestroy()
     {
+        // インプットアクションの停止
         IC.Disable();
     }
 }
