@@ -45,7 +45,7 @@ public class HurdleComponent : MonoBehaviour
         }
     }
 
-    public PlayerComponent.STATE_PLAYER GetPlayerState() {  return state_player; }
+    public PlayerComponent.STATE_PLAYER GetPlayerState() { return state_player; }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

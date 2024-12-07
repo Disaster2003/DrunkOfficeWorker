@@ -12,21 +12,26 @@ public class SpawnerPlay : MonoBehaviour
 
     // 生成した数
     [SerializeField, Header("確認用いじらないで")]
-    private int count;
+    private static int count;
 
     // 生成した数のゲッター
-    public int GetCount{ get { return count; } }
+    public static int GetCount { get { return count; } }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        count = 0;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (!GameObject.FindGameObjectWithTag("Hurdle"))
-        {
-            // 自身の破棄
-            if (count >= 10) Destroy(gameObject);
-            // スポーン
-            else HurdleSpawn();
-        }
+        if (GameObject.FindGameObjectWithTag("Hurdle")) return;
+
+        // 自身の破棄
+        if (count >= 10) Destroy(gameObject);
+        // スポーン
+        else HurdleSpawn();
     }
 
     /// <summary>
@@ -36,17 +41,16 @@ public class SpawnerPlay : MonoBehaviour
     private void HurdleSpawn()
     {
         // プレハブが存在していれば
-        if (pfb_Object.Length > 0)
-        {
-            // 一応配列に対応して乱数を生成する
-            // いらなかったら変更して
-            int i = Random.Range(0, pfb_Object.Length);
+        if (pfb_Object.Length <= 0) return;
 
-            // 生成して
-            Instantiate(pfb_Object[i], instancePos, Quaternion.identity);
+        // 一応配列に対応して乱数を生成する
+        // いらなかったら変更して
+        int i = Random.Range(0, pfb_Object.Length);
 
-            // 生成カウントを進める
-            count++;
-        }
+        // 生成して
+        Instantiate(pfb_Object[i], instancePos, Quaternion.identity);
+
+        // 生成カウントを進める
+        count++;
     }
 }

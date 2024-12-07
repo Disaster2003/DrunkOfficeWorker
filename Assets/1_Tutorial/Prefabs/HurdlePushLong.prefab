@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -3, y: 0}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8736886515957150728
@@ -293,8 +293,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1}
-  m_SizeDelta: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 3, y: 1}
+  m_SizeDelta: {x: 7, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8736886517745220770
 Canvas:
@@ -370,6 +370,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0065bf444f4e1e4c8906a3759a092fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttons:
+  - {fileID: 8736886515957150733}
 --- !u!1 &8736886517893876093
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,6 +466,11 @@ MonoBehaviour:
   - {fileID: 1080876447, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
   - {fileID: 41073931, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
   - {fileID: 1031615025, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
+  UI_Arrow:
+  - {fileID: 21300000, guid: cc5906d070ad39141819d67c25b55b66, type: 3}
+  - {fileID: 21300000, guid: 2c9cb759fb862664e8e6b2464e39535c, type: 3}
+  - {fileID: 21300000, guid: cfcb6b19b2da4fe4e934e75dcff4018b, type: 3}
+  - {fileID: 21300000, guid: e5df02fe15554bc408c6f87ab43bbbe0, type: 3}
   imgInputGauge: {fileID: 8736886515957150731}
   imgBeforeButton: {fileID: 0}
   kind_button: 2

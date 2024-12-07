@@ -23,12 +23,11 @@ public class BackGroundDarkken : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-        private void Update()
+    private void Update()
     {
-        if (isTest)
-        {
-            Darkken(test_t);
-        }
+        if (!isTest) return;
+
+        Darkken(test_t);
     }
 
     /// <summary>

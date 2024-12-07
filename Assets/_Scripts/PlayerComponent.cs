@@ -60,8 +60,16 @@ public class PlayerComponent : MonoBehaviour
                 float distance = Vector2.Distance(transform.position, positionStart);
                 PlayerAnimation(distance < 0.1f ? spritesPlayerWait : spritesPlayerRun);
 
-                // 開始位置へ向かう
-                transform.position = Vector2.MoveTowards(transform.position, positionStart, Time.deltaTime);
+                if (GetComponent<GoalPerformance>().isArrived)
+                {
+                    // 真ん中へ向かう
+                    transform.position = Vector2.MoveTowards(transform.position, Vector2.zero, Time.deltaTime);
+                }
+                else
+                {
+                    // 開始位置へ向かう
+                    transform.position = Vector2.MoveTowards(transform.position, positionStart, Time.deltaTime);
+                }
                 break;
             case STATE_PLAYER.TACKLE:
                 if (transform.position.x < 0)
