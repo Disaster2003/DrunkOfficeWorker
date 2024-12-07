@@ -75,7 +75,7 @@ public class Ranking : MonoBehaviour
         }
 
         // 新しいタイムを取得
-        if (isTest)
+        if (!isTest)
         {
             newTime = (int)Timer.get_timer;
         }
