@@ -26,13 +26,13 @@ public class Progress : MonoBehaviour
 
         //if (Vector3.Distance(transform.localPosition, positionTarget) < 0.1f)
         //{
-        //    // ¬‚Ý‚É—h‚ê‚é“®‚«‚ðPerlinNoise‚Å‰Á‚¦‚é
-        //    shakeTime += Time.deltaTime * shakeFrequency;
-        //    float shakeOffset = Mathf.PerlinNoise(shakeTime, 0) * shakeAmplitude * 2f - shakeAmplitude; // -shakeAmplitude ‚Å—h‚ê‚ª-U•~+U•‚Ì”ÍˆÍ‚Å¬‚Ý‚É“®‚­
-        //    positionNew.y += shakeOffset;
+        // ¬‚Ý‚É—h‚ê‚é“®‚«‚ðPerlinNoise‚Å‰Á‚¦‚é
+        shakeTime += Time.deltaTime * shakeFrequency;
+        float shakeOffset = Mathf.PerlinNoise(shakeTime, 0) * shakeAmplitude * 2f - shakeAmplitude; // -shakeAmplitude ‚Å—h‚ê‚ª-U•~+U•‚Ì”ÍˆÍ‚Å¬‚Ý‚É“®‚­
+        positionNew.y += shakeOffset;
 
-        //    // V‚µ‚¢ˆÊ’u‚É—h‚ê‚ÌƒIƒtƒZƒbƒg‚ð‰Á‚¦‚é
-        //    positionNew.y += shakeOffset;
+        // V‚µ‚¢ˆÊ’u‚É—h‚ê‚ÌƒIƒtƒZƒbƒg‚ð‰Á‚¦‚é
+        positionNew.y += shakeOffset;
         //}
 
         // Œ‹‰Ê‚ð‘ã“ü
