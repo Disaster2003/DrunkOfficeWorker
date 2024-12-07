@@ -7,7 +7,7 @@ public class PlayerTitleAnimation : MonoBehaviour
 {
     [SerializeField, Header("目標地点のx座標")]
     float position_xGoal;
-    private bool isMove = false; // true = 動いて良き, false = 動いたら悪し
+    private bool isMove; // true = 動いて良き, false = 動いたら悪し
 
     private InputControl IC; // インプットアクションを定義
 
@@ -17,6 +17,8 @@ public class PlayerTitleAnimation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        isMove = false;
+
         IC = new InputControl(); // インプットアクションを取得
         IC.Player.Decide.started += OnDecide; // アクションにイベントを登録
         IC.Enable(); // インプットアクションを機能させる為に有効化する。
@@ -25,7 +27,7 @@ public class PlayerTitleAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isMove) return;
+        if (!isMove) return;
 
         if (transform.position.x > position_xGoal)
         {

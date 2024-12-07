@@ -7,16 +7,13 @@ using UnityEngine.UI;
 
 public class ButtonAction : MonoBehaviour
 {
-<<<<<<< Updated upstream
     [SerializeField, Header("ボタン画像")]
     private Sprite[] UI_Button;
+    [SerializeField, Header("矢印画像")]
+    private Sprite[] UI_Arrow;
+
     [SerializeField, Header("長押し・連打ゲージ")]
     private Image imgInputGauge;
-=======
-    [SerializeField] private Sprite[] UI_Button;
-    [SerializeField] private Sprite[] UI_Arrow;
-    [SerializeField] private Image imgInputGauge;
->>>>>>> Stashed changes
 
     private InputControl IC; // インプットアクションを定義
 
@@ -97,27 +94,8 @@ public class ButtonAction : MonoBehaviour
             List<string[]> csvData = new List<string[]>(); // CSVファイルの中身を入れるリスト
             while (reader.Peek() != -1)
             {
-<<<<<<< Updated upstream
                 string line = reader.ReadLine(); // 1行ずつ読み込む
                 csvData.Add(line.Split(',')); // csvDataリストに追加する
-=======
-                // csvの読み込み
-                TextAsset csvFile = Resources.Load("level_adjust") as TextAsset; // ResourcesにあるCSVファイルを格納
-                StringReader reader = new StringReader(csvFile.text); // TextAssetをStringReaderに変換
-                List<string[]> csvData = new List<string[]>(); // CSVファイルの中身を入れるリスト
-                while (reader.Peek() != -1)
-                {
-                    string line = reader.ReadLine(); // 1行ずつ読み込む
-                    csvData.Add(line.Split(',')); // csvDataリストに追加する
-                }
-
-                // データ代入
-                int levelIndex = (int)GameManager.GetInstance().GetLevelState();
-                numberGenerate[KIND_BUTTON.PUSH] = int.Parse(csvData[levelIndex][2]);
-                numberGenerate[KIND_BUTTON.PUSH_LONG] = int.Parse(csvData[levelIndex][3]);
-                numberGenerate[KIND_BUTTON.PUSH_REPEAT_THREE] = int.Parse(csvData[levelIndex][4]);
-                numberGenerate[KIND_BUTTON.PUSH_REPEAT_FIVE] = int.Parse(csvData[levelIndex][5]);
->>>>>>> Stashed changes
             }
 
             // データ代入
