@@ -466,6 +466,11 @@ MonoBehaviour:
   - {fileID: 1080876447, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
   - {fileID: 41073931, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
   - {fileID: 1031615025, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
+  UI_Arrow:
+  - {fileID: 21300000, guid: cc5906d070ad39141819d67c25b55b66, type: 3}
+  - {fileID: 21300000, guid: 2c9cb759fb862664e8e6b2464e39535c, type: 3}
+  - {fileID: 21300000, guid: cfcb6b19b2da4fe4e934e75dcff4018b, type: 3}
+  - {fileID: 21300000, guid: e5df02fe15554bc408c6f87ab43bbbe0, type: 3}
   imgInputGauge: {fileID: 8736886515957150731}
   imgBeforeButton: {fileID: 0}
   kind_button: 1

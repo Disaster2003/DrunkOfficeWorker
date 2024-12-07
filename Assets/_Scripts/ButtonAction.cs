@@ -7,12 +7,18 @@ using UnityEngine.UI;
 
 public class ButtonAction : MonoBehaviour
 {
-    [SerializeField] private Sprite[] UI_Button;
-    [SerializeField] private Image imgInputGauge;
+    [SerializeField, Header("ボタン画像")]
+    private Sprite[] UI_Button;
+    [SerializeField, Header("矢印画像")]
+    private Sprite[] UI_Arrow;
+
+    [SerializeField, Header("長押し・連打ゲージ")]
+    private Image imgInputGauge;
 
     private InputControl IC; // インプットアクションを定義
 
-    [SerializeField] private GameObject imgBeforeButton;
+    [SerializeField, Header("前のボタン")]
+    private GameObject imgBeforeButton;
 
     private enum KIND_BUTTON
     {
@@ -24,8 +30,9 @@ public class ButtonAction : MonoBehaviour
     }
     [SerializeField, Header("チュートリアル用ボタンアクションの選択")]
     private KIND_BUTTON kind_button;
+
     private float timerPushLong;
-    private bool isPushed; // true = 押下中, false = not 押下
+    private bool isPushed; // true = 押下中,false = not 押下
     private int countPush;
 
     private static Dictionary<KIND_BUTTON, int> numberGenerate = new Dictionary<KIND_BUTTON, int>();
@@ -33,10 +40,18 @@ public class ButtonAction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // ボタンの抽選
         int rand = Random.Range(0, 4);
 
         // 画像の初期化
-        GetComponent<Image>().sprite = UI_Button[rand];
+        if (Gamepad.all.Count > 0)
+        {
+            GetComponent<Image>().sprite = UI_Button[rand];
+        }
+        else
+        {
+            GetComponent<Image>().sprite = UI_Arrow[rand];
+        }
         imgInputGauge.fillAmount = 0;
 
         // インプットアクションを取得
@@ -69,59 +84,56 @@ public class ButtonAction : MonoBehaviour
         countPush = 0;
         isPushed = false;
 
-        if (kind_button == KIND_BUTTON.NONE)
+        if (kind_button != KIND_BUTTON.NONE) return;
+
+        if (numberGenerate.Count == 0)
         {
-            if (numberGenerate.Count == 0)
+            // csvの読み込み
+            TextAsset csvFile = Resources.Load("level_adjust") as TextAsset; // ResourcesにあるCSVファイルを格納
+            StringReader reader = new StringReader(csvFile.text); // TextAssetをStringReaderに変換
+            List<string[]> csvData = new List<string[]>(); // CSVファイルの中身を入れるリスト
+            while (reader.Peek() != -1)
             {
-
-                // csvの読み込み
-                TextAsset csvFile = Resources.Load("level_adjust") as TextAsset; // ResourcesにあるCSVファイルを格納
-                StringReader reader = new StringReader(csvFile.text); // TextAssetをStringReaderに変換
-                List<string[]> csvData = new List<string[]>(); // CSVファイルの中身を入れるリスト
-                while (reader.Peek() != -1)
-                {
-                    string line = reader.ReadLine(); // 1行ずつ読み込む
-                    csvData.Add(line.Split(',')); // csvDataリストに追加する
-                }
-
-                // データ代入
-                int levelIndex = (int)GameManager.GetInstance().GetLevelState();
-                numberGenerate[KIND_BUTTON.PUSH] = int.Parse(csvData[levelIndex][2]);
-                numberGenerate[KIND_BUTTON.PUSH_LONG] = int.Parse(csvData[levelIndex][3]);
-                numberGenerate[KIND_BUTTON.PUSH_REPEAT_THREE] = int.Parse(csvData[levelIndex][4]);
-                numberGenerate[KIND_BUTTON.PUSH_REPEAT_FIVE] = int.Parse(csvData[levelIndex][5]);
+                string line = reader.ReadLine(); // 1行ずつ読み込む
+                csvData.Add(line.Split(',')); // csvDataリストに追加する
             }
 
-            // ボタンアクションの選択
-            do
-            {
-                rand = Random.Range(1, 4);
-                if (numberGenerate[(KIND_BUTTON)rand] > 0)
-                {
-                    numberGenerate[(KIND_BUTTON)rand]--;
-                    break;
-                }
-            }
-            while (true);
-            kind_button = (KIND_BUTTON)rand;
+            // データ代入
+            int levelIndex = (int)GameManager.GetInstance().GetLevelState();
+            numberGenerate[KIND_BUTTON.PUSH] = int.Parse(csvData[levelIndex][2]);
+            numberGenerate[KIND_BUTTON.PUSH_LONG] = int.Parse(csvData[levelIndex][3]);
+            numberGenerate[KIND_BUTTON.PUSH_REPEAT_THREE] = int.Parse(csvData[levelIndex][4]);
+            numberGenerate[KIND_BUTTON.PUSH_REPEAT_FIVE] = int.Parse(csvData[levelIndex][5]);
         }
+
+        // ボタンアクションの選択
+        do
+        {
+            rand = Random.Range(1, 4);
+            if (numberGenerate[(KIND_BUTTON)rand] > 0)
+            {
+                numberGenerate[(KIND_BUTTON)rand]--;
+                break;
+            }
+        }
+        while (true);
+        kind_button = (KIND_BUTTON)rand;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isPushed)
-        {
-            if (timerPushLong > 0.5f)
-            {
-                // 自身の破壊
-                Destroy(gameObject);
-            }
+        if (!isPushed) return;
 
-            // ボタンを押下中は経過時間を加算
-            timerPushLong += Time.deltaTime;
-            imgInputGauge.fillAmount = timerPushLong / 0.5f;
+        if (timerPushLong > 0.5f)
+        {
+            // 自身の破壊
+            Destroy(gameObject);
         }
+
+        // ボタンを押下中は経過時間を加算
+        timerPushLong += Time.deltaTime;
+        imgInputGauge.fillAmount = timerPushLong / 0.5f;
     }
 
     private void OnDestroy()
@@ -136,14 +148,14 @@ public class ButtonAction : MonoBehaviour
     /// </summary>
     private void InputButton(InputAction.CallbackContext context)
     {
+        if (imgBeforeButton != null) return;
+
         // nullチェック
-        if(kind_button == KIND_BUTTON.NONE)
+        if (kind_button == KIND_BUTTON.NONE)
         {
             Debug.LogError("ボタンアクションが未選択です");
             return;
         }
-
-        if (imgBeforeButton != null) return;
 
         switch (kind_button)
         {
