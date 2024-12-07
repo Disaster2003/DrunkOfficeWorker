@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
                 // 次のシーンへ
                 isChangingScene = false;
                 SceneManager.LoadSceneAsync((int)state_scene);
+                return;
             }
             // フェードアウト
             imgFade.fillAmount += Time.deltaTime;

@@ -623,7 +623,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -6523381184469149560, guid: 01e62b4e98ba3dc4ea72cd808983c1eb, type: 3}
       propertyPath: isArrived
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -6523381184469149560, guid: 01e62b4e98ba3dc4ea72cd808983c1eb, type: 3}
       propertyPath: isStartPerformance

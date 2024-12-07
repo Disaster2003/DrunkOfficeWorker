@@ -15,7 +15,13 @@ public class SpawnerPlay : MonoBehaviour
     private static int count;
 
     // ¶¬‚µ‚½”‚ÌƒQƒbƒ^[
-    public static int GetCount{ get { return count; } }
+    public static int GetCount { get { return count; } }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        count = 0;
+    }
 
     // Update is called once per frame
     void Update()

@@ -25,6 +25,7 @@ public class GoalPerformance : MonoBehaviour
     void Update()
     {
         if (GameObject.Find("Spawner")) return;
+        Debug.Log(gameObject);
 
         if (isArrived)
         {
