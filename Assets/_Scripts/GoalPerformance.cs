@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GoalPerformance : MonoBehaviour
 {
+    [SerializeField] private GameObject spawner;
+
     // èkè¨ë¨ìx
     public float scaleSpeed = 0.5f;
 
@@ -24,7 +26,7 @@ public class GoalPerformance : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameObject.Find("Spawner")) return;
+        if (spawner) return;
 
         if (isArrived)
         {

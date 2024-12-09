@@ -30,6 +30,8 @@ public class PlayerComponent : MonoBehaviour
     private Rigidbody2D rigidBody2D;
     private bool isJumped; // true = ジャンプ中, false = ジャンプ前後
 
+    private GoalPerformance goalPerformance;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +50,8 @@ public class PlayerComponent : MonoBehaviour
         rigidBody2D = GetComponent<Rigidbody2D>();
         rigidBody2D.freezeRotation = true;
         isJumped = false;
+
+        goalPerformance = GetComponent<GoalPerformance>();
     }
 
     // Update is called once per frame
@@ -60,7 +64,7 @@ public class PlayerComponent : MonoBehaviour
                 float distance = Vector2.Distance(transform.position, positionStart);
                 PlayerAnimation(distance < 0.1f ? spritesPlayerWait : spritesPlayerRun);
 
-                if (GetComponent<GoalPerformance>().isArrived)
+                if (goalPerformance.isArrived)
                 {
                     // 真ん中へ向かう
                     transform.position = Vector2.MoveTowards(transform.position, Vector2.zero, Time.deltaTime);

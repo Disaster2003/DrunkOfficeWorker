@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HurdleComponent : MonoBehaviour
 {
+    private Rigidbody2D rb2D;
+
     [SerializeField, Header("キー入力の成功時のプレイヤーがするアクション")]
     private PlayerComponent.STATE_PLAYER state_player;
 
@@ -13,6 +15,9 @@ public class HurdleComponent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rb2D = GetComponent<Rigidbody2D>();
+
+        // 初期配置
         transform.position = new Vector3(10, 0, 0);
 
         // 画像の設定
@@ -27,10 +32,8 @@ public class HurdleComponent : MonoBehaviour
         {
             // 自身の破棄
             Destroy(gameObject);
-            return;
         }
-
-        if (transform.childCount == 0)
+        else if (transform.childCount == 0)
         {
             if (state_player == PlayerComponent.STATE_PLAYER.JUMP)
             {
@@ -51,6 +54,13 @@ public class HurdleComponent : MonoBehaviour
     {
         if (collision.name != "Player") return;
 
+        // nullチェック
+        if(rb2D == null)
+        {
+            Debug.LogError("障害物のRigidbody2Dが取得できませんでした");
+            return;
+        }
+
         if (state_player == PlayerComponent.STATE_PLAYER.TACKLE)
         {
             // タックル終了
@@ -58,8 +68,8 @@ public class HurdleComponent : MonoBehaviour
 
             // 左上にぶっ飛ばす
             Vector2 topLeft = Vector2.up + Vector2.left;
-            GetComponent<Rigidbody2D>().AddForce(topLeft * 10, ForceMode2D.Impulse);
-            GetComponent<Rigidbody2D>().AddTorque(180, ForceMode2D.Impulse);
+            rb2D.AddForce(topLeft * 10, ForceMode2D.Impulse);
+            rb2D.AddTorque(180, ForceMode2D.Impulse);
         }
     }
 }
