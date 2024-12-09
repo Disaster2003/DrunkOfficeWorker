@@ -19,7 +19,7 @@ public class Progress : MonoBehaviour
     {
         // 総距離を計算
         totalDistance = Vector3.Distance(startPoint, endPoint);
-        transform.position = startPoint; // 初期位置を開始地点に設定
+        transform.localPosition = startPoint; // 初期位置を開始地点に設定
     }
 
     void Update()
@@ -42,6 +42,6 @@ public class Progress : MonoBehaviour
         newPosition.y += shakeOffset;
 
         // 新しい位置を設定
-        transform.position = newPosition;
+        transform.localPosition = newPosition;
     }
 }

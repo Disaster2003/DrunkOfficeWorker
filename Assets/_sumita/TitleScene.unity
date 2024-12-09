@@ -622,9 +622,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45994c1595940f34f86fb1ae29433fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPoint: {x: 10, y: 50, z: 0}
-  endPoint: {x: 500, y: 50, z: 0}
-  moveSpeed: 50
+  positionStart: {x: -200, y: 0, z: 0}
+  speedMove: 0
   shakeAmplitude: 5
   shakeFrequency: 5
 --- !u!1 &2111687967
