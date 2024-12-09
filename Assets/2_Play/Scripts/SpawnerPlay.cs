@@ -21,6 +21,7 @@ public class SpawnerPlay : MonoBehaviour
     void Start()
     {
         count = 0;
+        HurdleSpawn();
     }
 
     // Update is called once per frame

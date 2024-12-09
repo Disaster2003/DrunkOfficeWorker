@@ -4,42 +4,51 @@ using UnityEngine;
 
 public class Progress : MonoBehaviour
 {
-    public Vector3 startPoint = new Vector3(0, 0, 0); // 開始地点の座標
-    public Vector3 endPoint = new Vector3(10, 0, 0);  // 終了地点の座標
-    public float moveSpeed = 1f; // 移動速度
-    [Header("揺れの幅、頻度")]
-    public float shakeAmplitude = 0.1f; // 揺れの振幅（小刻み）
-    public float shakeFrequency = 10f; // 揺れの頻度（速さ）
+    [SerializeField, Header("初期位置の座標")]
+    private Vector3 positionStart = Vector3.zero;
+    [SerializeField, Header("移動速度")]
+    private float speedMove = 50.0f;
+    [Header("揺れの振幅（小刻み）、頻度（速さ）")]
+    [SerializeField] private float shakeAmplitude = 5.0f;
+    [SerializeField] private float shakeFrequency = 5.0f;
 
-    private float totalDistance; // 開始から終了地点までの距離
-    private float currentDistance = 0f; // 現在の移動した距離
-    private float shakeTime = 0f; // 揺れの時間を管理する
+    private float distanceCurrent = 0f; // 現在の移動した距離
+    private float distanceTotal;        // 開始から終了地点までの距離
+    private float timeShake;            // 揺れの時間を管理する
 
     void Start()
     {
-        // 総距離を計算
-        totalDistance = Vector3.Distance(startPoint, endPoint);
-        transform.localPosition = startPoint; // 初期位置を開始地点に設定
+        // 初期位置の設定
+        transform.localPosition = positionStart;
     }
 
     void Update()
     {
         // 移動した距離を更新
-        currentDistance += moveSpeed * Time.deltaTime;
+        distanceCurrent += speedMove * Time.deltaTime;
+
+        // 目標地点の設定
+        Vector3 positionTarget = new Vector3(positionStart.x + SpawnerPlay.GetCount * 100, positionStart.y);
+
+        // 総距離を計算
+        distanceTotal = Vector3.Distance(positionStart, positionTarget);
 
         // 距離が全体の距離を超えないようにクランプ
-        currentDistance = Mathf.Clamp(currentDistance, 0f, totalDistance);
+        distanceCurrent = Mathf.Clamp(distanceCurrent, 0f, distanceTotal);
 
         // 現在の位置を線形補間で計算
-        float t = currentDistance / totalDistance;
-        Vector3 newPosition = Vector3.Lerp(startPoint, endPoint, t);
+        float t = distanceCurrent / distanceTotal;
+        Vector3 newPosition = Vector3.Lerp(positionStart, positionTarget, t);
 
-        // 小刻みに揺れる動きをPerlinNoiseで加える
-        shakeTime += Time.deltaTime * shakeFrequency;
-        float shakeOffset = Mathf.PerlinNoise(shakeTime, 0) * shakeAmplitude * 2f - shakeAmplitude; // -shakeAmplitude で揺れが-振幅~+振幅の範囲で小刻みに動く
+        if (Vector3.Distance(transform.localPosition, positionTarget) > 0.1f)
+        {
+            // 小刻みに揺れる動きをPerlinNoiseで加える
+            timeShake += Time.deltaTime * shakeFrequency;
+            float shakeOffset = Mathf.PerlinNoise(timeShake, 0) * shakeAmplitude * 2f - shakeAmplitude; // -shakeAmplitude で揺れが-振幅~+振幅の範囲で小刻みに動く
 
-        // 新しい位置に揺れのオフセットを加える
-        newPosition.y += shakeOffset;
+            // 新しい位置に揺れのオフセットを加える
+            newPosition.y += shakeOffset;
+        }
 
         // 新しい位置を設定
         transform.localPosition = newPosition;
