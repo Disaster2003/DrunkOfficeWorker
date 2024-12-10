@@ -30,6 +30,7 @@ public class ButtonAction : MonoBehaviour
     }
     [SerializeField, Header("チュートリアル用ボタンアクションの選択")]
     private KIND_BUTTON kind_button;
+    private int indexMaxKindButton = (int)KIND_BUTTON.PUSH_REPEAT_FIVE;
 
     private float timerPushLong;
     private bool isPushed; // true = 押下中,false = not 押下
@@ -110,7 +111,7 @@ public class ButtonAction : MonoBehaviour
         // ボタンアクションの選択
         do
         {
-            rand = Random.Range(1, 5);
+            rand = Random.Range(1, indexMaxKindButton + 1);
             if (numberGenerate[(KIND_BUTTON)rand] > 0)
             {
                 numberGenerate[(KIND_BUTTON)rand]--;
