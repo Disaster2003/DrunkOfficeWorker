@@ -31,6 +31,9 @@ public class PlayerTitleAnimation : MonoBehaviour
 
         if (transform.position.x > position_xGoal)
         {
+            // シーン遷移の開始
+            GameManager.GetInstance().StartChangingScene();
+
             // 自身の破棄
             Destroy(gameObject);
             return;
@@ -50,11 +53,5 @@ public class PlayerTitleAnimation : MonoBehaviour
 
         // 移動開始
         isMove = true;
-    }
-
-    private void OnDestroy()
-    {
-        // シーン遷移の開始
-        GameManager.GetInstance().StartChangingScene();
     }
 }

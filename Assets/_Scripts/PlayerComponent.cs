@@ -181,10 +181,4 @@ public class PlayerComponent : MonoBehaviour
             rigidBody2D.gravityScale = 0;
         }
     }
-
-    private void OnDestroy()
-    {
-        GameManager.GetInstance().SetNextScene(GameManager.STATE_SCENE.RANKING);
-        GameManager.GetInstance().StartChangingScene();
-    }
 }

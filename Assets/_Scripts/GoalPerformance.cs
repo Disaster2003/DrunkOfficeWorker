@@ -38,6 +38,10 @@ public class GoalPerformance : MonoBehaviour
             }
             else
             {
+                // Œ‹‰Ê‰æ–Ê‚Ö
+                GameManager.GetInstance().SetNextScene(GameManager.STATE_SCENE.RANKING);
+                GameManager.GetInstance().StartChangingScene();
+
                 // ©g‚Ì”jŠü
                 Destroy(gameObject);
             }

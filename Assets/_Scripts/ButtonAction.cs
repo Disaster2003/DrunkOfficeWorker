@@ -110,7 +110,7 @@ public class ButtonAction : MonoBehaviour
         // ボタンアクションの選択
         do
         {
-            rand = Random.Range(1, 4);
+            rand = Random.Range(1, 5);
             if (numberGenerate[(KIND_BUTTON)rand] > 0)
             {
                 numberGenerate[(KIND_BUTTON)rand]--;
