@@ -429,8 +429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bb3e0683f111d749ae19d9e5e292f2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionInitialize: {x: 0, y: 0, z: 0}
-  position_xGoal: -18
+  positionGoal: {x: 0, y: 0, z: 0}
 --- !u!1 &836193654
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,6 +527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c80f9020248b0384e8679c1ce28848dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionFocus: {x: 5, y: 0, z: 0}
   colorFocus: {r: 0, g: 0, b: 0, a: 0.5019608}
 --- !u!1 &969174202
 GameObject:

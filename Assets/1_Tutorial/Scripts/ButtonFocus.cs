@@ -5,6 +5,9 @@ using UnityEngine;
 public class ButtonFocus : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
+    [SerializeField, Header("ボタンのフォーカスを開始する障害物の位置")]
+    private Vector3 positionFocus;
+
     [SerializeField, Header("ボタンに注目させるための背景色")]
     private Color colorFocus;
 
@@ -33,7 +36,7 @@ public class ButtonFocus : MonoBehaviour
             // 透明化
             spriteRenderer.color = Color.clear;
         }
-        else
+        else if(Vector3.Distance(hurdle.transform.position, positionFocus) < 0.1f)
         {
             // 不透明化
             spriteRenderer.color = colorFocus;
