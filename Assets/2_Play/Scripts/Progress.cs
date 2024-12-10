@@ -12,14 +12,18 @@ public class Progress : MonoBehaviour
     [SerializeField] private float shakeAmplitude = 5.0f;
     [SerializeField] private float shakeFrequency = 5.0f;
 
-    private float distanceCurrent = 0f; // 現在の移動した距離
-    private float distanceTotal;        // 開始から終了地点までの距離
-    private float timeShake;            // 揺れの時間を管理する
+    private float distanceCurrent; // 現在の移動した距離
+    private float distanceTotal;   // 開始から終了地点までの距離
+    private float timeShake;       // 揺れの時間を管理する
 
     void Start()
     {
         // 初期位置の設定
         transform.localPosition = positionStart;
+
+        distanceCurrent = 0;
+        distanceTotal = 0;
+        timeShake = 0;
     }
 
     void Update()

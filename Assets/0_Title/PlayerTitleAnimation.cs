@@ -6,7 +6,7 @@ using UnityEngine.InputSystem; // 新Inputシステムの利用に必要
 public class PlayerTitleAnimation : MonoBehaviour
 {
     [SerializeField, Header("目標地点のx座標")]
-    float position_xGoal;
+    private float position_xGoal;
     private bool isMove; // true = 動いて良き, false = 動いたら悪し
 
     private InputControl IC; // インプットアクションを定義

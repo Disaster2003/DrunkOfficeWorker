@@ -54,4 +54,9 @@ public class SpawnerPlay : MonoBehaviour
         // 生成カウントを進める
         count++;
     }
+
+    private void OnDestroy()
+    {
+        ButtonAction.ClearNumberGenerate();
+    }
 }

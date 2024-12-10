@@ -33,6 +33,7 @@ public class ButtonAction : MonoBehaviour
 
     private float timerPushLong;
     private bool isPushed; // true = ‰Ÿ‰º’†,false = not ‰Ÿ‰º
+
     private int countPush;
 
     private static Dictionary<KIND_BUTTON, int> numberGenerate = new Dictionary<KIND_BUTTON, int>();
@@ -81,8 +82,8 @@ public class ButtonAction : MonoBehaviour
 
         // ‰Ÿ‰ºó‘Ô‚Ì‰Šú‰»
         timerPushLong = 0;
-        countPush = 0;
         isPushed = false;
+        countPush = 0;
 
         if (kind_button != KIND_BUTTON.NONE) return;
 
@@ -210,4 +211,9 @@ public class ButtonAction : MonoBehaviour
                 break;
         }
     }
+
+    /// <summary>
+    /// numberGenerate‚ğ‹ó‚É‚·‚é
+    /// </summary>
+    public static void ClearNumberGenerate() { numberGenerate.Clear(); }
 }

@@ -20,7 +20,7 @@ public class Timer : MonoBehaviour
     private static float timer = 0;
 
     // タイマーのゲッターランキングで呼び出す
-    static public float get_timer
+    public static float get_timer
     {
         get
         {
@@ -29,10 +29,10 @@ public class Timer : MonoBehaviour
     }
 
     // 最大時間
-    readonly public static double timeMax = 86400;
+    public static readonly double timeMax = 86400;
 
     // タイマーを止める
-    bool isStop = false;
+    private bool isStop = false;
 
     /// <summary>
     /// 時間に変換
