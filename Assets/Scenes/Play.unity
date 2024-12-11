@@ -1166,8 +1166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bb3e0683f111d749ae19d9e5e292f2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionInitialize: {x: 0, y: 0, z: 0}
-  position_xGoal: -18
+  positionGoal: {x: 0, y: 0, z: 0}
 --- !u!1 &1153041756
 GameObject:
   m_ObjectHideFlags: 0
