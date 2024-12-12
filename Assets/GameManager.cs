@@ -101,12 +101,6 @@ public class GameManager : MonoBehaviour
 
         switch (state_scene)
         {
-            case STATE_SCENE.TITLE:
-                if(_state_scene == STATE_SCENE.PLAY)
-                {
-                    _state_scene = STATE_SCENE.NAMING;
-                }
-                break;
             case STATE_SCENE.NAMING:
                 _state_level = state_level;
                 isChangingScene = true;
