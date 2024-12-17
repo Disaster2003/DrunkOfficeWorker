@@ -1069,7 +1069,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1074813969
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1705,7 +1705,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 300}
-  m_SizeDelta: {x: 300, y: 100}
+  m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2025406026
 MonoBehaviour:
@@ -1721,7 +1721,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   time: 60
   spawner: {fileID: 1350815637}
-  bgd: {fileID: 1074813971}
+  bgd: {fileID: 0}
 --- !u!114 &2025406027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1755,7 +1755,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "88\u664288\u5206"
+  m_Text: "88\u664288\u520688\u79D2"
 --- !u!222 &2025406028
 CanvasRenderer:
   m_ObjectHideFlags: 0

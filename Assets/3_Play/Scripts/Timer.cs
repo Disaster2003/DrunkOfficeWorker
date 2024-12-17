@@ -93,17 +93,11 @@ public class Timer : MonoBehaviour
     {
         if (spawner == null) return;
 
-        // nullチェック
-        if(bgd == null)
-        {
-            Debug.LogError("BackgroundDarkkenが未設定です");
-            return;
-        }
-
         // 制限時間が無くなるまで時間を減らす
         if (timer <= 0)
         {
             timer = 0;
+            GameManager.GetInstance().SetNextScene(GameManager.STATE_SCENE.OVER);
         }
         else
         {
@@ -111,10 +105,17 @@ public class Timer : MonoBehaviour
             timer -= Time.deltaTime;
         }
 
+        Render();
+
+        // nullチェック
+        if (bgd == null)
+        {
+            Debug.LogError("BackgroundDarkkenが未設定です");
+            return;
+        }
+
         // 背景を時間に連動させて暗くしていく
         bgd.Darkken(Mathf.Clamp01(1 - (time - (time - timer)) / time));
-
-        Render();
     }
 
     /// <summary>
