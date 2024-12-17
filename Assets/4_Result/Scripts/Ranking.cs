@@ -67,8 +67,8 @@ public class Ranking : MonoBehaviour
             {
                 nameRank[i] = "-";
                 scoreRank[i] = 0;
-                PlayerPrefs.SetString(nameLevel + "_RN" + i, "-");
-                PlayerPrefs.SetInt(nameLevel + "_RS" + i, 0);
+                PlayerPrefs.SetString(nameLevel + "_RN" + i, nameRank[i]);
+                PlayerPrefs.SetInt(nameLevel + "_RS" + i, scoreRank[i]);
             }
             Debug.Log("データ領域を初期化しました");
         }
@@ -137,7 +137,7 @@ public class Ranking : MonoBehaviour
             else
             {
                 // スコアがないよ
-                txtName[idx].text = nameRank[idx];
+                txtName[idx].text = nameRank[idx + 1];
                 txtScore[idx].text = "--時--分--秒";
             }
         }

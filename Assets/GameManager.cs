@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -53,6 +54,9 @@ public class GameManager : MonoBehaviour
         // シーン遷移状態の初期化
         imgFade.fillAmount = 1;
         isChangingScene = false;
+
+        // 名前の初期化
+        PlayerPrefs.SetString("PlayerName", "");
     }
 
     // Update is called once per frame
@@ -104,8 +108,16 @@ public class GameManager : MonoBehaviour
         switch (state_scene)
         {
             case STATE_SCENE.NAMING:
-            case STATE_SCENE.RANKING:
+            case STATE_SCENE.PLAY:
                 _state_level = state_level;
+                break;
+            case STATE_SCENE.RANKING:
+                if(_state_scene == STATE_SCENE.PLAY)
+                {
+                    // 名前リセット
+                    PlayerPrefs.SetString("PlayerName", "");
+                }
+
                 isChangingScene = true;
                 break;
             case STATE_SCENE.OVER:
@@ -123,6 +135,14 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError("遷移先の難易度が未設定です");
             return;
+        }
+
+        if (_state_scene == STATE_SCENE.PLAY)
+        {
+            if(PlayerPrefs.GetString("PlayerName") == "")
+            {
+                _state_scene = STATE_SCENE.NAMING;
+            }
         }
 
         // 遷移先の決定

@@ -5,25 +5,25 @@ using UnityEngine.UI;
 
 public class SubstiuteText : MonoBehaviour
 {
-    private Text text;
+    private Text txt;
     private Text txtChild;
 
     // Start is called before the first frame update
     void Start()
     {
         // コンポーネントの取得
-        text = GetComponent<Text>();
+        txt = GetComponent<Text>();
         txtChild = transform.GetChild(0).GetComponent<Text>();
+
+        Invoke(nameof(_SubstiuteText), 0.5f);
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// テキストを置き換える
+    /// </summary>
+    private void _SubstiuteText()
     {
-        if (text.text != txtChild.text)
-        {
-            // 子コンポーネントのテキストを揃える
-            txtChild.text = text.text;
-            text.enabled = false;
-        }
+        txtChild.text = txt.text;
+        GetComponent<SubstiuteText>().enabled = false;
     }
 }
