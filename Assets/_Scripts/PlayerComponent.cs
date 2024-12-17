@@ -16,6 +16,9 @@ public class PlayerComponent : MonoBehaviour
     [Header("プレイヤーの特定位置")]
     [SerializeField] private Vector2 positionStart;
 
+    [SerializeField, Header("移動速度")]
+    private float speedMove;
+
     private SpriteRenderer spriteRenderer;
     [Header("プレイヤーのアニメーション画像配列")]
     [SerializeField] private Sprite[] spritesPlayerWait;
@@ -67,25 +70,25 @@ public class PlayerComponent : MonoBehaviour
                 if (goalPerformance.isArrived)
                 {
                     // 真ん中へ向かう
-                    transform.position = Vector2.MoveTowards(transform.position, Vector2.zero, Time.deltaTime);
+                    transform.position = Vector2.MoveTowards(transform.position, Vector2.zero, speedMove * Time.deltaTime);
                 }
                 else
                 {
                     // 開始位置へ向かう
-                    transform.position = Vector2.MoveTowards(transform.position, positionStart, Time.deltaTime);
+                    transform.position = Vector2.MoveTowards(transform.position, positionStart, speedMove * Time.deltaTime);
                 }
                 break;
             case STATE_PLAYER.TACKLE:
                 if (transform.position.x < 0)
                 {
                     // 走行
-                    transform.Translate(5 * Time.deltaTime, 0, 0);
+                    transform.Translate(speedMove * Time.deltaTime, 0, 0);
                     PlayerAnimation(spritesPlayerRun);
                 }
                 else
                 {
                     // タックル
-                    transform.Translate(10 * Time.deltaTime, 0, 0);
+                    transform.Translate(2 * speedMove * Time.deltaTime, 0, 0);
                     PlayerAnimation(spritesPlayerTackle);
                 }
                 break;

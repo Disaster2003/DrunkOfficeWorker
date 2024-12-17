@@ -12,6 +12,9 @@ public class HurdleComponent : MonoBehaviour
     [SerializeField, Header("障害物画像")]
     private Sprite[] spritesHurdle;
 
+    [SerializeField, Header("移動速度")]
+    private float speedMove;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,13 +41,13 @@ public class HurdleComponent : MonoBehaviour
             if (state_player == PlayerComponent.STATE_PLAYER.JUMP)
             {
                 // プレイヤーの下を通過させる
-                transform.Translate(10 * -Time.deltaTime, 0, 0);
+                transform.Translate(5 * speedMove * -Time.deltaTime, 0, 0);
             }
         }
         else if (transform.position.x > 5)
         {
             // カメラ内へ移動
-            transform.Translate(-Time.deltaTime, 0, 0);
+            transform.Translate(speedMove * -Time.deltaTime, 0, 0);
         }
     }
 

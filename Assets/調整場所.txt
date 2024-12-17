@@ -1,5 +1,9 @@
 タイトル
-・PlayerTitleAnimation PositionTarget(画面外へ向かう場所)とSpeed Move(向かうスピード)
+・TitleScene内のPlayer/PlayerTitleAnimationのSpeed Move(移動速度)
 
-チュートリアル
-・
+チュートリアル / プレイ
+・_Prefab/Player/PlayerComponetのSpeed Move(移動速度)
+・卒展/level_adjustのボタンのそれぞれの種類数
+・3_Play/Prefabs/Hurdle〇〇と1_Tutorial/Prefabs/Hurdle〇〇のSpeed Move(移動速度)
+・PlayScene内のCanvas/txtTimerのTime(制限時間)
+・PlayScene内のCanvas/imgPhaseCharacter/ProgressのSpeed Move(移動速度)
