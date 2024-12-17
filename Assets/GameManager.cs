@@ -108,11 +108,14 @@ public class GameManager : MonoBehaviour
         switch (state_scene)
         {
             case STATE_SCENE.NAMING:
+                _state_level = state_level;
+                isChangingScene = true;
+                break;
             case STATE_SCENE.PLAY:
                 _state_level = state_level;
                 break;
             case STATE_SCENE.RANKING:
-                if(_state_scene == STATE_SCENE.PLAY)
+                if(_state_scene == STATE_SCENE.TITLE)
                 {
                     // 名前リセット
                     PlayerPrefs.SetString("PlayerName", "");
@@ -139,9 +142,12 @@ public class GameManager : MonoBehaviour
 
         if (_state_scene == STATE_SCENE.PLAY)
         {
-            if(PlayerPrefs.GetString("PlayerName") == "")
+            if (state_scene != STATE_SCENE.NAMING)
             {
-                _state_scene = STATE_SCENE.NAMING;
+                if (PlayerPrefs.GetString("PlayerName") == "")
+                {
+                    _state_scene = STATE_SCENE.NAMING;
+                }
             }
         }
 

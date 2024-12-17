@@ -137,9 +137,11 @@ public class Ranking : MonoBehaviour
             else
             {
                 // スコアがないよ
-                txtName[idx].text = nameRank[idx + 1];
                 txtScore[idx].text = "--時--分--秒";
             }
+
+            // 名前の代入
+            txtName[idx].text = nameRank[idx + 1];
         }
     }
 }
