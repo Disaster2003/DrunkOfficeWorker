@@ -10,9 +10,6 @@ public class Timer : MonoBehaviour
 {
     private Text txtTimer;
 
-    [SerializeField, Header("背景を暗くするコンポーネント")]
-    private BackGroundDarkken bgd;
-
     [SerializeField, Header("制限時間")]
     private float time = 30;
 
@@ -32,7 +29,10 @@ public class Timer : MonoBehaviour
     public static readonly double timeMax = 86400;
 
     // タイマーを止める
-    private bool isStop = false;
+    [SerializeField] private GameObject spawner;
+
+    [SerializeField, Header("背景を暗くするコンポーネント")]
+    private BackGroundDarkken bgd;
 
     /// <summary>
     /// 時間に変換
@@ -76,14 +76,6 @@ public class Timer : MonoBehaviour
     }
 
     /// <summary>
-    /// タイマーを動かすのを止める
-    /// </summary>
-    public void Stop()
-    {
-        isStop = true;
-    }
-
-    /// <summary>
     /// スタートイベント
     /// </summary>
     private void Start()
@@ -99,25 +91,28 @@ public class Timer : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (!isStop)
+        if (spawner == null) return;
+
+        // nullチェック
+        if(bgd == null)
         {
-            // 制限時間が無くなるまで時間を減らす
-            if (timer <= 0)
-            {
-                timer = 0;
-            }
-            else
-            {
-                // 時間を減らす
-                timer -= Time.deltaTime;
-            }
+            Debug.LogError("BackgroundDarkkenが未設定です");
+            return;
         }
 
-        if (bgd)
+        // 制限時間が無くなるまで時間を減らす
+        if (timer <= 0)
         {
-            // 背景を時間に連動させて暗くしていく
-            bgd.Darkken(Mathf.Clamp01(1 - (time - (time - timer)) / time));
+            timer = 0;
         }
+        else
+        {
+            // 時間を減らす
+            timer -= Time.deltaTime;
+        }
+
+        // 背景を時間に連動させて暗くしていく
+        bgd.Darkken(Mathf.Clamp01(1 - (time - (time - timer)) / time));
 
         Render();
     }

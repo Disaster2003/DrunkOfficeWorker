@@ -12,9 +12,10 @@ public class GameManager : MonoBehaviour
     {
         TITLE = 0,    // タイトル画面
         TUTORIAL = 1, // チュートリアル画面
-        PLAY = 2,     // プレイ画面
-        RANKING = 3,  // ランキング
-        OVER = 4,     // ゲームオーバー
+        NAMING = 2,   // 命名画面
+        PLAY = 3,     // プレイ画面
+        RANKING = 4,  // ランキング
+        OVER = 5,     // ゲームオーバー
         NONE,         // 何もなし
     }
     private STATE_SCENE state_scene;
@@ -71,6 +72,8 @@ public class GameManager : MonoBehaviour
                 // 次のシーンへ
                 isChangingScene = false;
                 SceneManager.LoadSceneAsync((int)state_scene);
+
+                Debug.Log("シーンを切り替えました");
             }
             else
             {
@@ -98,6 +101,18 @@ public class GameManager : MonoBehaviour
     {
         if(isChangingScene) return;
 
+        switch (state_scene)
+        {
+            case STATE_SCENE.NAMING:
+            case STATE_SCENE.RANKING:
+                _state_level = state_level;
+                isChangingScene = true;
+                break;
+            case STATE_SCENE.OVER:
+                isChangingScene = true;
+                break;
+        }
+
         // nullチェック
         if (_state_scene == STATE_SCENE.NONE)
         {
@@ -108,11 +123,6 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError("遷移先の難易度が未設定です");
             return;
-        }
-
-        if (state_scene == STATE_SCENE.RANKING || state_scene == STATE_SCENE.OVER)
-        {
-            isChangingScene = true;
         }
 
         // 遷移先の決定
