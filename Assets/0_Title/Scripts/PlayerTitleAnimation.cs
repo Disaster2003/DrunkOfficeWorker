@@ -9,6 +9,11 @@ public class PlayerTitleAnimation : MonoBehaviour
     private float position_xGoal;
     private bool isMove; // true = 動いて良き, false = 動いたら悪し
 
+    [Header("待機、驚愕、走行")]
+    [SerializeField] private Sprite[] wait;
+    [SerializeField] private Sprite[] amazing;
+    [SerializeField] private Sprite[] run;
+
     private InputControl IC; // インプットアクションを定義
 
     [SerializeField, Header("移動速度")]

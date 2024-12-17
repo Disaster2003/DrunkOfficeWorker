@@ -174,10 +174,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state_player: 2
   spritesHurdle:
-  - {fileID: -992429338, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
-  - {fileID: 1080876447, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
-  - {fileID: 41073931, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
-  - {fileID: 1031615025, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
+  - {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  - {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  - {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  - {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
 --- !u!1 &400256725272022970
 GameObject:
   m_ObjectHideFlags: 0

@@ -72,6 +72,8 @@ public class GameManager : MonoBehaviour
                 // 次のシーンへ
                 isChangingScene = false;
                 SceneManager.LoadSceneAsync((int)state_scene);
+
+                Debug.Log("シーンを切り替えました");
             }
             else
             {
@@ -102,12 +104,12 @@ public class GameManager : MonoBehaviour
         switch (state_scene)
         {
             case STATE_SCENE.NAMING:
+            case STATE_SCENE.RANKING:
                 _state_level = state_level;
                 isChangingScene = true;
                 break;
-            case STATE_SCENE.RANKING:
             case STATE_SCENE.OVER:
-                isChangingScene =true;
+                isChangingScene = true;
                 break;
         }
 
