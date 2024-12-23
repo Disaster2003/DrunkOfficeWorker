@@ -33,11 +33,13 @@ public class ButtonAction : MonoBehaviour
     private int indexMaxKindButton = (int)KIND_BUTTON.PUSH_REPEAT_FIVE;
 
     private float timerPushLong;
-    private bool isPushed; // true = 押下中,false = not 押下
+    private bool isPushed; // true = 押下中, false = not 押下
 
     private int countPush;
 
     private static Dictionary<KIND_BUTTON, int> numberGenerate = new Dictionary<KIND_BUTTON, int>();
+
+    /* ここに変数 */
 
     // Start is called before the first frame update
     void Start()
@@ -62,20 +64,16 @@ public class ButtonAction : MonoBehaviour
         switch (rand)
         {
             case 0:
-                IC.Player.UpKey.started += InputButton;
-                IC.Player.UpKey.canceled += ReleaseButton;
+                InitializedButton(IC.Player.UpKey);
                 break;
             case 1:
-                IC.Player.DownKey.started += InputButton;
-                IC.Player.DownKey.canceled += ReleaseButton;
+                InitializedButton(IC.Player.DownKey);
                 break;
             case 2:
-                IC.Player.LeftKey.started += InputButton;
-                IC.Player.LeftKey.canceled += ReleaseButton;
+                InitializedButton(IC.Player.LeftKey);
                 break;
             case 3:
-                IC.Player.RightKey.started += InputButton;
-                IC.Player.RightKey.canceled += ReleaseButton;
+                InitializedButton(IC.Player.RightKey);
                 break;
         }
         // インプットアクションの有効化
@@ -211,6 +209,31 @@ public class ButtonAction : MonoBehaviour
                 }
                 break;
         }
+    }
+
+
+    /// <summary>
+    /// キー入力の失敗処理
+    /// </summary>
+    private void MissButton(InputAction.CallbackContext context)
+    {
+        /* ここにキー入力ミス処理 */
+    }
+
+    /// <summary>
+    /// キーの初期化
+    /// </summary>
+    /// <param name="inputAction">機能させるキー</param>
+    private void InitializedButton(InputAction inputAction)
+    {
+        IC.Player.UpKey.started += (inputAction == IC.Player.UpKey) ? InputButton : MissButton;
+        IC.Player.UpKey.canceled += (inputAction == IC.Player.UpKey) ? ReleaseButton : null;
+        IC.Player.DownKey.started += (inputAction == IC.Player.DownKey) ? InputButton : MissButton;
+        IC.Player.DownKey.canceled += (inputAction == IC.Player.DownKey) ? ReleaseButton : null;
+        IC.Player.LeftKey.started += (inputAction == IC.Player.LeftKey) ? InputButton : MissButton;
+        IC.Player.LeftKey.canceled += (inputAction == IC.Player.LeftKey) ? ReleaseButton : null;
+        IC.Player.RightKey.started += (inputAction == IC.Player.RightKey) ? InputButton : MissButton;
+        IC.Player.RightKey.canceled += (inputAction == IC.Player.RightKey) ? ReleaseButton : null;
     }
 
     /// <summary>
