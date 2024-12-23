@@ -220,7 +220,7 @@ public class ButtonAction : MonoBehaviour
     private void MissButton(InputAction.CallbackContext context)
     {
         /* ここにキー入力ミス処理 */
-        changeSpeed.missCnt++;
+        changeSpeed.UpMissCnt();
         if(changeSpeed.missCnt >= changeSpeed.conditionsNum)
         {
             changeSpeed.finishSpeedUp();
