@@ -9,12 +9,13 @@ public class SpeedUP : MonoBehaviour
     public float currentSpeed;   //現在のスピード
     public float upSpeed;       //上げるスピード
     public int conditionsNum = 10;   //条件の数
-    private int missCnt;    //ミスのカウント
+    public float missCnt;    //ミスのカウント
 
     // Start is called before the first frame update
     void Start()
     {
         currentSpeed = firstSpeed;
+        missCnt = 0;
     }
 
     void UpMissCnt()
@@ -22,12 +23,12 @@ public class SpeedUP : MonoBehaviour
         missCnt++;
     }
 
-    void SpeedUp()
+    public void SpeedUp()
     {
         currentSpeed += upSpeed;
     }
 
-    void finishSpeedUp()
+    public void finishSpeedUp()
     {
         currentSpeed = firstSpeed;
     }
