@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
 public class SpeedUP : MonoBehaviour
@@ -9,7 +8,7 @@ public class SpeedUP : MonoBehaviour
     public float currentSpeed;   //現在のスピード
     public float upSpeed;       //上げるスピード
     public int conditionsNum = 10;   //条件の数
-    private float missCnt;    //ミスのカウント
+    private static float missCnt;    //ミスのカウント
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +17,7 @@ public class SpeedUP : MonoBehaviour
         missCnt = 0;
     }
 
-    public void UpMissCnt()
+    public static void UpMissCnt()
     {
         missCnt++;
     }
@@ -36,6 +35,11 @@ public class SpeedUP : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (missCnt >= conditionsNum)
+        {
+            finishSpeedUp();
+        }
+
         transform.position = Vector3.left * currentSpeed * Time.deltaTime;
     }
 }

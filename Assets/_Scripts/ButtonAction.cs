@@ -4,7 +4,6 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.InputSystem; // 新Inputシステムの利用に必要
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class ButtonAction : MonoBehaviour
 {
@@ -39,9 +38,6 @@ public class ButtonAction : MonoBehaviour
     private int countPush;
 
     private static Dictionary<KIND_BUTTON, int> numberGenerate = new Dictionary<KIND_BUTTON, int>();
-
-    /* ここに変数 */
-    private SpeedUP changeSpeed = new SpeedUP();
 
     // Start is called before the first frame update
     void Start()
@@ -219,12 +215,7 @@ public class ButtonAction : MonoBehaviour
     /// </summary>
     private void MissButton(InputAction.CallbackContext context)
     {
-        /* ここにキー入力ミス処理 */
-        changeSpeed.UpMissCnt();
-        if(changeSpeed.missCnt >= changeSpeed.conditionsNum)
-        {
-            changeSpeed.finishSpeedUp();
-        }
+        SpeedUP.UpMissCnt();
     }
 
     /// <summary>
