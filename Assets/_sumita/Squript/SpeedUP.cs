@@ -40,6 +40,6 @@ public class SpeedUP : MonoBehaviour
             finishSpeedUp();
         }
 
-        transform.position = Vector3.left * currentSpeed * Time.deltaTime;
+        transform.position = Vector3.left * currentSpeed;
     }
 }
