@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class SpeedUP : MonoBehaviour
 {
-    public float firstSpeed;    //最初のスピード
-    public float currentSpeed;   //現在のスピード
-    public float upSpeed;       //上げるスピード
+    [Header("初期速度を入力してください")]
+    public float speedCurrent;
+    private float speedFirst;
+    [SerializeField, Header("速度の上昇値")]
+    private float upSpeed;
     public int conditionsNum = 10;   //条件の数
     private static float missCnt;    //ミスのカウント
 
     // Start is called before the first frame update
     void Start()
     {
-        currentSpeed = firstSpeed;
+        speedFirst = speedCurrent;
         missCnt = 0;
     }
 
@@ -24,12 +26,7 @@ public class SpeedUP : MonoBehaviour
 
     public void SpeedUp()
     {
-        currentSpeed += upSpeed;
-    }
-
-    public void finishSpeedUp()
-    {
-        currentSpeed = firstSpeed;
+        speedCurrent += upSpeed;
     }
 
     // Update is called once per frame
@@ -37,9 +34,8 @@ public class SpeedUP : MonoBehaviour
     {
         if (missCnt >= conditionsNum)
         {
-            finishSpeedUp();
+            // 初期化
+            speedCurrent = speedFirst;
         }
-
-        transform.position = Vector3.left * currentSpeed;
     }
 }
