@@ -63,7 +63,13 @@ public class ButtonManager : MonoBehaviour
                 else break;       
             }
 
-            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(3 - cnt, transform.localPosition.y), Time.deltaTime);
+            transform.localPosition =
+                Vector3.Lerp
+                (
+                    transform.localPosition,
+                    new Vector3(3 - cnt, transform.localPosition.y),
+                    GetComponent<SpeedUP>().speedCurrent * Time.deltaTime
+                );
         }
     }
 }

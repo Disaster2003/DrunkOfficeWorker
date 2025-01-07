@@ -39,8 +39,6 @@ public class ButtonAction : MonoBehaviour
 
     private static Dictionary<KIND_BUTTON, int> numberGenerate = new Dictionary<KIND_BUTTON, int>();
 
-    /* ここに変数 */
-
     // Start is called before the first frame update
     void Start()
     {
@@ -217,7 +215,7 @@ public class ButtonAction : MonoBehaviour
     /// </summary>
     private void MissButton(InputAction.CallbackContext context)
     {
-        /* ここにキー入力ミス処理 */
+        SpeedUP.UpMissCnt();
     }
 
     /// <summary>
