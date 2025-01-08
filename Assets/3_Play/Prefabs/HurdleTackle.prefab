@@ -512,10 +512,10 @@ MonoBehaviour:
   - {fileID: 41073931, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
   - {fileID: 1031615025, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
   UI_Arrow:
-  - {fileID: 21300000, guid: cc5906d070ad39141819d67c25b55b66, type: 3}
-  - {fileID: 21300000, guid: 2c9cb759fb862664e8e6b2464e39535c, type: 3}
-  - {fileID: 21300000, guid: cfcb6b19b2da4fe4e934e75dcff4018b, type: 3}
-  - {fileID: 21300000, guid: e5df02fe15554bc408c6f87ab43bbbe0, type: 3}
+  - {fileID: -1008384642, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
+  - {fileID: -2144106426, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
+  - {fileID: -1743240911, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
+  - {fileID: -1042735775, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
   imgInputGauge: {fileID: 1278605895457326740}
   imgBeforeButton: {fileID: 5234803771886805642}
   kind_button: 0
@@ -691,10 +691,10 @@ MonoBehaviour:
   - {fileID: 41073931, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
   - {fileID: 1031615025, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
   UI_Arrow:
-  - {fileID: 21300000, guid: cc5906d070ad39141819d67c25b55b66, type: 3}
-  - {fileID: 21300000, guid: 2c9cb759fb862664e8e6b2464e39535c, type: 3}
-  - {fileID: 21300000, guid: cfcb6b19b2da4fe4e934e75dcff4018b, type: 3}
-  - {fileID: 21300000, guid: e5df02fe15554bc408c6f87ab43bbbe0, type: 3}
+  - {fileID: -1008384642, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
+  - {fileID: -2144106426, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
+  - {fileID: -1743240911, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
+  - {fileID: -1042735775, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
   imgInputGauge: {fileID: 8696961346681613608}
   imgBeforeButton: {fileID: 2501488277453330480}
   kind_button: 0
@@ -1101,10 +1101,10 @@ MonoBehaviour:
   - {fileID: 41073931, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
   - {fileID: 1031615025, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
   UI_Arrow:
-  - {fileID: 21300000, guid: cc5906d070ad39141819d67c25b55b66, type: 3}
-  - {fileID: 21300000, guid: 2c9cb759fb862664e8e6b2464e39535c, type: 3}
-  - {fileID: 21300000, guid: cfcb6b19b2da4fe4e934e75dcff4018b, type: 3}
-  - {fileID: 21300000, guid: e5df02fe15554bc408c6f87ab43bbbe0, type: 3}
+  - {fileID: -1008384642, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
+  - {fileID: -2144106426, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
+  - {fileID: -1743240911, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
+  - {fileID: -1042735775, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
   imgInputGauge: {fileID: 2725475169308135809}
   imgBeforeButton: {fileID: 2094384292764002808}
   kind_button: 0
@@ -1203,10 +1203,10 @@ MonoBehaviour:
   - {fileID: 41073931, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
   - {fileID: 1031615025, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
   UI_Arrow:
-  - {fileID: 21300000, guid: cc5906d070ad39141819d67c25b55b66, type: 3}
-  - {fileID: 21300000, guid: 2c9cb759fb862664e8e6b2464e39535c, type: 3}
-  - {fileID: 21300000, guid: cfcb6b19b2da4fe4e934e75dcff4018b, type: 3}
-  - {fileID: 21300000, guid: e5df02fe15554bc408c6f87ab43bbbe0, type: 3}
+  - {fileID: -1008384642, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
+  - {fileID: -2144106426, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
+  - {fileID: -1743240911, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
+  - {fileID: -1042735775, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
   imgInputGauge: {fileID: 6296314063131725372}
   imgBeforeButton: {fileID: 2091795139323361192}
   kind_button: 0
@@ -1305,10 +1305,10 @@ MonoBehaviour:
   - {fileID: 41073931, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
   - {fileID: 1031615025, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
   UI_Arrow:
-  - {fileID: 21300000, guid: cc5906d070ad39141819d67c25b55b66, type: 3}
-  - {fileID: 21300000, guid: 2c9cb759fb862664e8e6b2464e39535c, type: 3}
-  - {fileID: 21300000, guid: cfcb6b19b2da4fe4e934e75dcff4018b, type: 3}
-  - {fileID: 21300000, guid: e5df02fe15554bc408c6f87ab43bbbe0, type: 3}
+  - {fileID: -1008384642, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
+  - {fileID: -2144106426, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
+  - {fileID: -1743240911, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
+  - {fileID: -1042735775, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
   imgInputGauge: {fileID: 2325920797513790725}
   imgBeforeButton: {fileID: 2047812575628988904}
   kind_button: 0
@@ -1484,10 +1484,10 @@ MonoBehaviour:
   - {fileID: 41073931, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
   - {fileID: 1031615025, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
   UI_Arrow:
-  - {fileID: 21300000, guid: cc5906d070ad39141819d67c25b55b66, type: 3}
-  - {fileID: 21300000, guid: 2c9cb759fb862664e8e6b2464e39535c, type: 3}
-  - {fileID: 21300000, guid: cfcb6b19b2da4fe4e934e75dcff4018b, type: 3}
-  - {fileID: 21300000, guid: e5df02fe15554bc408c6f87ab43bbbe0, type: 3}
+  - {fileID: -1008384642, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
+  - {fileID: -2144106426, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
+  - {fileID: -1743240911, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
+  - {fileID: -1042735775, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
   imgInputGauge: {fileID: 7461420548006709912}
   imgBeforeButton: {fileID: 1589589914788261165}
   kind_button: 0
@@ -1586,10 +1586,10 @@ MonoBehaviour:
   - {fileID: 41073931, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
   - {fileID: 1031615025, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
   UI_Arrow:
-  - {fileID: 21300000, guid: cc5906d070ad39141819d67c25b55b66, type: 3}
-  - {fileID: 21300000, guid: 2c9cb759fb862664e8e6b2464e39535c, type: 3}
-  - {fileID: 21300000, guid: cfcb6b19b2da4fe4e934e75dcff4018b, type: 3}
-  - {fileID: 21300000, guid: e5df02fe15554bc408c6f87ab43bbbe0, type: 3}
+  - {fileID: -1008384642, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
+  - {fileID: -2144106426, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
+  - {fileID: -1743240911, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
+  - {fileID: -1042735775, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
   imgInputGauge: {fileID: 7923076997179647639}
   imgBeforeButton: {fileID: 0}
   kind_button: 0

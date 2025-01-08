@@ -125,20 +125,12 @@ public class ButtonAction : MonoBehaviour
 
         if (timerPushLong > 0.5f)
         {
-            // 自身の破壊
-            Destroy(gameObject);
+            DeleteComponent();
         }
 
         // ボタンを押下中は経過時間を加算
         timerPushLong += Time.deltaTime;
         imgInputGauge.fillAmount = timerPushLong / 0.5f;
-    }
-
-    private void OnDestroy()
-    {
-        // インプットアクションの無効化
-        IC.Disable();
-        Destroy(transform.parent.gameObject);
     }
 
     /// <summary>
@@ -158,8 +150,7 @@ public class ButtonAction : MonoBehaviour
         switch (kind_button)
         {
             case KIND_BUTTON.PUSH:
-                // 自身の破壊
-                Destroy(gameObject);
+                DeleteComponent();
                 break;
             case KIND_BUTTON.PUSH_LONG:
                 isPushed = true;
@@ -187,8 +178,7 @@ public class ButtonAction : MonoBehaviour
             case KIND_BUTTON.PUSH_REPEAT_THREE:
                 if(countPush >= 3)
                 {
-                    // 自身の破壊
-                    Destroy(gameObject);
+                    DeleteComponent();
                 }
                 else
                 {
@@ -198,8 +188,7 @@ public class ButtonAction : MonoBehaviour
             case KIND_BUTTON.PUSH_REPEAT_FIVE:
                 if (countPush >= 5)
                 {
-                    // 自身の破壊
-                    Destroy(gameObject);
+                    DeleteComponent();
                 }
                 else
                 {
@@ -209,6 +198,16 @@ public class ButtonAction : MonoBehaviour
         }
     }
 
+    private void DeleteComponent()
+    {
+        // インプットアクションの無効化
+        IC.Disable();
+
+        Destroy(transform.parent.gameObject);
+
+        // 自身の破壊
+        Destroy(gameObject);
+    }
 
     /// <summary>
     /// キー入力の失敗処理
