@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class SpeedAdjust : MonoBehaviour
 {
-    [Header("初期速度を入力してください")]
-    public float speedCurrent;
-    private float speedFirst;
+    [SerializeField, Header("初期速度を入力してください")]
+    private float SPEED_FIRST;
+    private static float speedCurrent = 0;
+    /// <summary>
+    /// 現在の速度を取得する
+    /// </summary>
+    public static float GetCurrentSpeed {  get { return speedCurrent; } }
     [SerializeField, Header("速度の上昇倍率")]
     private float fTempoUp;
 
-    private static float fCountMiss;
+    private static float fCountMiss = 0;
     [SerializeField, Header("ミス上限(チュートリアル、初-上級)")]
     private int[] iArrayFailMax = new int[4];
     private static bool isTempoUpped;
@@ -22,8 +26,7 @@ public class SpeedAdjust : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        speedFirst = speedCurrent;
-        fCountMiss = 0;
+        if (speedCurrent == 0) speedCurrent = SPEED_FIRST;
         isTempoUpped = false;
     }
 
@@ -34,7 +37,7 @@ public class SpeedAdjust : MonoBehaviour
         {
             // 初期化
             fCountMiss = 0;
-            speedCurrent = speedFirst;
+            speedCurrent = SPEED_FIRST;
         }
         else if (isTempoUpped)
         {

@@ -2710,7 +2710,6 @@ MonoBehaviour:
   state_player: 1
   spriteArrayHurdle:
   - {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  fSpeedMove: 2
 --- !u!1 &8736886517745220774
 GameObject:
   m_ObjectHideFlags: 0
@@ -2853,7 +2852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 574dda1b90b249247a03be6c27fe506b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedCurrent: 2
+  SPEED_FIRST: 2
   fTempoUp: 1.5
   iArrayFailMax: 00000000000000000000000000000000
 --- !u!1 &9079782799755881505

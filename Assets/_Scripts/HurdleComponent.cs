@@ -44,13 +44,13 @@ public class HurdleComponent : MonoBehaviour
             if (state_player == PlayerComponent.STATE_PLAYER.JUMP)
             {
                 // プレイヤーの下を通過させる
-                transform.Translate(5 * GetComponentInChildren<SpeedAdjust>().speedCurrent * -Time.deltaTime, 0, 0);
+                transform.Translate(5 * SpeedAdjust.GetCurrentSpeed * -Time.deltaTime, 0, 0);
             }
         }
         else if (transform.position.x > 5)
         {
             // カメラ内へ移動
-            transform.Translate(GetComponentInChildren<SpeedAdjust>().speedCurrent * -Time.deltaTime, 0, 0);
+            transform.Translate(SpeedAdjust.GetCurrentSpeed * -Time.deltaTime, 0, 0);
         }
     }
 
