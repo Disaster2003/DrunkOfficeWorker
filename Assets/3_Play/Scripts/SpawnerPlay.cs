@@ -30,9 +30,14 @@ public class SpawnerPlay : MonoBehaviour
         if (GameObject.FindGameObjectWithTag("Hurdle")) return;
 
         // 自身の破棄
-        if (count >= 10) Destroy(gameObject);
+        if (count >= 10)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         // スポーン
-        else HurdleSpawn();
+        HurdleSpawn();
     }
 
     /// <summary>
@@ -44,12 +49,38 @@ public class SpawnerPlay : MonoBehaviour
         // プレハブが存在していれば
         if (pfb_Object.Length <= 0) return;
 
+        if(count >= 3)
+        {
+            bool isPrimeNumbers = false;
+            if (count == 3)
+            {
+                isPrimeNumbers = true;
+            }
+            else if(count % 2 > 0 && count % 3 > 0)
+            {
+                // 素数か調べる
+                for (int i = 5; i * i <= count; i++)
+                {
+                    if (count % i == 0 || count % (i + 2) == 0)
+                    {
+                        isPrimeNumbers = false;
+                        break;
+                    }
+
+                    isPrimeNumbers = true;
+                }
+            }
+
+            // スピードアップON
+            if (isPrimeNumbers) SpeedAdjust.SetIsTempoUpped = true;
+        }
+
         // 一応配列に対応して乱数を生成する
         // いらなかったら変更して
-        int i = Random.Range(0, pfb_Object.Length);
+        int rand = Random.Range(0, pfb_Object.Length);
 
         // 生成して
-        Instantiate(pfb_Object[i], instancePos, Quaternion.identity);
+        Instantiate(pfb_Object[rand], instancePos, Quaternion.identity);
 
         // 生成カウントを進める
         count++;

@@ -264,7 +264,7 @@ public class ButtonAction : MonoBehaviour
     /// </summary>
     private void MissButton(InputAction.CallbackContext context)
     {
-        SpeedUP.UpMissCnt();
+        SpeedAdjust.AddMissCnt = 1;
     }
 
     private void DeleteComponent()

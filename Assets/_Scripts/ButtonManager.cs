@@ -68,7 +68,7 @@ public class ButtonManager : MonoBehaviour
                 (
                     transform.localPosition,
                     new Vector3(3 - cnt, transform.localPosition.y),
-                    GetComponent<SpeedUP>().speedCurrent * Time.deltaTime
+                    GetComponent<SpeedAdjust>().speedCurrent * Time.deltaTime
                 );
         }
     }
