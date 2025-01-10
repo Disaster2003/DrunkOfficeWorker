@@ -12,11 +12,15 @@ public class ButtonAction : MonoBehaviour
     [SerializeField, Header("矢印画像")]
     private Sprite[] UI_Arrow;
 
-    [SerializeField, Header("長押し・連打ゲージ")]
+    [SerializeField, Header("長押しゲージのベース")]
+    private GameObject imgInputGaugeBase;
+    [SerializeField, Header("長押しゲージ")]
     private Image imgInputGauge;
+    [SerializeField, Header("連打ゲージ")]
+    private Image imgRepeatGauge;
+    [SerializeField] private Sprite[] beer;
 
     private InputControl IC; // インプットアクションを定義
-
     [SerializeField, Header("前のボタン")]
     private GameObject imgBeforeButton;
 
@@ -42,6 +46,63 @@ public class ButtonAction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DecideButton();
+
+        // 押下状態の初期化
+        timerPushLong = 0;
+        isPushed = false;
+        countPush = 0;
+
+        DecideKindOfButton();
+
+        switch (kind_button)
+        {
+            case KIND_BUTTON.PUSH:
+                imgInputGaugeBase.SetActive(false);
+                imgRepeatGauge.gameObject.SetActive(false);
+                break;
+            case KIND_BUTTON.PUSH_LONG:
+                imgRepeatGauge.gameObject.SetActive(false);
+                break;
+            case KIND_BUTTON.PUSH_REPEAT_THREE:
+                imgInputGaugeBase.SetActive(false);
+
+                // Sprite配列をListに変換
+                List<Sprite> spriteList = new List<Sprite>(beer);
+
+                // 2番目(インデックス1)と4番目(インデックス3)を削除
+                spriteList.RemoveAt(1);
+                spriteList.RemoveAt(3);
+
+                // Listを再びSprite配列に変換 (必要であれば)
+                beer = spriteList.ToArray();
+                break;
+            case KIND_BUTTON.PUSH_REPEAT_FIVE:
+                imgInputGaugeBase.SetActive(false);
+                break;
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!isPushed) return;
+
+        if (timerPushLong > 0.5f)
+        {
+            DeleteComponent();
+        }
+
+        // ボタンを押下中は経過時間を加算
+        timerPushLong += Time.deltaTime;
+        imgInputGauge.fillAmount = timerPushLong / 0.5f;
+    }
+
+    /// <summary>
+    /// キーの決定
+    /// </summary>
+    private void DecideButton()
+    {
         // ボタンの抽選
         int rand = Random.Range(0, 4);
 
@@ -55,6 +116,7 @@ public class ButtonAction : MonoBehaviour
             GetComponent<Image>().sprite = UI_Arrow[rand];
         }
         imgInputGauge.fillAmount = 0;
+        imgRepeatGauge.sprite = beer[0];
 
         // インプットアクションを取得
         IC = new InputControl();
@@ -76,12 +138,29 @@ public class ButtonAction : MonoBehaviour
         }
         // インプットアクションの有効化
         IC.Enable();
+    }
 
-        // 押下状態の初期化
-        timerPushLong = 0;
-        isPushed = false;
-        countPush = 0;
+    /// <summary>
+    /// キーの初期化
+    /// </summary>
+    /// <param name="inputAction">機能させるキー</param>
+    private void InitializedButton(InputAction inputAction)
+    {
+        IC.Player.UpKey.started += (inputAction == IC.Player.UpKey) ? InputButton : MissButton;
+        IC.Player.UpKey.canceled += (inputAction == IC.Player.UpKey) ? ReleaseButton : null;
+        IC.Player.DownKey.started += (inputAction == IC.Player.DownKey) ? InputButton : MissButton;
+        IC.Player.DownKey.canceled += (inputAction == IC.Player.DownKey) ? ReleaseButton : null;
+        IC.Player.LeftKey.started += (inputAction == IC.Player.LeftKey) ? InputButton : MissButton;
+        IC.Player.LeftKey.canceled += (inputAction == IC.Player.LeftKey) ? ReleaseButton : null;
+        IC.Player.RightKey.started += (inputAction == IC.Player.RightKey) ? InputButton : MissButton;
+        IC.Player.RightKey.canceled += (inputAction == IC.Player.RightKey) ? ReleaseButton : null;
+    }
 
+    /// <summary>
+    /// ボタンの種類を決定
+    /// </summary>
+    private void DecideKindOfButton()
+    {
         if (kind_button != KIND_BUTTON.NONE) return;
 
         if (numberGenerate.Count == 0)
@@ -105,6 +184,7 @@ public class ButtonAction : MonoBehaviour
         }
 
         // ボタンアクションの選択
+        int rand = 0;
         do
         {
             rand = Random.Range(1, indexMaxKindButton + 1);
@@ -116,21 +196,6 @@ public class ButtonAction : MonoBehaviour
         }
         while (true);
         kind_button = (KIND_BUTTON)rand;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (!isPushed) return;
-
-        if (timerPushLong > 0.5f)
-        {
-            DeleteComponent();
-        }
-
-        // ボタンを押下中は経過時間を加算
-        timerPushLong += Time.deltaTime;
-        imgInputGauge.fillAmount = timerPushLong / 0.5f;
     }
 
     /// <summary>
@@ -151,7 +216,7 @@ public class ButtonAction : MonoBehaviour
         {
             case KIND_BUTTON.PUSH:
                 DeleteComponent();
-                break;
+                return;
             case KIND_BUTTON.PUSH_LONG:
                 isPushed = true;
                 break;
@@ -176,37 +241,22 @@ public class ButtonAction : MonoBehaviour
                 isPushed = false;
                 break;
             case KIND_BUTTON.PUSH_REPEAT_THREE:
-                if(countPush >= 3)
+                if (countPush >= 3)
                 {
                     DeleteComponent();
+                    return;
                 }
-                else
-                {
-                    imgInputGauge.fillAmount = countPush / 3.0f;
-                }
+                else imgRepeatGauge.sprite = beer[countPush];
                 break;
             case KIND_BUTTON.PUSH_REPEAT_FIVE:
                 if (countPush >= 5)
                 {
                     DeleteComponent();
+                    return;
                 }
-                else
-                {
-                    imgInputGauge.fillAmount = countPush / 5.0f;
-                }
+                else imgRepeatGauge.sprite = beer[countPush];
                 break;
         }
-    }
-
-    private void DeleteComponent()
-    {
-        // インプットアクションの無効化
-        IC.Disable();
-
-        Destroy(transform.parent.gameObject);
-
-        // 自身の破壊
-        Destroy(gameObject);
     }
 
     /// <summary>
@@ -217,20 +267,12 @@ public class ButtonAction : MonoBehaviour
         SpeedUP.UpMissCnt();
     }
 
-    /// <summary>
-    /// キーの初期化
-    /// </summary>
-    /// <param name="inputAction">機能させるキー</param>
-    private void InitializedButton(InputAction inputAction)
+    private void DeleteComponent()
     {
-        IC.Player.UpKey.started += (inputAction == IC.Player.UpKey) ? InputButton : MissButton;
-        IC.Player.UpKey.canceled += (inputAction == IC.Player.UpKey) ? ReleaseButton : null;
-        IC.Player.DownKey.started += (inputAction == IC.Player.DownKey) ? InputButton : MissButton;
-        IC.Player.DownKey.canceled += (inputAction == IC.Player.DownKey) ? ReleaseButton : null;
-        IC.Player.LeftKey.started += (inputAction == IC.Player.LeftKey) ? InputButton : MissButton;
-        IC.Player.LeftKey.canceled += (inputAction == IC.Player.LeftKey) ? ReleaseButton : null;
-        IC.Player.RightKey.started += (inputAction == IC.Player.RightKey) ? InputButton : MissButton;
-        IC.Player.RightKey.canceled += (inputAction == IC.Player.RightKey) ? ReleaseButton : null;
+        // インプットアクションの無効化
+        IC.Disable();
+
+        Destroy(transform.parent.gameObject);
     }
 
     /// <summary>

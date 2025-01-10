@@ -237,8 +237,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hurdleTutorial:
   - {fileID: 8736886515976814190, guid: 2ffdc45687d92e34c9ba696f3bd2cb70, type: 3}
-  - {fileID: 8736886515976814190, guid: a8fa4ef9fc24ceb47bf7e0a1bb480f75, type: 3}
-  - {fileID: 8736886515976814190, guid: 898119e3266884a4e8b0df08d040d323, type: 3}
+  - {fileID: 8736886515976814190, guid: 62759ad4cba5c7d43a29170f1952acb0, type: 3}
+  - {fileID: 8736886515976814190, guid: 632ff82f014beaa45b7a09f287608d27, type: 3}
 --- !u!1 &526881584
 GameObject:
   m_ObjectHideFlags: 0
