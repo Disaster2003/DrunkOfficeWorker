@@ -1,9 +1,12 @@
 タイトル
 ・TitleScene内のPlayer/PlayerTitleAnimationのSpeed Move(移動速度)
+　->済
 
 チュートリアル / プレイ
 ・_Prefab/Player/PlayerComponetのSpeed Move(移動速度)
+　->済
 ・卒展/level_adjustのボタンのそれぞれの種類数
-・3_Play/Prefabs/Hurdle〇〇と1_Tutorial/Prefabs/Hurdle〇〇のSpeed Move(移動速度)
+・3_Play/Prefabs/Hurdle〇〇/Canvasと1_Tutorial/Prefabs/Hurdle〇〇/CanvasのIArrayFailMax
 ・PlayScene内のCanvas/txtTimerのTime(制限時間)
 ・PlayScene内のCanvas/imgPhaseCharacter/ProgressのSpeed Move(移動速度)
+->済

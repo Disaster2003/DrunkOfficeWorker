@@ -154,18 +154,23 @@ public class ButtonAction : MonoBehaviour
     /// <param name="inputAction">機能させるキー</param>
     private void InitializedButton(InputAction inputAction)
     {
-        // キーの開始イベントハンドラを登録
-        IC.Player.UpKey.started += (inputAction == IC.Player.UpKey) ? InputButton : MissButton;
-        IC.Player.DownKey.started += (inputAction == IC.Player.DownKey) ? InputButton : MissButton;
-        IC.Player.LeftKey.started += (inputAction == IC.Player.LeftKey) ? InputButton : MissButton;
-        IC.Player.RightKey.started += (inputAction == IC.Player.RightKey) ? InputButton : MissButton;
-
-        // キーの終了イベントハンドラを登録
-        if (inputAction == IC.Player.UpKey) IC.Player.UpKey.canceled += ReleaseButton;
-        if (inputAction == IC.Player.DownKey) IC.Player.DownKey.canceled += ReleaseButton;
-        if (inputAction == IC.Player.LeftKey) IC.Player.LeftKey.canceled += ReleaseButton;
-        if (inputAction == IC.Player.RightKey) IC.Player.RightKey.canceled += ReleaseButton;
+        SetInputAndRelease(inputAction, IC.Player.UpKey);
+        SetInputAndRelease(inputAction, IC.Player.DownKey);
+        SetInputAndRelease(inputAction, IC.Player.LeftKey);
+        SetInputAndRelease(inputAction, IC.Player.RightKey);
     }
+
+    /// <summary>
+    /// 押下と離した時のイベントを設定する
+    /// </summary>
+    /// <param name="inputAction">入力されたキー</param>
+    /// <param name="keyKind">キーの種類</param>
+    private void SetInputAndRelease(InputAction inputAction, InputAction keyKind)
+    {
+        keyKind.started += (inputAction == keyKind) ? InputButton : MissButton;
+        if (inputAction == keyKind) keyKind.canceled += ReleaseButton;
+    }
+
 
     /// <summary>
     /// ボタンの種類を決定

@@ -11,7 +11,8 @@ public class SpeedAdjust : MonoBehaviour
     private float fTempoUp;
 
     private static float fCountMiss;
-    public int[] iArrayFailMax = new int[4];
+    [SerializeField, Header("ミス上限(チュートリアル、初-上級)")]
+    private int[] iArrayFailMax = new int[4];
     private static bool isTempoUpped;
     /// <summary>
     /// スピードを上げる

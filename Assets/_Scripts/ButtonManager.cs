@@ -53,8 +53,8 @@ public class ButtonManager : MonoBehaviour
             // プレイヤーの状態設定
             FindObjectOfType<PlayerComponent>().SetPlayerState = GetComponentInParent<HurdleComponent>().GetPlayerState;
 
-            // 自身の破壊
-            Destroy(gameObject);
+            //// 自身の破壊
+            //Destroy(gameObject);
         }
         else
         {
