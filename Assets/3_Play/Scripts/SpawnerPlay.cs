@@ -58,17 +58,17 @@ public class SpawnerPlay : MonoBehaviour
             }
             else if(count % 2 > 0 && count % 3 > 0)
             {
-                // 素数か調べる
-                for (int i = 5; i * i <= count; i++)
-                {
-                    if (count % i == 0 || count % (i + 2) == 0)
-                    {
-                        isPrimeNumbers = false;
-                        break;
-                    }
+                //// 素数か調べる(countが11以上)
+                //for (int i = 5; i * i <= count; i++)
+                //{
+                //    if (count % i == 0 || count % (i + 2) == 0)
+                //    {
+                //        isPrimeNumbers = false;
+                //        break;
+                //    }
 
-                    isPrimeNumbers = true;
-                }
+                isPrimeNumbers = true;
+                //}
             }
 
             // スピードアップON
