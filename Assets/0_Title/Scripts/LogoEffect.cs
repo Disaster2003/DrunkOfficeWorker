@@ -6,11 +6,12 @@ using UnityEngine.UI;
 public class LogoEffect : MonoBehaviour
 {
     private Image imgTitleLogo;
-    [SerializeField] private float interval;
+    [SerializeField] private float fIntervalAppearLogo;
 
     // Start is called before the first frame update
     void Start()
     {
+        // コンポーネントの取得
         imgTitleLogo = GetComponent<Image>();
         imgTitleLogo.fillAmount = 0;
     }
@@ -20,14 +21,15 @@ public class LogoEffect : MonoBehaviour
     {
         if (imgTitleLogo.fillAmount >= 1) return;
 
-        // ロゴエフェクト
-        if(interval < 0)
+        if(fIntervalAppearLogo <= 0)
         {
+            // ロゴ表示
             imgTitleLogo.fillAmount += Time.deltaTime;
         }
         else
         {
-            interval -= Time.deltaTime;
+            // ロゴ表示のインターバル中
+            fIntervalAppearLogo -= Time.deltaTime;
         }
     }
 }

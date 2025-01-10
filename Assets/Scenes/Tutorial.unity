@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b263fae0f759a734faf14e7c42eabd9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hurdleTutorial:
+  goArrayHurdle:
   - {fileID: 8736886515976814190, guid: 2ffdc45687d92e34c9ba696f3bd2cb70, type: 3}
   - {fileID: 8736886515976814190, guid: 62759ad4cba5c7d43a29170f1952acb0, type: 3}
   - {fileID: 8736886515976814190, guid: 632ff82f014beaa45b7a09f287608d27, type: 3}
@@ -629,6 +629,14 @@ PrefabInstance:
       propertyPath: spawner
       value: 
       objectReference: {fileID: 404684615}
+    - target: {fileID: 939253038916842659, guid: 01e62b4e98ba3dc4ea72cd808983c1eb, type: 3}
+      propertyPath: fSpeedMove
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 939253038916842660, guid: 01e62b4e98ba3dc4ea72cd808983c1eb, type: 3}
+      propertyPath: fSpeedMove
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 939253038916842664, guid: 01e62b4e98ba3dc4ea72cd808983c1eb, type: 3}
       propertyPath: m_RootOrder
       value: 2

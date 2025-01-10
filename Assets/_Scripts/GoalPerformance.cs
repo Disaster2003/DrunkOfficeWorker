@@ -6,22 +6,17 @@ public class GoalPerformance : MonoBehaviour
 {
     [SerializeField] private GameObject spawner;
 
-    // 縮小速度
-    public float scaleSpeed = 0.5f;
+    [SerializeField, Header("縮小速度")]
+    private float fSpeedShrink = 0.5f;
+    [SerializeField, Header("最小サイズ")]
+    private Vector3 scaleMin = new Vector3(0.1f, 0.1f, 0.1f);
 
-    [Header("最終サイズスケール")]
-    // 最小スケールサイズ
-    public Vector3 minimumScale = new Vector3(0.1f, 0.1f, 0.1f);
+    [SerializeField, Header("縮小の目標地点")]
+    private Vector3 positionGoal = Vector3.zero;
+    [SerializeField, Header("移動速度")]
+    private float fSpeedMove;
 
-    [Header("ただの移動から縮小移動に変わる場所")]
-    //途中まで行く座標
-    public Vector2 positionGoal;
-
-    //最初の速さ
-    [SerializeField] private float speedMove;
-
-    //移動から縮小移動に変更するフラグ
-    public bool isArrived = false;
+    public bool isArrived = false; // true = 縮小地点に到着, false = 未到達
 
     // Update is called once per frame
     void Update()
@@ -31,16 +26,16 @@ public class GoalPerformance : MonoBehaviour
         if (isArrived)
         {
             // 現在のスケールが最小スケールより大きい場合のみ縮小
-            if (transform.localScale.x > minimumScale.x)
+            if (transform.localScale.x > scaleMin.x)
             {
                 // スケールを徐々に縮小
-                transform.localScale = Vector3.MoveTowards(transform.localScale, minimumScale, scaleSpeed * Time.deltaTime);
+                transform.localScale = Vector3.MoveTowards(transform.localScale, scaleMin, fSpeedShrink * Time.deltaTime);
             }
             else
             {
                 // 結果画面へ
-                GameManager.GetInstance().SetNextScene(GameManager.STATE_SCENE.RANKING);
-                GameManager.GetInstance().StartChangingScene();
+                GameManager.GetInstance.SetNextScene(GameManager.STATE_SCENE.RESULT);
+                GameManager.GetInstance.StartChangingScene();
 
                 // 自身の破棄
                 Destroy(gameObject);
@@ -48,17 +43,15 @@ public class GoalPerformance : MonoBehaviour
         }
         else
         {
-            //現在地を取得
-            Vector2 currentPosition = transform.position;
-
-            if (Vector2.Distance(currentPosition, positionGoal) < 0.1f)
+            if (Vector2.Distance(transform.position, positionGoal) < 0.1f)
             {
+                // 目標地点に到着
                 isArrived = true;
                 return;
             }
 
-            //移動
-            transform.position = Vector3.MoveTowards(currentPosition, positionGoal, speedMove * Time.deltaTime);
+            // 移動
+            transform.position = Vector3.MoveTowards(transform.position, positionGoal, fSpeedMove * Time.deltaTime);
         }
     }
 }

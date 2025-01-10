@@ -16,7 +16,7 @@ public class SaveName : MonoBehaviour
 
     private void OnDestroy()
     {
-        // “ü—Í‚µ‚½–¼‘O‚ð•Û‘¶
+        // “ü—Í‚µ‚½–¼‘O‚Ì•Û‘¶
         PlayerPrefs.SetString("PlayerName", txtName.text);
     }
 }

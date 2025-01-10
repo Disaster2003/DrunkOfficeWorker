@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using static UnityEngine.EventSystems.PointerEventData;
 
 public class LetterAction : MonoBehaviour
 {
@@ -16,7 +15,8 @@ public class LetterAction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        strLetter = transform.GetComponentInChildren<Text>().text;
+        // 文字列の取得
+        strLetter = transform.GetChild(0).GetComponent<Text>().text;
 
         // インプットアクションを取得
         IC = new InputControl();
@@ -36,11 +36,7 @@ public class LetterAction : MonoBehaviour
     {
         if (gameObject != EventSystem.current.currentSelectedGameObject) return;
 
-        if(strLetter == "けってい")
-        {
-
-        }
-        else if(strLetter == "さくじょ")
+        if(strLetter == "さくじょ")
         {
             if (txtName.text == "名前を入力") return;
 
@@ -55,12 +51,12 @@ public class LetterAction : MonoBehaviour
         }
         else if(txtName.text == "名前を入力")
         {
-            // 1文字目を始める
+            // 1文字目
             txtName.text = strLetter;
         }
         else if (txtName.text.Length < 5)
         {
-            // 文字を追加する
+            // 文字の追加
             txtName.text += strLetter;
         }
     }

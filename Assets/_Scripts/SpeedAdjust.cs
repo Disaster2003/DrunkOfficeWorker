@@ -7,15 +7,11 @@ public class SpeedAdjust : MonoBehaviour
     [Header("初期速度を入力してください")]
     public float speedCurrent;
     private float speedFirst;
-    [SerializeField, Header("速度の上昇値")]
-    private float tempoUp;
+    [SerializeField, Header("速度の上昇倍率")]
+    private float fTempoUp;
 
-    private static float missCnt;    //ミスのカウント
-    /// <summary>
-    /// ミス回数を増やす
-    /// </summary>
-    public static float AddMissCnt { set { missCnt += value; } }
-    public int[] conditionsNum = new int[2];   //条件の数
+    private static float fCountMiss;
+    public int[] iArrayFailMax = new int[4];
     private static bool isTempoUpped;
     /// <summary>
     /// スピードを上げる
@@ -26,25 +22,30 @@ public class SpeedAdjust : MonoBehaviour
     void Start()
     {
         speedFirst = speedCurrent;
-        missCnt = 0;
+        fCountMiss = 0;
         isTempoUpped = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (missCnt >= conditionsNum[(int)GameManager.GetInstance().GetLevelState() - 2])
+        if (fCountMiss >= iArrayFailMax[(int)GameManager.GetInstance.GetLevelState])
         {
             // 初期化
-            missCnt = 0;
+            fCountMiss = 0;
             speedCurrent = speedFirst;
         }
         else if (isTempoUpped)
         {
             // スピードアップ
             isTempoUpped = false;
-            missCnt = 0;
-            speedCurrent *= tempoUp;
+            fCountMiss = 0;
+            speedCurrent *= fTempoUp;
         }
     }
+
+    /// <summary>
+    /// ミス回数を増やす
+    /// </summary>
+    public static void AddMissCnt() { fCountMiss++; }
 }

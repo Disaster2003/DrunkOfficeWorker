@@ -296,10 +296,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 890c85fd341cd6e49bcae111c6b00072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionStart: {x: -500, y: 225, z: 0}
-  speedMove: 50
-  shakeAmplitude: 5
-  shakeFrequency: 5
+  positionStart: {x: -500, y: 225}
+  fSpeedMove: 50
+  fShakeAmplitude: 5
+  fShakeFrequency: 5
 --- !u!1 &628041583
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,7 +1150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7b3b309a24616d468428b45653834ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  darkColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  colorDark: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!114 &1074813972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1163,7 +1163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bb3e0683f111d749ae19d9e5e292f2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionGoal: {x: 0, y: 0, z: 0}
+  positionGoal: {x: 0, y: 0}
 --- !u!1 &1153041756
 GameObject:
   m_ObjectHideFlags: 0
@@ -1360,10 +1360,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5c87a923ae71e748baf0654ceeace5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pfb_Object:
+  goArrayHurdle:
   - {fileID: 8736886515976814190, guid: 4d35e776f41ee8a44ac7a781bdb48ab3, type: 3}
-  - {fileID: 8736886515976814190, guid: ff2c165ae035c444eaf366dfc44657f1, type: 3}
-  instancePos: {x: 10, y: 0, z: 0}
+  - {fileID: 8736886515976814190, guid: 3b1a9b432bcc5a541b7b053a7c17fa1a, type: 3}
+  positionSpawn: {x: 10, y: 0}
 --- !u!1 &1451305349
 GameObject:
   m_ObjectHideFlags: 0
@@ -1721,7 +1721,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   time: 60
   spawner: {fileID: 1350815637}
-  bgd: {fileID: 0}
+  backGroundDarkken: {fileID: 0}
 --- !u!114 &2025406027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1780,6 +1780,14 @@ PrefabInstance:
       propertyPath: spawner
       value: 
       objectReference: {fileID: 1350815637}
+    - target: {fileID: 939253038916842659, guid: 01e62b4e98ba3dc4ea72cd808983c1eb, type: 3}
+      propertyPath: fSpeedMove
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 939253038916842660, guid: 01e62b4e98ba3dc4ea72cd808983c1eb, type: 3}
+      propertyPath: fSpeedMove
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 939253038916842664, guid: 01e62b4e98ba3dc4ea72cd808983c1eb, type: 3}
       propertyPath: m_RootOrder
       value: 2

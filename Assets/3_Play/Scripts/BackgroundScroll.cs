@@ -5,7 +5,7 @@ using UnityEngine;
 public class BackgroundScroll : MonoBehaviour
 {
     [SerializeField, Header("–Ú•W’n“_")]
-    private Vector3 positionGoal;
+    private Vector2 positionGoal = Vector2.zero;
 
     // Start is called before the first frame update
     void Start()

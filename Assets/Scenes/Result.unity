@@ -2692,13 +2692,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3d024b8b5147a143833133ab11a2f5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  txtName:
+  txtArrayName:
   - {fileID: 952976239}
   - {fileID: 244297759}
   - {fileID: 2085172354}
   - {fileID: 1047438081}
   - {fileID: 1098053739}
-  txtScore:
+  txtArrayScore:
   - {fileID: 1951460515}
   - {fileID: 1410187396}
   - {fileID: 308706708}

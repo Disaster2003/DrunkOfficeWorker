@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class SpawnerTutorial : MonoBehaviour
 {
-    [SerializeField, Header("チュートリアル用Prefab")]
-    private GameObject[] hurdleTutorial;
-    private int indexSpawn;
+    [SerializeField] private GameObject[] goArrayHurdle;
+    private int iIndexSpawn;
 
     // Start is called before the first frame update
     void Start()
     {
-        indexSpawn = 0;
+        iIndexSpawn = 0;
     }
 
     // Update is called once per frame
@@ -20,9 +19,14 @@ public class SpawnerTutorial : MonoBehaviour
         if (GameObject.FindGameObjectWithTag("Hurdle")) return;
 
         // 自身の破棄
-        if (indexSpawn >= hurdleTutorial.Length) Destroy(gameObject);
+        if (iIndexSpawn >= goArrayHurdle.Length)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         // スポーン
-        else HurdleSpawn();
+        HurdleSpawn();
     }
 
     /// <summary>
@@ -30,7 +34,9 @@ public class SpawnerTutorial : MonoBehaviour
     /// </summary>
     private void HurdleSpawn()
     {
-        Instantiate(hurdleTutorial[indexSpawn]);
-        indexSpawn++;
+        Instantiate(goArrayHurdle[iIndexSpawn]);
+
+        // 生成カウントを進める
+        iIndexSpawn++;
     }
 }

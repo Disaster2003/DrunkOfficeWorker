@@ -37,7 +37,7 @@ public class PlayerTitleAnimation : MonoBehaviour
         if (transform.position.x > position_xGoal)
         {
             // シーン遷移の開始
-            GameManager.GetInstance().StartChangingScene();
+            GameManager.GetInstance.StartChangingScene();
 
             // 自身の破棄
             Destroy(gameObject);

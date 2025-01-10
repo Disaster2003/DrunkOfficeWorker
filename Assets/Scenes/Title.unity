@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6ba152b1176a77409eb4e6e621fcaac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state_scene: 3
+  state_scene: 4
   state_level: 0
 --- !u!114 &46128885
 MonoBehaviour:
@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b99c4d0fa9dd1c641bb809f3cc096706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interval: 1
+  fIntervalAppearLogo: 1
 --- !u!114 &299278538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -836,7 +836,7 @@ MonoBehaviour:
   wait: []
   amazing: []
   run: []
-  speedMove: 1
+  speedMove: 2
 --- !u!1 &1626620760
 GameObject:
   m_ObjectHideFlags: 0

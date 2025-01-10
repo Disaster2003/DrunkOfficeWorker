@@ -89,12 +89,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1da5c5dbfcd510e43a4cfbf2346724f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UI_Button:
+  spriteArrayXboxButton:
   - {fileID: -992429338, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
   - {fileID: 1080876447, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
   - {fileID: 41073931, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
   - {fileID: 1031615025, guid: 4fc259cfb02fa154189bd801c45cf176, type: 3}
-  UI_Arrow:
+  spriteArrayArrow:
   - {fileID: -1008384642, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
   - {fileID: -2144106426, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
   - {fileID: -1743240911, guid: 296613a9ec2d5fb439e9dac26bc2ec31, type: 3}
@@ -102,13 +102,13 @@ MonoBehaviour:
   imgInputGaugeBase: {fileID: 6049897252500972045}
   imgInputGauge: {fileID: 8046040823584833411}
   imgRepeatGauge: {fileID: 3794361477728484617}
-  beer:
+  spriteArrayBeer:
   - {fileID: -1892355423, guid: e6f07c965183f0f459d7d9cbd1f6fa65, type: 3}
   - {fileID: -1517435373, guid: e6f07c965183f0f459d7d9cbd1f6fa65, type: 3}
   - {fileID: 895320354, guid: e6f07c965183f0f459d7d9cbd1f6fa65, type: 3}
   - {fileID: -1348155993, guid: e6f07c965183f0f459d7d9cbd1f6fa65, type: 3}
   - {fileID: 28457811, guid: e6f07c965183f0f459d7d9cbd1f6fa65, type: 3}
-  imgBeforeButton: {fileID: 0}
+  goNotesBefore: {fileID: 0}
   kind_button: 3
 --- !u!1 &510731085214450184
 GameObject:
@@ -470,9 +470,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state_player: 1
-  spritesHurdle:
+  spriteArrayHurdle:
   - {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  speedMove: 2
+  fSpeedMove: 2
 --- !u!1 &8736886517745220774
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,7 +486,7 @@ GameObject:
   - component: {fileID: 8736886517745220773}
   - component: {fileID: 8736886517745220772}
   - component: {fileID: 8736886517745220771}
-  - component: {fileID: 5067396241243189692}
+  - component: {fileID: 8247196039162884351}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -589,9 +589,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0065bf444f4e1e4c8906a3759a092fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttons:
+  goArrayNotes:
   - {fileID: 4210500236730663735}
---- !u!114 &5067396241243189692
+--- !u!114 &8247196039162884351
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -600,12 +600,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8736886517745220774}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c56f7f5b44dce64fb1769f671ec947a, type: 3}
+  m_Script: {fileID: 11500000, guid: 574dda1b90b249247a03be6c27fe506b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedCurrent: 3
-  upSpeed: 0
-  conditionsNum: 10
+  speedCurrent: 2
+  fTempoUp: 1.5
+  iArrayFailMax: 00000000000000000000000000000000
 --- !u!1 &9079782799755881505
 GameObject:
   m_ObjectHideFlags: 0

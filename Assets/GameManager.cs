@@ -8,6 +8,11 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
+    /// <summary>
+    /// インスタンスを取得する
+    /// </summary>
+    public static GameManager GetInstance { get { return instance; } }
+
 
     public enum STATE_SCENE
     {
@@ -15,7 +20,7 @@ public class GameManager : MonoBehaviour
         TUTORIAL = 1, // チュートリアル画面
         NAMING = 2,   // 命名画面
         PLAY = 3,     // プレイ画面
-        RANKING = 4,  // ランキング
+        RESULT = 4,   // 結果画面
         OVER = 5,     // ゲームオーバー
         NONE,         // 何もなし
     }
@@ -28,6 +33,10 @@ public class GameManager : MonoBehaviour
         HARD,   // 上級
     }
     private STATE_LEVEL state_level;
+    /// <summary>
+    /// 難易度を取得する
+    /// </summary>
+    public STATE_LEVEL GetLevelState {  get { return state_level; } }
 
     [SerializeField, Header("フェードイン/アウト用画像")]
     private Image imgFade;
@@ -44,6 +53,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            // 単一化
             Destroy(gameObject);
         }
 
@@ -76,8 +86,6 @@ public class GameManager : MonoBehaviour
                 // 次のシーンへ
                 isChangingScene = false;
                 SceneManager.LoadSceneAsync((int)state_scene);
-
-                Debug.Log("シーンを切り替えました");
             }
             else
             {
@@ -93,11 +101,6 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// インスタンスを取得する
-    /// </summary>
-    public static GameManager GetInstance() { return instance; }
-
-    /// <summary>
     /// 次のシーンを設定する
     /// </summary>
     /// <param name="_state_scene">次のシーン</param>
@@ -105,6 +108,7 @@ public class GameManager : MonoBehaviour
     {
         if(isChangingScene) return;
 
+        // 遷移時の特別な処理
         switch (state_scene)
         {
             case STATE_SCENE.NAMING:
@@ -114,7 +118,7 @@ public class GameManager : MonoBehaviour
             case STATE_SCENE.PLAY:
                 _state_level = state_level;
                 break;
-            case STATE_SCENE.RANKING:
+            case STATE_SCENE.RESULT:
                 if(_state_scene == STATE_SCENE.TITLE)
                 {
                     // 名前リセット
@@ -146,6 +150,7 @@ public class GameManager : MonoBehaviour
             {
                 if (PlayerPrefs.GetString("PlayerName") == "")
                 {
+                    // 名前入力画面を挟む
                     _state_scene = STATE_SCENE.NAMING;
                 }
             }
@@ -155,11 +160,6 @@ public class GameManager : MonoBehaviour
         state_scene = _state_scene;
         state_level = _state_level;
     }
-
-    /// <summary>
-    /// 難易度を取得する
-    /// </summary>
-    public STATE_LEVEL GetLevelState() { return state_level; }
 
     /// <summary>
     /// シーンの切り替えを開始する

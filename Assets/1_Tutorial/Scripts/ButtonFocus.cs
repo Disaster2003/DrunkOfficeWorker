@@ -5,15 +5,17 @@ using UnityEngine;
 public class ButtonFocus : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
-    [SerializeField, Header("ボタンのフォーカスを開始する障害物の位置")]
-    private Vector3 positionFocus;
 
-    [SerializeField, Header("ボタンに注目させるための背景色")]
+    [SerializeField, Header("ボタンをフォーカスする障害物の開始位置")]
+    private Vector2 positionFocus;
+
+    [SerializeField, Header("ボタンに注目させる背景色")]
     private Color colorFocus;
 
     // Start is called before the first frame update
     void Start()
     {
+        // コンポーネントの取得
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.color = Color.clear;
     }

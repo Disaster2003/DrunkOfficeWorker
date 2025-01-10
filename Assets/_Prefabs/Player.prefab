@@ -172,14 +172,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7820f971bcec0c4199260f1c8344b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state_player: 0
   positionStart: {x: -5, y: 0}
-  speedMove: 3
-  spritesPlayerWait: []
-  spritesPlayerRun: []
-  spritesPlayerTackle: []
-  spritesPlayerJumpUp: []
-  spritesPlayerJumpDown: []
+  fSpeedMove: 3
+  spriteArrayPlayerWait: []
+  spriteArrayPlayerRun: []
+  spriteArrayPlayerTackle: []
+  spriteArrayPlayerJumpUp: []
+  spriteArrayPlayerJumpDown: []
   INTERVAL_ANIMATION: 0.2
 --- !u!114 &939253038916842659
 MonoBehaviour:
@@ -194,8 +193,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 0}
-  scaleSpeed: 0.5
-  minimumScale: {x: 0.1, y: 0.1, z: 0.1}
-  positionGoal: {x: 0, y: 0}
-  speedMove: 5
+  fSpeedShrink: 0.5
+  scaleMin: {x: 0.1, y: 0.1, z: 0.1}
+  positionGoal: {x: 0, y: 0, z: 0}
+  fSpeedMove: 5
   isArrived: 0

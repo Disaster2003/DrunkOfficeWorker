@@ -29,7 +29,7 @@ public class DecideScene : MonoBehaviour
         if (gameObject != EventSystem.current.currentSelectedGameObject) return;
 
         // ‘JˆÚæ‚ÌƒV[ƒ“‚ğŒˆ’è‚·‚é
-        GameManager.GetInstance().SetNextScene(state_scene, state_level);
+        GameManager.GetInstance.SetNextScene(state_scene, state_level);
     }
 
     private void OnDestroy()

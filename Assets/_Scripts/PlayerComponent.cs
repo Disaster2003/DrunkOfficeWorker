@@ -10,28 +10,32 @@ public class PlayerComponent : MonoBehaviour
         TACKLE, // タックル
         JUMP,   // ジャンプ
     }
-    [SerializeField]
     private STATE_PLAYER state_player;
 
-    [Header("プレイヤーの特定位置")]
-    [SerializeField] private Vector2 positionStart;
+    /// <summary>
+    /// プレイヤーの状態を設定する
+    /// </summary>
+    public STATE_PLAYER SetPlayerState { set { state_player = value; } }
+
+    [SerializeField, Header("プレイヤーの特定位置")]
+    private Vector2 positionStart;
 
     [SerializeField, Header("移動速度")]
-    private float speedMove;
+    private float fSpeedMove;
 
     private SpriteRenderer spriteRenderer;
     [Header("プレイヤーのアニメーション画像配列")]
-    [SerializeField] private Sprite[] spritesPlayerWait;
-    [SerializeField] private Sprite[] spritesPlayerRun;
-    [SerializeField] private Sprite[] spritesPlayerTackle;
-    [SerializeField] private Sprite[] spritesPlayerJumpUp;
-    [SerializeField] private Sprite[] spritesPlayerJumpDown;
-    private float timerAnimation;
+    [SerializeField] private Sprite[] spriteArrayPlayerWait;
+    [SerializeField] private Sprite[] spriteArrayPlayerRun;
+    [SerializeField] private Sprite[] spriteArrayPlayerTackle;
+    [SerializeField] private Sprite[] spriteArrayPlayerJumpUp;
+    [SerializeField] private Sprite[] spriteArrayPlayerJumpDown;
+    private float fTimerAnimation;
     [SerializeField, Header("アニメーション間隔")]
     private float INTERVAL_ANIMATION;
 
-    private Rigidbody2D rigidBody2D;
-    private bool isJumped; // true = ジャンプ中, false = ジャンプ前後
+    private Rigidbody2D rb2D;
+    private bool isJumped; // true = ジャンプ中, false = not ジャンプ
 
     private GoalPerformance goalPerformance;
 
@@ -44,14 +48,13 @@ public class PlayerComponent : MonoBehaviour
         // 開始位置へ
         transform.position = positionStart;
 
-        // 画像の初期化
+        // コンポーネントの取得
         spriteRenderer = GetComponent<SpriteRenderer>();
         // spriteRenderer.sprite = spritesPlayerWait[0];
-        timerAnimation = 0;
+        fTimerAnimation = 0;
 
-        // 回転不可
-        rigidBody2D = GetComponent<Rigidbody2D>();
-        rigidBody2D.freezeRotation = true;
+        rb2D = GetComponent<Rigidbody2D>();
+        rb2D.freezeRotation = true;
         isJumped = false;
 
         goalPerformance = GetComponent<GoalPerformance>();
@@ -65,58 +68,49 @@ public class PlayerComponent : MonoBehaviour
             case STATE_PLAYER.WAIT:
                 // 待機/走行アニメーション
                 float distance = Vector2.Distance(transform.position, positionStart);
-                PlayerAnimation(distance < 0.1f ? spritesPlayerWait : spritesPlayerRun);
+                PlayerAnimation(distance < 0.1f ? spriteArrayPlayerWait : spriteArrayPlayerRun);
 
                 if (goalPerformance.isArrived)
                 {
                     // 真ん中へ向かう
-                    transform.position = Vector2.MoveTowards(transform.position, Vector2.zero, speedMove * Time.deltaTime);
+                    transform.position = Vector2.MoveTowards(transform.position, Vector2.zero, fSpeedMove * Time.deltaTime);
                 }
                 else
                 {
                     // 開始位置へ向かう
-                    transform.position = Vector2.MoveTowards(transform.position, positionStart, speedMove * Time.deltaTime);
+                    transform.position = Vector2.MoveTowards(transform.position, positionStart, fSpeedMove * Time.deltaTime);
                 }
                 break;
             case STATE_PLAYER.TACKLE:
                 if (transform.position.x < 0)
                 {
                     // 走行
-                    transform.Translate(speedMove * Time.deltaTime, 0, 0);
-                    PlayerAnimation(spritesPlayerRun);
+                    transform.Translate(fSpeedMove * Time.deltaTime, 0, 0);
+                    PlayerAnimation(spriteArrayPlayerRun);
                 }
                 else
                 {
                     // タックル
-                    transform.Translate(2 * speedMove * Time.deltaTime, 0, 0);
-                    PlayerAnimation(spritesPlayerTackle);
+                    transform.Translate(2 * fSpeedMove * Time.deltaTime, 0, 0);
+                    PlayerAnimation(spriteArrayPlayerTackle);
                 }
                 break;
             case STATE_PLAYER.JUMP:
                 OnJumpAndLand();
 
-                if (rigidBody2D.velocity.y > 0)
+                if (rb2D.velocity.y > 0)
                 {
                     // 上昇アニメーション
-                    PlayerAnimation(spritesPlayerJumpUp);
+                    PlayerAnimation(spriteArrayPlayerJumpUp);
                 }
                 else
                 {
                     // 下降アニメーション
-                    PlayerAnimation(spritesPlayerJumpDown);
+                    PlayerAnimation(spriteArrayPlayerJumpDown);
                 }
                 break;
         }
     }
-
-    /// <summary>
-    /// プレイヤーの状態を設定する
-    /// </summary>
-    /// <param name="_state_player">設定する状態</param>
-    public void SetPlayerState(STATE_PLAYER _state_player)
-    {
-        state_player = _state_player;
-    } 
 
     /// <summary>
     /// プレイヤーのアニメーション処理
@@ -126,10 +120,10 @@ public class PlayerComponent : MonoBehaviour
     {
         if(sprites == null) return;
 
-        if (timerAnimation >= INTERVAL_ANIMATION)
+        if (fTimerAnimation >= INTERVAL_ANIMATION)
         {
             // インターバルの初期化
-            timerAnimation = 0;
+            fTimerAnimation = 0;
 
             for (int i = 0; i < sprites.Length; i++)
             {
@@ -158,7 +152,7 @@ public class PlayerComponent : MonoBehaviour
         else
         {
             // アニメーションのインターバル中
-            timerAnimation += Time.deltaTime;
+            fTimerAnimation += Time.deltaTime;
         }
     }
 
@@ -171,8 +165,8 @@ public class PlayerComponent : MonoBehaviour
         {
             // ジャンプ
             isJumped = true;
-            rigidBody2D.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
-            rigidBody2D.gravityScale = 1;
+            rb2D.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+            rb2D.gravityScale = 1;
         }
         else if (transform.position.y < positionStart.y)
         {
@@ -180,8 +174,8 @@ public class PlayerComponent : MonoBehaviour
             isJumped = false;
             state_player = STATE_PLAYER.WAIT;
             transform.position = new Vector3(transform.position.x, positionStart.y);
-            rigidBody2D.velocity = Vector2.zero;
-            rigidBody2D.gravityScale = 0;
+            rb2D.velocity = Vector2.zero;
+            rb2D.gravityScale = 0;
         }
     }
 }

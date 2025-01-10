@@ -4,23 +4,21 @@ using UnityEngine;
 
 public class SpawnerPlay : MonoBehaviour
 {
-    [SerializeField, Header("生成するプレハブ")]
-    private GameObject[] pfb_Object;
+    [SerializeField] private GameObject[] goArrayHurdle;
 
     [SerializeField, Header("生成位置")]
-    private Vector3 instancePos;
+    private Vector2 positionSpawn = Vector2.zero;
 
-    // 生成した数
-    [SerializeField, Header("確認用いじらないで")]
-    private static int count;
-
-    // 生成した数のゲッター
-    public static int GetCount { get { return count; } }
+    private static int iCountSpawn;
+    /// <summary>
+    /// スポーンした数を取得する
+    /// </summary>
+    public static int GetSpawnCount { get { return iCountSpawn; } }
 
     // Start is called before the first frame update
     void Start()
     {
-        count = 0;
+        iCountSpawn = 0;
         HurdleSpawn();
     }
 
@@ -30,7 +28,7 @@ public class SpawnerPlay : MonoBehaviour
         if (GameObject.FindGameObjectWithTag("Hurdle")) return;
 
         // 自身の破棄
-        if (count >= 10)
+        if (iCountSpawn >= 10)
         {
             Destroy(gameObject);
             return;
@@ -41,22 +39,22 @@ public class SpawnerPlay : MonoBehaviour
     }
 
     /// <summary>
-    /// 生成する
-    /// 他のところから読んでもらう
+    /// 障害物を生成する
     /// </summary>
     private void HurdleSpawn()
     {
-        // プレハブが存在していれば
-        if (pfb_Object.Length <= 0) return;
-
-        if(count >= 3)
+        if (goArrayHurdle.Length <= 0)
         {
+            Debug.LogError("スポーンさせる障害物が未設定です");
+            return;
+        }
+
+        if(iCountSpawn >= 3)
+        {
+            // 素数か調べる
             bool isPrimeNumbers = false;
-            if (count == 3)
-            {
-                isPrimeNumbers = true;
-            }
-            else if(count % 2 > 0 && count % 3 > 0)
+            if (iCountSpawn == 3) isPrimeNumbers = true;
+            else if (iCountSpawn % 2 > 0 && iCountSpawn % 3 > 0)
             {
                 //// 素数か調べる(countが11以上)
                 //for (int i = 5; i * i <= count; i++)
@@ -75,15 +73,12 @@ public class SpawnerPlay : MonoBehaviour
             if (isPrimeNumbers) SpeedAdjust.SetIsTempoUpped = true;
         }
 
-        // 一応配列に対応して乱数を生成する
-        // いらなかったら変更して
-        int rand = Random.Range(0, pfb_Object.Length);
-
-        // 生成して
-        Instantiate(pfb_Object[rand], instancePos, Quaternion.identity);
+        // ランダムで生成する
+        int rand = Random.Range(0, goArrayHurdle.Length);
+        Instantiate(goArrayHurdle[rand], positionSpawn, Quaternion.identity);
 
         // 生成カウントを進める
-        count++;
+        iCountSpawn++;
     }
 
     private void OnDestroy()

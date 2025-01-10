@@ -8,9 +8,9 @@ using UnityEngine.UI;
 public class ButtonAction : MonoBehaviour
 {
     [SerializeField, Header("ボタン画像")]
-    private Sprite[] UI_Button;
+    private Sprite[] spriteArrayXboxButton;
     [SerializeField, Header("矢印画像")]
-    private Sprite[] UI_Arrow;
+    private Sprite[] spriteArrayArrow;
 
     [SerializeField, Header("長押しゲージのベース")]
     private GameObject imgInputGaugeBase;
@@ -18,11 +18,11 @@ public class ButtonAction : MonoBehaviour
     private Image imgInputGauge;
     [SerializeField, Header("連打ゲージ")]
     private Image imgRepeatGauge;
-    [SerializeField] private Sprite[] beer;
+    [SerializeField] private Sprite[] spriteArrayBeer;
 
     private InputControl IC; // インプットアクションを定義
     [SerializeField, Header("前のボタン")]
-    private GameObject imgBeforeButton;
+    private GameObject goNotesBefore;
 
     private enum KIND_BUTTON
     {
@@ -32,14 +32,13 @@ public class ButtonAction : MonoBehaviour
         PUSH_REPEAT_THREE,  // 3連打
         PUSH_REPEAT_FIVE,   // 5連打
     }
-    [SerializeField, Header("チュートリアル用ボタンアクションの選択")]
+    [SerializeField, Header("チュートリアルのみ選択")]
     private KIND_BUTTON kind_button;
-    private int indexMaxKindButton = (int)KIND_BUTTON.PUSH_REPEAT_FIVE;
+    private int iIndexMaxKind_Button = (int)KIND_BUTTON.PUSH_REPEAT_FIVE;
 
-    private float timerPushLong;
+    private float fTimerPushLong;
     private bool isPushed; // true = 押下中, false = not 押下
-
-    private int countPush;
+    private int iCountPush;
 
     private static Dictionary<KIND_BUTTON, int> numberGenerate = new Dictionary<KIND_BUTTON, int>();
 
@@ -49,12 +48,13 @@ public class ButtonAction : MonoBehaviour
         DecideButton();
 
         // 押下状態の初期化
-        timerPushLong = 0;
+        fTimerPushLong = 0;
         isPushed = false;
-        countPush = 0;
+        iCountPush = 0;
 
         DecideKindOfButton();
 
+        // 不必要な画像を非表示
         switch (kind_button)
         {
             case KIND_BUTTON.PUSH:
@@ -68,14 +68,14 @@ public class ButtonAction : MonoBehaviour
                 imgInputGaugeBase.SetActive(false);
 
                 // Sprite配列をListに変換
-                List<Sprite> spriteList = new List<Sprite>(beer);
+                List<Sprite> spriteList = new List<Sprite>(spriteArrayBeer);
 
                 // 2番目(インデックス1)と4番目(インデックス3)を削除
                 spriteList.RemoveAt(1);
                 spriteList.RemoveAt(3);
 
-                // Listを再びSprite配列に変換 (必要であれば)
-                beer = spriteList.ToArray();
+                // Listを再びSprite配列に変換
+                spriteArrayBeer = spriteList.ToArray();
                 break;
             case KIND_BUTTON.PUSH_REPEAT_FIVE:
                 imgInputGaugeBase.SetActive(false);
@@ -88,14 +88,22 @@ public class ButtonAction : MonoBehaviour
     {
         if (!isPushed) return;
 
-        if (timerPushLong > 0.5f)
+        if (fTimerPushLong >= 0.5f)
         {
-            DeleteComponent();
+            Destroy(transform.parent.gameObject);
         }
+        else
+        {
+            // ボタンを押下中は経過時間を加算
+            fTimerPushLong += Time.deltaTime;
+            imgInputGauge.fillAmount = fTimerPushLong / 0.5f;
+        }
+    }
 
-        // ボタンを押下中は経過時間を加算
-        timerPushLong += Time.deltaTime;
-        imgInputGauge.fillAmount = timerPushLong / 0.5f;
+    private void OnDestroy()
+    {
+        // インプットアクションの無効化
+        IC.Disable();
     }
 
     /// <summary>
@@ -109,14 +117,14 @@ public class ButtonAction : MonoBehaviour
         // 画像の初期化
         if (Gamepad.all.Count > 0)
         {
-            GetComponent<Image>().sprite = UI_Button[rand];
+            GetComponent<Image>().sprite = spriteArrayXboxButton[rand];
         }
         else
         {
-            GetComponent<Image>().sprite = UI_Arrow[rand];
+            GetComponent<Image>().sprite = spriteArrayArrow[rand];
         }
         imgInputGauge.fillAmount = 0;
-        imgRepeatGauge.sprite = beer[0];
+        imgRepeatGauge.sprite = spriteArrayBeer[0];
 
         // インプットアクションを取得
         IC = new InputControl();
@@ -146,14 +154,17 @@ public class ButtonAction : MonoBehaviour
     /// <param name="inputAction">機能させるキー</param>
     private void InitializedButton(InputAction inputAction)
     {
+        // キーの開始イベントハンドラを登録
         IC.Player.UpKey.started += (inputAction == IC.Player.UpKey) ? InputButton : MissButton;
-        IC.Player.UpKey.canceled += (inputAction == IC.Player.UpKey) ? ReleaseButton : null;
         IC.Player.DownKey.started += (inputAction == IC.Player.DownKey) ? InputButton : MissButton;
-        IC.Player.DownKey.canceled += (inputAction == IC.Player.DownKey) ? ReleaseButton : null;
         IC.Player.LeftKey.started += (inputAction == IC.Player.LeftKey) ? InputButton : MissButton;
-        IC.Player.LeftKey.canceled += (inputAction == IC.Player.LeftKey) ? ReleaseButton : null;
         IC.Player.RightKey.started += (inputAction == IC.Player.RightKey) ? InputButton : MissButton;
-        IC.Player.RightKey.canceled += (inputAction == IC.Player.RightKey) ? ReleaseButton : null;
+
+        // キーの終了イベントハンドラを登録
+        if (inputAction == IC.Player.UpKey) IC.Player.UpKey.canceled += ReleaseButton;
+        if (inputAction == IC.Player.DownKey) IC.Player.DownKey.canceled += ReleaseButton;
+        if (inputAction == IC.Player.LeftKey) IC.Player.LeftKey.canceled += ReleaseButton;
+        if (inputAction == IC.Player.RightKey) IC.Player.RightKey.canceled += ReleaseButton;
     }
 
     /// <summary>
@@ -176,18 +187,18 @@ public class ButtonAction : MonoBehaviour
             }
 
             // データ代入
-            int levelIndex = (int)GameManager.GetInstance().GetLevelState();
-            numberGenerate[KIND_BUTTON.PUSH] = int.Parse(csvData[levelIndex][2]);
-            numberGenerate[KIND_BUTTON.PUSH_LONG] = int.Parse(csvData[levelIndex][3]);
-            numberGenerate[KIND_BUTTON.PUSH_REPEAT_THREE] = int.Parse(csvData[levelIndex][4]);
-            numberGenerate[KIND_BUTTON.PUSH_REPEAT_FIVE] = int.Parse(csvData[levelIndex][5]);
+            int iIndexLevel = (int)GameManager.GetInstance.GetLevelState;
+            numberGenerate[KIND_BUTTON.PUSH] = int.Parse(csvData[iIndexLevel][2]);
+            numberGenerate[KIND_BUTTON.PUSH_LONG] = int.Parse(csvData[iIndexLevel][3]);
+            numberGenerate[KIND_BUTTON.PUSH_REPEAT_THREE] = int.Parse(csvData[iIndexLevel][4]);
+            numberGenerate[KIND_BUTTON.PUSH_REPEAT_FIVE] = int.Parse(csvData[iIndexLevel][5]);
         }
 
         // ボタンアクションの選択
         int rand = 0;
         do
         {
-            rand = Random.Range(1, indexMaxKindButton + 1);
+            rand = Random.Range(1, iIndexMaxKind_Button + 1);
             if (numberGenerate[(KIND_BUTTON)rand] > 0)
             {
                 numberGenerate[(KIND_BUTTON)rand]--;
@@ -203,7 +214,7 @@ public class ButtonAction : MonoBehaviour
     /// </summary>
     private void InputButton(InputAction.CallbackContext context)
     {
-        if (imgBeforeButton != null) return;
+        if (goNotesBefore != null) return;
 
         // nullチェック
         if (kind_button == KIND_BUTTON.NONE)
@@ -215,14 +226,14 @@ public class ButtonAction : MonoBehaviour
         switch (kind_button)
         {
             case KIND_BUTTON.PUSH:
-                DeleteComponent();
-                return;
+                Destroy(transform.parent.gameObject);
+                break;
             case KIND_BUTTON.PUSH_LONG:
                 isPushed = true;
                 break;
             case KIND_BUTTON.PUSH_REPEAT_THREE:
             case KIND_BUTTON.PUSH_REPEAT_FIVE:
-                countPush++;
+                iCountPush++;
                 break;
         }
     }
@@ -232,31 +243,40 @@ public class ButtonAction : MonoBehaviour
     /// </summary>
     private void ReleaseButton(InputAction.CallbackContext context)
     {
+        if (goNotesBefore != null) return;
+
+        // nullチェック
+        if (kind_button == KIND_BUTTON.NONE)
+        {
+            Debug.LogError("ボタンアクションが未選択です");
+            return;
+        }
+
         switch (kind_button)
         {
             case KIND_BUTTON.PUSH_LONG:
                 // ボタンを押していないと経過時間はゼロ
                 imgInputGauge.fillAmount = 0;
-                timerPushLong = 0;
+                fTimerPushLong = 0;
                 isPushed = false;
                 break;
             case KIND_BUTTON.PUSH_REPEAT_THREE:
-                if (countPush >= 3)
-                {
-                    DeleteComponent();
-                    return;
-                }
-                else imgRepeatGauge.sprite = beer[countPush];
+                CountPushNumber(3);
                 break;
             case KIND_BUTTON.PUSH_REPEAT_FIVE:
-                if (countPush >= 5)
-                {
-                    DeleteComponent();
-                    return;
-                }
-                else imgRepeatGauge.sprite = beer[countPush];
+                CountPushNumber(5);
                 break;
         }
+    }
+
+    /// <summary>
+    /// 押下回数を数える
+    /// </summary>
+    /// <param name="iCountMax">押下上限</param>
+    private void CountPushNumber(int iCountMax)
+    {
+        if (iCountPush >= iCountMax) Destroy(transform.parent.gameObject);
+        else imgRepeatGauge.sprite = spriteArrayBeer[iCountPush];
     }
 
     /// <summary>
@@ -264,19 +284,11 @@ public class ButtonAction : MonoBehaviour
     /// </summary>
     private void MissButton(InputAction.CallbackContext context)
     {
-        SpeedAdjust.AddMissCnt = 1;
-    }
-
-    private void DeleteComponent()
-    {
-        // インプットアクションの無効化
-        IC.Disable();
-
-        Destroy(transform.parent.gameObject);
+        SpeedAdjust.AddMissCnt();
     }
 
     /// <summary>
-    /// numberGenerateを空にする
+    /// ボタンの生成数の合計を空にする
     /// </summary>
     public static void ClearNumberGenerate() { numberGenerate.Clear(); }
 }
