@@ -110,6 +110,7 @@ MonoBehaviour:
   - {fileID: 28457811, guid: e6f07c965183f0f459d7d9cbd1f6fa65, type: 3}
   goNotesBefore: {fileID: 0}
   kind_button: 3
+  level_adjust: {fileID: 4900000, guid: af3f02b44312a324a8f8f3f1d7ffbba3, type: 3}
 --- !u!1 &510731085214450184
 GameObject:
   m_ObjectHideFlags: 0

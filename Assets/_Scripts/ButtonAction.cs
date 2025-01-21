@@ -40,6 +40,7 @@ public class ButtonAction : MonoBehaviour
     private bool isPushed; // true = 押下中, false = not 押下
     private int iCountPush;
 
+    [SerializeField] private TextAsset level_adjust;
     private static Dictionary<KIND_BUTTON, int> numberGenerate = new Dictionary<KIND_BUTTON, int>();
 
     // Start is called before the first frame update
@@ -182,8 +183,7 @@ public class ButtonAction : MonoBehaviour
         if (numberGenerate.Count == 0)
         {
             // csvの読み込み
-            TextAsset csvFile = Resources.Load("level_adjust") as TextAsset; // ResourcesにあるCSVファイルを格納
-            StringReader reader = new StringReader(csvFile.text); // TextAssetをStringReaderに変換
+            StringReader reader = new StringReader(level_adjust.text); // TextAssetをStringReaderに変換
             List<string[]> csvData = new List<string[]>(); // CSVファイルの中身を入れるリスト
             while (reader.Peek() != -1)
             {

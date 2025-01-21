@@ -110,6 +110,7 @@ MonoBehaviour:
   - {fileID: 28457811, guid: e6f07c965183f0f459d7d9cbd1f6fa65, type: 3}
   goNotesBefore: {fileID: 0}
   kind_button: 0
+  level_adjust: {fileID: 4900000, guid: af3f02b44312a324a8f8f3f1d7ffbba3, type: 3}
 --- !u!1 &50270379647044070
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,6 +483,7 @@ MonoBehaviour:
   - {fileID: 28457811, guid: e6f07c965183f0f459d7d9cbd1f6fa65, type: 3}
   goNotesBefore: {fileID: 5495380765521572948}
   kind_button: 0
+  level_adjust: {fileID: 4900000, guid: af3f02b44312a324a8f8f3f1d7ffbba3, type: 3}
 --- !u!1 &997689967801162050
 GameObject:
   m_ObjectHideFlags: 0
@@ -592,6 +594,7 @@ MonoBehaviour:
   - {fileID: 28457811, guid: e6f07c965183f0f459d7d9cbd1f6fa65, type: 3}
   goNotesBefore: {fileID: 288405883425514090}
   kind_button: 0
+  level_adjust: {fileID: 4900000, guid: af3f02b44312a324a8f8f3f1d7ffbba3, type: 3}
 --- !u!1 &1110689144553999068
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,6 +781,7 @@ MonoBehaviour:
   - {fileID: 28457811, guid: e6f07c965183f0f459d7d9cbd1f6fa65, type: 3}
   goNotesBefore: {fileID: 7526053326845928218}
   kind_button: 0
+  level_adjust: {fileID: 4900000, guid: af3f02b44312a324a8f8f3f1d7ffbba3, type: 3}
 --- !u!1 &1235935610532901978
 GameObject:
   m_ObjectHideFlags: 0
@@ -1040,6 +1044,7 @@ MonoBehaviour:
   - {fileID: 28457811, guid: e6f07c965183f0f459d7d9cbd1f6fa65, type: 3}
   goNotesBefore: {fileID: 4390705880169498503}
   kind_button: 0
+  level_adjust: {fileID: 4900000, guid: af3f02b44312a324a8f8f3f1d7ffbba3, type: 3}
 --- !u!1 &1931296865279770222
 GameObject:
   m_ObjectHideFlags: 0
@@ -2271,6 +2276,7 @@ MonoBehaviour:
   - {fileID: 28457811, guid: e6f07c965183f0f459d7d9cbd1f6fa65, type: 3}
   goNotesBefore: {fileID: 4210500236730663735}
   kind_button: 0
+  level_adjust: {fileID: 4900000, guid: af3f02b44312a324a8f8f3f1d7ffbba3, type: 3}
 --- !u!1 &8462036417666952898
 GameObject:
   m_ObjectHideFlags: 0
@@ -2535,6 +2541,7 @@ MonoBehaviour:
   - {fileID: 28457811, guid: e6f07c965183f0f459d7d9cbd1f6fa65, type: 3}
   goNotesBefore: {fileID: 7054509416227625832}
   kind_button: 0
+  level_adjust: {fileID: 4900000, guid: af3f02b44312a324a8f8f3f1d7ffbba3, type: 3}
 --- !u!1 &8736886515976814190
 GameObject:
   m_ObjectHideFlags: 0
