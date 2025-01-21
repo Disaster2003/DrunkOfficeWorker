@@ -112,7 +112,7 @@ public class ButtonAction : MonoBehaviour
     private void DecideButton()
     {
         // ƒ{ƒ^ƒ“‚Ì’Š‘I
-        int rand = Random.Range(0, 4);
+        int rand = Random.Range(0, spriteArrayXboxButton.Length);
 
         // ‰æ‘œ‚Ì‰Šú‰»
         if (Gamepad.all.Count > 0)
