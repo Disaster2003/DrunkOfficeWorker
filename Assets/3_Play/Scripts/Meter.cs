@@ -14,12 +14,13 @@ public class Meter : MonoBehaviour
         // コンポーネントの取得
         txtMeter = GetComponent<Text>();
 
-        fMeter = 110;
+        fMeter = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        fMeter = Mathf.Lerp(fMeter, SpawnerPlay.GetSpawnCount * 10, 0.5f);
+        fMeter = 100 -  HurdleComponent.GetDestroyCount * 10;
+        txtMeter.text = $"残り{fMeter.ToString("f0")}m";
     }
 }

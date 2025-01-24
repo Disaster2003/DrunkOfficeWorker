@@ -42,8 +42,21 @@ public class BackgroundScroll : MonoBehaviour
             return;
         }
 
-        if (GameObject.FindGameObjectWithTag("Hurdle") || isFinished) return;
-       
+        if (isFinished) return;
+
+        // 障害物が定位置でないならスクロールし続ける
+        GameObject hurdle = GameObject.FindGameObjectWithTag("Hurdle");
+        if (hurdle != null)
+        {
+            if (Mathf.Abs(hurdle.transform.position.x) < 0.2f)
+            {
+                return;
+            }
+        }
+
+        // 背景のスクロール
+        transform.Translate(5 * -Time.deltaTime, 0, 0);
+
         if (transform.position.x <= positionGoal.x)
         {
             if (spriteRendererChild.sprite == station)
@@ -67,11 +80,6 @@ public class BackgroundScroll : MonoBehaviour
 
             // 初期位置へ
             transform.position = Vector3.zero;
-        }
-        else
-        {
-            // 背景のスクロール
-            transform.Translate(10 * -Time.deltaTime, 0, 0);
         }
     }
 }

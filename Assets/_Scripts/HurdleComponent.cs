@@ -27,6 +27,12 @@ public class HurdleComponent : MonoBehaviour
 
     [SerializeField] private Sprite[] ojisan;
 
+    private static int countDestroy;
+    /// <summary>
+    /// Œ‚”j”‚ğæ“¾‚·‚é
+    /// </summary>
+    public static int GetDestroyCount {  get { return countDestroy; } }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -79,6 +85,11 @@ public class HurdleComponent : MonoBehaviour
             }
             else Animation();
         }
+    }
+
+    private void OnDestroy()
+    {
+        countDestroy++;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

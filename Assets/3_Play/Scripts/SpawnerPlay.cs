@@ -53,7 +53,7 @@ public class SpawnerPlay : MonoBehaviour
             return;
         }
 
-        if(iCountSpawn >= 3)
+        if (iCountSpawn >= 3)
         {
             // ‘f”‚©’²‚×‚é
             bool isPrimeNumbers = false;
