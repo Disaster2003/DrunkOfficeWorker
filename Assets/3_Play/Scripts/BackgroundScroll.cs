@@ -55,13 +55,13 @@ public class BackgroundScroll : MonoBehaviour
             else if (spawner == null)
             {
                 // ‰w“ž’…
-                spriteRenderer.sprite = nomiyagai[0];
+                spriteRenderer.sprite = spriteRendererChild.sprite;
                 spriteRendererChild.sprite = station;
             }
             else
             {
                 // ŠX’†
-                spriteRenderer.sprite = nomiyagai[0];
+                spriteRenderer.sprite = spriteRendererChild.sprite;
                 spriteRendererChild.sprite = nomiyagai[Random.Range(0, nomiyagai.Length)];
             }
 
