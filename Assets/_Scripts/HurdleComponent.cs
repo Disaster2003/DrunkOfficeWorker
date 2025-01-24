@@ -100,7 +100,7 @@ public class HurdleComponent : MonoBehaviour
             collision.GetComponent<PlayerComponent>().SetPlayerState = PlayerComponent.STATE_PLAYER.WAIT;
 
             // ç∂è„Ç…Ç‘Ç¡îÚÇŒÇ∑
-            Vector2 topLeft = Vector2.up + Vector2.right;
+            Vector2 topLeft = Vector2.up + Vector2.left;
             rb2D.AddForce(topLeft * 10, ForceMode2D.Impulse);
             rb2D.AddTorque(180, ForceMode2D.Impulse);
         }
