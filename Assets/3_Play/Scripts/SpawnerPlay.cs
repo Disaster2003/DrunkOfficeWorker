@@ -6,19 +6,20 @@ public class SpawnerPlay : MonoBehaviour
 {
     [SerializeField] private GameObject[] goArrayHurdle;
 
-    [SerializeField, Header("生成位置")]
-    private Vector2 positionSpawn = Vector2.zero;
-
     private static int iCountSpawn;
     /// <summary>
     /// スポーンした数を取得する
     /// </summary>
     public static int GetSpawnCount { get { return iCountSpawn; } }
 
+    private float iIntervalSpawn;
+
     // Start is called before the first frame update
     void Start()
     {
         iCountSpawn = 0;
+        iIntervalSpawn = 1.0f;
+
         HurdleSpawn();
     }
 
@@ -35,7 +36,8 @@ public class SpawnerPlay : MonoBehaviour
         }
 
         // スポーン
-        HurdleSpawn();
+        if (iIntervalSpawn <= 0) HurdleSpawn();
+        else iIntervalSpawn += -Time.deltaTime;
     }
 
     /// <summary>
@@ -43,6 +45,8 @@ public class SpawnerPlay : MonoBehaviour
     /// </summary>
     private void HurdleSpawn()
     {
+        iIntervalSpawn = 1.0f;
+
         if (goArrayHurdle.Length <= 0)
         {
             Debug.LogError("スポーンさせる障害物が未設定です");
@@ -75,7 +79,7 @@ public class SpawnerPlay : MonoBehaviour
 
         // ランダムで生成する
         int rand = Random.Range(0, goArrayHurdle.Length);
-        Instantiate(goArrayHurdle[rand], positionSpawn, Quaternion.identity);
+        Instantiate(goArrayHurdle[rand]);
 
         // 生成カウントを進める
         iCountSpawn++;

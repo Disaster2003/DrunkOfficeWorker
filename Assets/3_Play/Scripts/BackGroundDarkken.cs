@@ -5,6 +5,7 @@ using UnityEngine;
 public class BackGroundDarkken : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRendererChild;
 
     [SerializeField, Header("暗さ")]
     private Color colorDark = new Color(0.5f, 0.5f, 0.5f, 1);
@@ -14,6 +15,7 @@ public class BackGroundDarkken : MonoBehaviour
     {
         // コンポーネントの取得
         spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRendererChild = transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
 
     /// <summary>
@@ -23,5 +25,6 @@ public class BackGroundDarkken : MonoBehaviour
     public void Darkken(float t)
     {
         spriteRenderer.color = Color.Lerp(Color.white, colorDark, t);
+        spriteRendererChild.color = Color.Lerp(Color.white, colorDark, t);
     }
 }

@@ -376,7 +376,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -470,9 +470,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03d6a46c597f5a24fbc8c09c5151b1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionInitialize: {x: 10, y: -3}
   state_player: 1
-  spriteArrayHurdle:
-  - {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  beercase:
+  - {fileID: -309121793, guid: 8db9a017b1124d747882bbe02644cb6c, type: 3}
+  - {fileID: 600856557, guid: 8db9a017b1124d747882bbe02644cb6c, type: 3}
+  rubbish:
+  - {fileID: -1443000999, guid: 124f88f489be4af44a3cac3ea6b0cf84, type: 3}
+  - {fileID: 2063165324, guid: 124f88f489be4af44a3cac3ea6b0cf84, type: 3}
+  ojisan:
+  - {fileID: 21300000, guid: 911a7f4b9bd0e8a4f844aee5fd0bfb04, type: 3}
 --- !u!1 &8736886517745220774
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,7 +16,13 @@ public class GoalPerformance : MonoBehaviour
     [SerializeField, Header("移動速度")]
     private float fSpeedMove;
 
-    public bool isArrived = false; // true = 縮小地点に到着, false = 未到達
+    private bool isArrived;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        isArrived = false;
+    }
 
     // Update is called once per frame
     void Update()
@@ -41,17 +47,10 @@ public class GoalPerformance : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        else
+        else if (Vector2.Distance(transform.position, positionGoal) < 0.1f)
         {
-            if (Vector2.Distance(transform.position, positionGoal) < 0.1f)
-            {
-                // 目標地点に到着
-                isArrived = true;
-                return;
-            }
-
-            // 移動
-            transform.position = Vector3.MoveTowards(transform.position, positionGoal, fSpeedMove * Time.deltaTime);
+            // 目標地点に到着
+            isArrived = true;
         }
     }
 }

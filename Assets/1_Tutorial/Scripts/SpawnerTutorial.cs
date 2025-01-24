@@ -6,11 +6,15 @@ public class SpawnerTutorial : MonoBehaviour
 {
     [SerializeField] private GameObject[] goArrayHurdle;
     private int iIndexSpawn;
+    private float iIntervalSpawn;
 
     // Start is called before the first frame update
     void Start()
     {
         iIndexSpawn = 0;
+        iIntervalSpawn = 1.0f;
+
+        HurdleSpawn();
     }
 
     // Update is called once per frame
@@ -26,7 +30,8 @@ public class SpawnerTutorial : MonoBehaviour
         }
 
         // スポーン
-        HurdleSpawn();
+        if (iIntervalSpawn <= 0) HurdleSpawn();
+        else iIntervalSpawn += -Time.deltaTime;
     }
 
     /// <summary>
@@ -34,6 +39,8 @@ public class SpawnerTutorial : MonoBehaviour
     /// </summary>
     private void HurdleSpawn()
     {
+        iIntervalSpawn = 1.0f;
+
         Instantiate(goArrayHurdle[iIndexSpawn]);
 
         // 生成カウントを進める

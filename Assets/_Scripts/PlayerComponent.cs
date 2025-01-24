@@ -18,7 +18,7 @@ public class PlayerComponent : MonoBehaviour
     public STATE_PLAYER SetPlayerState { set { state_player = value; } }
 
     [SerializeField, Header("プレイヤーの特定位置")]
-    private Vector2 positionStart;
+    private Vector3 positionStart;
 
     [SerializeField, Header("移動速度")]
     private float fSpeedMove;
@@ -37,7 +37,15 @@ public class PlayerComponent : MonoBehaviour
     private Rigidbody2D rb2D;
     private bool isJumped; // true = ジャンプ中, false = not ジャンプ
 
-    private GoalPerformance goalPerformance;
+    [SerializeField, Header("背景コンポーネント")]
+    private BackgroundScroll background;
+    private enum STATE_ARRIVE
+    {
+        MOVE,
+        CENTER,
+        UP,
+    }
+    private STATE_ARRIVE state_arrive;
 
     // Start is called before the first frame update
     void Start()
@@ -57,7 +65,7 @@ public class PlayerComponent : MonoBehaviour
         rb2D.freezeRotation = true;
         isJumped = false;
 
-        goalPerformance = GetComponent<GoalPerformance>();
+        state_arrive = STATE_ARRIVE.MOVE;
     }
 
     // Update is called once per frame
@@ -70,15 +78,32 @@ public class PlayerComponent : MonoBehaviour
                 float distance = Vector2.Distance(transform.position, positionStart);
                 PlayerAnimation(distance < 0.1f ? spriteArrayPlayerWait : spriteArrayPlayerRun);
 
-                if (goalPerformance.isArrived)
+                switch (state_arrive)
                 {
-                    // 真ん中へ向かう
-                    transform.position = Vector2.MoveTowards(transform.position, Vector2.zero, fSpeedMove * Time.deltaTime);
-                }
-                else
-                {
-                    // 開始位置へ向かう
-                    transform.position = Vector2.MoveTowards(transform.position, positionStart, fSpeedMove * Time.deltaTime);
+                    case STATE_ARRIVE.MOVE:
+                        if (Vector2.Distance(transform.position, positionStart) > 0.1f)
+                        {
+                            // 開始位置へ向かう
+                            transform.position = Vector2.MoveTowards(transform.position, positionStart, fSpeedMove * Time.deltaTime);
+                        }
+                        // 帰宅
+                        else if (background.GetIsFinished) state_arrive = STATE_ARRIVE.CENTER;
+                        break;
+                    case STATE_ARRIVE.CENTER:
+                        if (Vector2.Distance(transform.position, new Vector2(0, -3)) < 0.1f)
+                        {
+                            state_arrive = STATE_ARRIVE.UP;
+                        }
+                        else
+                        {
+                            // 真ん中へ向かう
+                            transform.position = Vector2.MoveTowards(transform.position, new Vector2(0, -3), fSpeedMove * Time.deltaTime);
+                        }
+                        break;
+                    case STATE_ARRIVE.UP:
+                        // 真ん中上へ向かう
+                        transform.position = Vector2.MoveTowards(transform.position, new Vector2(0, 3), fSpeedMove * Time.deltaTime);
+                        break;
                 }
                 break;
             case STATE_PLAYER.TACKLE:
