@@ -64,7 +64,7 @@ public class HurdleComponent : MonoBehaviour
             // ©g‚Ì”jŠü
             Destroy(gameObject);
         }
-        else if (transform.position.x > 5)
+        else if (transform.position.x > 0)
         {
             // ƒJƒƒ‰“à‚ÖˆÚ“®
             transform.Translate(SpeedAdjust.GetCurrentSpeed * -Time.deltaTime, 0, 0);
