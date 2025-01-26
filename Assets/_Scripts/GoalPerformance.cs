@@ -39,6 +39,9 @@ public class GoalPerformance : MonoBehaviour
             }
             else
             {
+                // ƒ[ƒ^[‚Ì‰Šú‰»
+                HurdleComponent.DestroyCount = 0;
+
                 // Œ‹‰Ê‰æ–Ê‚Ö
                 GameManager.GetInstance.SetNextScene(GameManager.STATE_SCENE.RESULT);
                 GameManager.GetInstance.StartChangingScene();

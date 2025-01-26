@@ -31,7 +31,11 @@ public class HurdleComponent : MonoBehaviour
     /// <summary>
     /// Œ‚”j”‚ğæ“¾‚·‚é
     /// </summary>
-    public static int GetDestroyCount {  get { return countDestroy; } }
+    public static int DestroyCount
+    {
+        get { return countDestroy; }
+        set { countDestroy = value; }
+    }
 
     // Start is called before the first frame update
     void Start()

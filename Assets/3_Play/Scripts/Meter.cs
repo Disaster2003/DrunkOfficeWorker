@@ -20,7 +20,7 @@ public class Meter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        fMeter = 100 -  HurdleComponent.GetDestroyCount * 10;
+        fMeter = 100 -  HurdleComponent.DestroyCount * 10;
         txtMeter.text = $"Žc‚è{fMeter.ToString("f0")}m";
     }
 }
