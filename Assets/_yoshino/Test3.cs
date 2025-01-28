@@ -1,13 +1,29 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Test3 : MonoBehaviour
 {
+    public struct Status
+    {
+        public int hp,
+            atk,
+            def;
+
+        public Status(int _hp, int _atk, int _def)
+        {
+            hp = _hp;
+            atk = _atk;
+            def = _def;
+        }
+    }
+    private Status status;
+
     // Start is called before the first frame update
     void Start()
     {
+        status = new Status(0, 0, 0);
+
         //Color.black;
         //Color.blue;
         //Color.clear;
