@@ -90,14 +90,14 @@ public class PlayerComponent : MonoBehaviour
                         else if (background.GetIsFinished) state_arrive = STATE_ARRIVE.CENTER;
                         break;
                     case STATE_ARRIVE.CENTER:
-                        if (Vector2.Distance(transform.position, new Vector2(0, -3)) < 0.1f)
+                        if (Vector2.Distance(transform.position, new Vector2(0, -1)) < 0.1f)
                         {
                             state_arrive = STATE_ARRIVE.UP;
                         }
                         else
                         {
                             // 真ん中へ向かう
-                            transform.position = Vector2.MoveTowards(transform.position, new Vector2(0, -3), fSpeedMove * Time.deltaTime);
+                            transform.position = Vector2.MoveTowards(transform.position, new Vector2(0, -1), fSpeedMove * Time.deltaTime);
                         }
                         break;
                     case STATE_ARRIVE.UP:
@@ -117,7 +117,7 @@ public class PlayerComponent : MonoBehaviour
                 {
                     // タックル
                     transform.Translate(2 * fSpeedMove * Time.deltaTime, 0, 0);
-                    PlayerAnimation(spriteArrayPlayerTackle);
+                    PlayerAnimation(spriteArrayPlayerRun/*Tackle*/);
                 }
                 break;
             case STATE_PLAYER.JUMP:

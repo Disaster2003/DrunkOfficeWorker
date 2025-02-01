@@ -85,7 +85,7 @@ public class HurdleComponent : MonoBehaviour
             if (transform.childCount == 0)
             {
                 // ƒvƒŒƒCƒ„[‚Ì‰º‚ğ’Ê‰ß‚³‚¹‚é
-                transform.Translate(5 * SpeedAdjust.GetCurrentSpeed * -Time.deltaTime, 0, 0);
+                transform.Translate(2 * SpeedAdjust.GetCurrentSpeed * -Time.deltaTime, 0, 0);
             }
             else Animation();
         }

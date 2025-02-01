@@ -8,6 +8,8 @@ public class Meter : MonoBehaviour
     private Text txtMeter;
     private float fMeter;
 
+    [SerializeField] GameObject arrow;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,14 @@ public class Meter : MonoBehaviour
     void Update()
     {
         fMeter = 100 -  HurdleComponent.DestroyCount * 10;
-        txtMeter.text = $"残り{fMeter.ToString("f0")}m";
+
+        if(fMeter <= 0)
+        {
+            // 自身の破棄
+            Destroy(arrow);
+            Destroy(transform.parent.gameObject);
+        }
+        // メーター更新
+        else txtMeter.text = $"残り{fMeter.ToString("f0")}m";
     }
 }

@@ -5,14 +5,25 @@ using UnityEngine.InputSystem; // 新Inputシステムの利用に必要
 
 public class PlayerTitleAnimation : MonoBehaviour
 {
+    private enum STATE_PLAYER
+    {
+        WAIT,   // 待機
+        AMAZING,// 驚き
+        RUN,    // 走行
+    }
+    private STATE_PLAYER state_player;
+
     [SerializeField, Header("目標地点のx座標")]
     private float position_xGoal;
-    private bool isMove; // true = 動いて良き, false = 動いたら悪し
 
+    private SpriteRenderer spriteRenderer;
     [Header("待機、驚愕、走行")]
     [SerializeField] private Sprite[] wait;
     [SerializeField] private Sprite[] amazing;
     [SerializeField] private Sprite[] run;
+    private float fTimerAnimation;
+    [SerializeField, Header("アニメーション間隔")]
+    private float INTERVAL_ANIMATION;
 
     private InputControl IC; // インプットアクションを定義
 
@@ -22,7 +33,10 @@ public class PlayerTitleAnimation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isMove = false;
+        state_player = STATE_PLAYER.WAIT;
+
+        // コンポーネントの取得
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         IC = new InputControl(); // インプットアクションを取得
         IC.Player.Decide.started += OnDecide; // アクションにイベントを登録
@@ -32,20 +46,31 @@ public class PlayerTitleAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isMove) return;
-
-        if (transform.position.x > position_xGoal)
+        switch (state_player)
         {
-            // シーン遷移の開始
-            GameManager.GetInstance.StartChangingScene();
+            case STATE_PLAYER.WAIT:
+                PlayerAnimation(wait);
+                break;
+            case STATE_PLAYER.AMAZING:
+                PlayerAnimation(amazing);
+                break;
+            case STATE_PLAYER.RUN:
+                if (transform.position.x > position_xGoal)
+                {
+                    // シーン遷移の開始
+                    GameManager.GetInstance.StartChangingScene();
 
-            // 自身の破棄
-            Destroy(gameObject);
-            return;
+                    // 自身の破棄
+                    Destroy(gameObject);
+                    return;
+                }
+
+                // 右移動
+                transform.Translate(speedMove * Time.deltaTime, 0, 0);
+
+                PlayerAnimation(run);
+                break;
         }
-
-        // 右移動
-        transform.Translate(speedMove * Time.deltaTime, 0, 0);
     }
 
     /// <summary>
@@ -54,9 +79,55 @@ public class PlayerTitleAnimation : MonoBehaviour
     /// <param name="context">決定ボタン</param>
     private void OnDecide(InputAction.CallbackContext context)
     {
-        if (isMove) return;
+        if (state_player != STATE_PLAYER.WAIT) return;
 
         // 移動開始
-        isMove = true;
+        state_player = STATE_PLAYER.AMAZING;
+    }
+
+    /// <summary>
+    /// プレイヤーのアニメーション処理
+    /// </summary>
+    /// <param name="sprites">アニメーションする画像配列</param>
+    private void PlayerAnimation(Sprite[] sprites)
+    {
+        if (sprites == null) return;
+
+        if (fTimerAnimation >= INTERVAL_ANIMATION)
+        {
+            // インターバルの初期化
+            fTimerAnimation = 0;
+
+            for (int i = 0; i < sprites.Length; i++)
+            {
+                if (spriteRenderer.sprite == sprites[i])
+                {
+                    if (i == sprites.Length - 1)
+                    {
+                        // 最初の画像へ
+                        spriteRenderer.sprite = sprites[0];
+
+                        if(sprites == amazing) state_player = STATE_PLAYER.RUN;
+                        return;
+                    }
+                    else
+                    {
+                        // 次の画像へ
+                        spriteRenderer.sprite = sprites[i + 1];
+                        return;
+                    }
+                }
+                else if (i == sprites.Length - 1)
+                {
+                    // 画像を変更する
+                    spriteRenderer.sprite = sprites[0];
+                }
+            }
+        }
+        else
+        {
+            // アニメーションのインターバル中
+            fTimerAnimation += Time.deltaTime;
+        }
     }
 }

@@ -813,8 +813,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1595692240}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6, y: -3, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalPosition: {x: 5, y: -1.75, z: 0}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -833,9 +833,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   position_xGoal: 11
-  wait: []
-  amazing: []
-  run: []
+  wait:
+  - {fileID: -1963337376, guid: d9e8e3579c9f100429bcf52552adeb7f, type: 3}
+  - {fileID: -164125692, guid: d9e8e3579c9f100429bcf52552adeb7f, type: 3}
+  - {fileID: 579175760, guid: d9e8e3579c9f100429bcf52552adeb7f, type: 3}
+  - {fileID: -1058437973, guid: d9e8e3579c9f100429bcf52552adeb7f, type: 3}
+  amazing:
+  - {fileID: -1963337376, guid: d9e8e3579c9f100429bcf52552adeb7f, type: 3}
+  run:
+  - {fileID: -143329996, guid: d9e8e3579c9f100429bcf52552adeb7f, type: 3}
+  - {fileID: 1374414250, guid: d9e8e3579c9f100429bcf52552adeb7f, type: 3}
+  - {fileID: 1339754450, guid: d9e8e3579c9f100429bcf52552adeb7f, type: 3}
+  - {fileID: 1391710975, guid: d9e8e3579c9f100429bcf52552adeb7f, type: 3}
+  INTERVAL_ANIMATION: 0.2
   speedMove: 2
 --- !u!1 &1626620760
 GameObject:

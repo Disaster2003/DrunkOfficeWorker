@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Test3 : MonoBehaviour
 {
+    Test3 instance;
+
     public struct Status
     {
         public int hp,
@@ -23,6 +25,9 @@ public class Test3 : MonoBehaviour
     void Start()
     {
         status = new Status(0, 0, 0);
+
+        Dictionary<int, string> a = new Dictionary<int, string>();
+        if (a[1].Length == 0)return;
 
         //Color.black;
         //Color.blue;

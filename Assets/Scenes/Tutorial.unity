@@ -471,7 +471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 939253038916842660, guid: 01e62b4e98ba3dc4ea72cd808983c1eb, type: 3}
       propertyPath: positionStart.y
-      value: -3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 939253038916842664, guid: 01e62b4e98ba3dc4ea72cd808983c1eb, type: 3}
       propertyPath: m_RootOrder
