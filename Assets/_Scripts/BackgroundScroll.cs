@@ -7,6 +7,12 @@ public class BackgroundScroll : MonoBehaviour
     [SerializeField, Header("目標地点")]
     private Vector2 positionGoal = Vector2.zero;
 
+    private bool isStopped;
+    /// <summary>
+    /// 背景のスクロール停止を取得する
+    /// </summary>
+    public bool GetIsStopped { get { return isStopped; } }
+
     private bool isFinished;
     /// <summary>
     /// 背景のスクロール終了を取得する
@@ -25,6 +31,7 @@ public class BackgroundScroll : MonoBehaviour
         // 初期配置
         transform.position = Vector3.zero;
 
+        isStopped = false;
         isFinished = false;
 
         // コンポーネントの取得
@@ -42,7 +49,11 @@ public class BackgroundScroll : MonoBehaviour
             return;
         }
 
-        if (isFinished) return;
+        if (isFinished)
+        {
+            isStopped = true;
+            return;
+        }
 
         // 障害物が定位置でないならスクロールし続ける
         GameObject hurdle = GameObject.FindGameObjectWithTag("Hurdle");
@@ -50,11 +61,13 @@ public class BackgroundScroll : MonoBehaviour
         {
             if (Mathf.Abs(hurdle.transform.position.x) < 0.2f)
             {
+                isStopped = true;
                 return;
             }
         }
 
         // 背景のスクロール
+        isStopped = false;
         transform.Translate(5 * -Time.deltaTime, 0, 0);
 
         if (transform.position.x <= positionGoal.x)

@@ -41,9 +41,10 @@ public class PlayerComponent : MonoBehaviour
     private BackgroundScroll background;
     private enum STATE_ARRIVE
     {
-        MOVE,
-        CENTER,
-        UP,
+        NONE,   // 何もなし
+        MOVE,   // 動作中
+        CENTER, // 駅の入り口
+        ENTER,  // 入っていく
     }
     private STATE_ARRIVE state_arrive;
 
@@ -65,7 +66,7 @@ public class PlayerComponent : MonoBehaviour
         rb2D.freezeRotation = true;
         isJumped = false;
 
-        state_arrive = STATE_ARRIVE.MOVE;
+        state_arrive = STATE_ARRIVE.NONE;
     }
 
     // Update is called once per frame
@@ -74,35 +75,58 @@ public class PlayerComponent : MonoBehaviour
         switch(state_player)
         {
             case STATE_PLAYER.WAIT:
-                // 待機/走行アニメーション
-                float distance = Vector2.Distance(transform.position, positionStart);
-                PlayerAnimation(distance < 0.1f ? spriteArrayPlayerWait : spriteArrayPlayerRun);
-
                 switch (state_arrive)
                 {
-                    case STATE_ARRIVE.MOVE:
-                        if (Vector2.Distance(transform.position, positionStart) > 0.1f)
+                    case STATE_ARRIVE.NONE:
+                        if (background.GetIsFinished)
                         {
-                            // 開始位置へ向かう
-                            transform.position = Vector2.MoveTowards(transform.position, positionStart, fSpeedMove * Time.deltaTime);
+                            // 帰宅開始
+                            state_arrive = STATE_ARRIVE.CENTER;
+                            return;
                         }
-                        // 帰宅
-                        else if (background.GetIsFinished) state_arrive = STATE_ARRIVE.CENTER;
+                        if (!background.GetIsStopped)
+                        {
+                            // 動作開始
+                            state_arrive = STATE_ARRIVE.MOVE;
+                            return;
+                        }
+
+                        PlayerAnimation(spriteArrayPlayerWait);
+                        break;
+                    case STATE_ARRIVE.MOVE:
+                        if (background.GetIsStopped)
+                        {
+                            if (Vector2.Distance(transform.position, positionStart) < 0.1f)
+                            {
+                                // 動作終了
+                                state_arrive = STATE_ARRIVE.NONE;
+                                return;
+                            }
+                        }
+
+                        // 開始位置へ向かう
+                        transform.position = Vector2.MoveTowards(transform.position, positionStart, fSpeedMove * Time.deltaTime);
+
+                        PlayerAnimation(spriteArrayPlayerRun);
                         break;
                     case STATE_ARRIVE.CENTER:
                         if (Vector2.Distance(transform.position, new Vector2(0, -1)) < 0.1f)
                         {
-                            state_arrive = STATE_ARRIVE.UP;
+                            state_arrive = STATE_ARRIVE.ENTER;
                         }
                         else
                         {
                             // 真ん中へ向かう
                             transform.position = Vector2.MoveTowards(transform.position, new Vector2(0, -1), fSpeedMove * Time.deltaTime);
+
+                            PlayerAnimation(spriteArrayPlayerRun);
                         }
                         break;
-                    case STATE_ARRIVE.UP:
+                    case STATE_ARRIVE.ENTER:
                         // 真ん中上へ向かう
                         transform.position = Vector2.MoveTowards(transform.position, new Vector2(0, 3), fSpeedMove * Time.deltaTime);
+
+                        PlayerAnimation(spriteArrayPlayerWait);
                         break;
                 }
                 break;
@@ -198,6 +222,7 @@ public class PlayerComponent : MonoBehaviour
             // 着地
             isJumped = false;
             state_player = STATE_PLAYER.WAIT;
+            state_arrive = STATE_ARRIVE.MOVE;
             transform.position = new Vector3(transform.position.x, positionStart.y);
             rb2D.velocity = Vector2.zero;
             rb2D.gravityScale = 0;
