@@ -177,6 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state_scene: 4
   state_level: 0
+  select: {fileID: 8300000, guid: 729bc2b8622f16f4eaa8a9e79c92b444, type: 3}
 --- !u!114 &46128885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,7 +453,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2f3bd91524484724685e27973ca554c9, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7a50624a34d859c4d981e07c31b8d4d4, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -592,6 +593,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state_scene: 3
   state_level: 2
+  select: {fileID: 8300000, guid: 729bc2b8622f16f4eaa8a9e79c92b444, type: 3}
 --- !u!114 &895650497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -834,18 +836,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position_xGoal: 11
   wait:
-  - {fileID: -1963337376, guid: d9e8e3579c9f100429bcf52552adeb7f, type: 3}
-  - {fileID: -164125692, guid: d9e8e3579c9f100429bcf52552adeb7f, type: 3}
-  - {fileID: 579175760, guid: d9e8e3579c9f100429bcf52552adeb7f, type: 3}
-  - {fileID: -1058437973, guid: d9e8e3579c9f100429bcf52552adeb7f, type: 3}
-  amazing:
-  - {fileID: -1963337376, guid: d9e8e3579c9f100429bcf52552adeb7f, type: 3}
+  - {fileID: 1388738774, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: -1451749890, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: 1815286766, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: -822768816, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
   run:
-  - {fileID: -143329996, guid: d9e8e3579c9f100429bcf52552adeb7f, type: 3}
-  - {fileID: 1374414250, guid: d9e8e3579c9f100429bcf52552adeb7f, type: 3}
-  - {fileID: 1339754450, guid: d9e8e3579c9f100429bcf52552adeb7f, type: 3}
-  - {fileID: 1391710975, guid: d9e8e3579c9f100429bcf52552adeb7f, type: 3}
+  - {fileID: 1452682416, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: 1887477011, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: 735006947, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: 650942337, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  amazing:
+  - {fileID: 1259852559, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: 743733913, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: 796710202, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: -1391784630, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
   INTERVAL_ANIMATION: 0.2
+  INTERVAL_AMAZING: 1
   speedMove: 2
 --- !u!1 &1626620760
 GameObject:
@@ -1053,6 +1059,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state_scene: 3
   state_level: 3
+  select: {fileID: 8300000, guid: 729bc2b8622f16f4eaa8a9e79c92b444, type: 3}
 --- !u!114 &1930745861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1276,6 +1283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state_scene: 1
   state_level: 0
+  select: {fileID: 8300000, guid: 729bc2b8622f16f4eaa8a9e79c92b444, type: 3}
 --- !u!114 &2018935927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1432,6 +1440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state_scene: 3
   state_level: 1
+  select: {fileID: 8300000, guid: 729bc2b8622f16f4eaa8a9e79c92b444, type: 3}
 --- !u!114 &2044446030
 MonoBehaviour:
   m_ObjectHideFlags: 0

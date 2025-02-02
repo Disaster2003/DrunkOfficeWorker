@@ -27,9 +27,9 @@ public class PlayerComponent : MonoBehaviour
     [Header("プレイヤーのアニメーション画像配列")]
     [SerializeField] private Sprite[] spriteArrayPlayerWait;
     [SerializeField] private Sprite[] spriteArrayPlayerRun;
-    [SerializeField] private Sprite[] spriteArrayPlayerTackle;
     [SerializeField] private Sprite[] spriteArrayPlayerJumpUp;
     [SerializeField] private Sprite[] spriteArrayPlayerJumpDown;
+    [SerializeField] private Sprite[] spriteArrayPlayerTackle;
     private float fTimerAnimation;
     [SerializeField, Header("アニメーション間隔")]
     private float INTERVAL_ANIMATION;
@@ -59,7 +59,7 @@ public class PlayerComponent : MonoBehaviour
 
         // コンポーネントの取得
         spriteRenderer = GetComponent<SpriteRenderer>();
-        // spriteRenderer.sprite = spritesPlayerWait[0];
+        spriteRenderer.sprite = spriteArrayPlayerWait[0];
         fTimerAnimation = 0;
 
         rb2D = GetComponent<Rigidbody2D>();
@@ -131,7 +131,7 @@ public class PlayerComponent : MonoBehaviour
                 }
                 break;
             case STATE_PLAYER.TACKLE:
-                if (transform.position.x < 0)
+                if (transform.position.x < -4)
                 {
                     // 走行
                     transform.Translate(fSpeedMove * Time.deltaTime, 0, 0);
@@ -141,7 +141,7 @@ public class PlayerComponent : MonoBehaviour
                 {
                     // タックル
                     transform.Translate(2 * fSpeedMove * Time.deltaTime, 0, 0);
-                    PlayerAnimation(spriteArrayPlayerRun/*Tackle*/);
+                    PlayerAnimation(spriteArrayPlayerTackle);
                 }
                 break;
             case STATE_PLAYER.JUMP:
@@ -180,6 +180,11 @@ public class PlayerComponent : MonoBehaviour
                 {
                     if (i == sprites.Length - 1)
                     {
+                        if(sprites == spriteArrayPlayerJumpUp || sprites == spriteArrayPlayerJumpDown)
+                        {
+                            return;
+                        }
+
                         // 最初の画像へ
                         spriteRenderer.sprite = sprites[0];
                         return;

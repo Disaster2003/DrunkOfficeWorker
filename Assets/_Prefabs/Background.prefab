@@ -111,7 +111,7 @@ Transform:
   m_GameObject: {fileID: 3069046161747211324}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.95, y: 0.95, z: 1}
+  m_LocalScale: {x: 0.925, y: 0.925, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3069046161424363298}
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bb3e0683f111d749ae19d9e5e292f2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionGoal: {x: -18.25, y: 0}
+  positionGoal: {x: -17.5, y: 0}
   nomiyagai:
   - {fileID: 21300000, guid: a151645a056fdde4884adb8dce1f302f, type: 3}
   - {fileID: 21300000, guid: 197775b4857d05e4995993191f5d2001, type: 3}

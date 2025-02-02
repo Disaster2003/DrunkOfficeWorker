@@ -12,6 +12,8 @@ public class DecideScene : MonoBehaviour
 
     private InputControl IC; // インプットアクションを定義
 
+    [SerializeField] AudioClip select;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +31,7 @@ public class DecideScene : MonoBehaviour
         if (gameObject != EventSystem.current.currentSelectedGameObject) return;
 
         // 遷移先のシーンを決定する
+        GameManager.GetInstance.PlaySE(select);
         GameManager.GetInstance.SetNextScene(state_scene, state_level);
     }
 

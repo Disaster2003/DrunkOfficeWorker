@@ -37,6 +37,8 @@ public class HurdleComponent : MonoBehaviour
         set { countDestroy = value; }
     }
 
+    [SerializeField] AudioClip SE_hit;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -115,6 +117,7 @@ public class HurdleComponent : MonoBehaviour
             collision.GetComponent<PlayerComponent>().SetPlayerState = PlayerComponent.STATE_PLAYER.WAIT;
 
             // ç∂è„Ç…Ç‘Ç¡îÚÇŒÇ∑
+            GameManager.GetInstance.PlaySE(SE_hit);
             Vector2 topLeft = Vector2.up + Vector2.left;
             rb2D.AddForce(topLeft * 10, ForceMode2D.Impulse);
             rb2D.AddTorque(180, ForceMode2D.Impulse);

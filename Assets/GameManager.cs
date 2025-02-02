@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public static GameManager GetInstance { get { return instance; } }
 
-
     public enum STATE_SCENE
     {
         TITLE = 0,    // タイトル画面
@@ -41,6 +40,8 @@ public class GameManager : MonoBehaviour
     private Image imgFade;
     private bool isChangingScene; // true = シーン遷移する, false = シーン遷移しない
 
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +67,8 @@ public class GameManager : MonoBehaviour
 
         // 名前の初期化
         PlayerPrefs.SetString("PlayerName", "");
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -164,4 +167,13 @@ public class GameManager : MonoBehaviour
     /// シーンの切り替えを開始する
     /// </summary>
     public void StartChangingScene() { isChangingScene = true; }
+
+    /// <summary>
+    /// SEを鳴らす
+    /// </summary>
+    /// <param name="se">鳴らすSE</param>
+    public void PlaySE(AudioClip se)
+    {
+        audioSource.PlayOneShot(se);
+    }
 }

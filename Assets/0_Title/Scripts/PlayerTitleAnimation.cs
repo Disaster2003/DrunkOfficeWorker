@@ -19,11 +19,13 @@ public class PlayerTitleAnimation : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     [Header("待機、驚愕、走行")]
     [SerializeField] private Sprite[] wait;
-    [SerializeField] private Sprite[] amazing;
     [SerializeField] private Sprite[] run;
+    [SerializeField] private Sprite[] amazing;
     private float fTimerAnimation;
     [SerializeField, Header("アニメーション間隔")]
     private float INTERVAL_ANIMATION;
+    [SerializeField, Header("驚きのインターバル")]
+    private float INTERVAL_AMAZING;
 
     private InputControl IC; // インプットアクションを定義
 
@@ -55,6 +57,12 @@ public class PlayerTitleAnimation : MonoBehaviour
                 PlayerAnimation(amazing);
                 break;
             case STATE_PLAYER.RUN:
+                if(INTERVAL_AMAZING > 0)
+                {
+                    INTERVAL_AMAZING -= Time.deltaTime;
+                    return;
+                }
+
                 if (transform.position.x > position_xGoal)
                 {
                     // シーン遷移の開始
@@ -104,10 +112,14 @@ public class PlayerTitleAnimation : MonoBehaviour
                 {
                     if (i == sprites.Length - 1)
                     {
+                        if (sprites == amazing)
+                        {
+                            state_player = STATE_PLAYER.RUN;
+                            return;
+                        }
+
                         // 最初の画像へ
                         spriteRenderer.sprite = sprites[0];
-
-                        if(sprites == amazing) state_player = STATE_PLAYER.RUN;
                         return;
                     }
                     else
