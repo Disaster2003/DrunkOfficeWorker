@@ -12,6 +12,7 @@ public class ButtonAction : MonoBehaviour
     [SerializeField, Header("矢印画像")]
     private Sprite[] spriteArrayArrow;
 
+    private Image imgButton;
     [SerializeField, Header("長押しゲージのベース")]
     private GameObject imgInputGaugeBase;
     [SerializeField, Header("長押しゲージ")]
@@ -46,6 +47,9 @@ public class ButtonAction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // コンポーネントの取得
+        imgButton = GetComponent<Image>();
+
         DecideButton();
 
         // 押下状態の初期化
@@ -87,6 +91,22 @@ public class ButtonAction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(transform.position.x < 4)
+        {
+            // 先頭3つを表示
+            imgButton.color = Color.white;
+        }
+        //else if(transform.position.x < 6)
+        //{
+        //    // 4つめを半透明
+        //    imgButton.color = new Color(1, 1, 1, 0.5f);
+        //}
+        else
+        {
+            // 以降非表示
+            imgButton.color = Color.black;
+        }
+
         if (!isPushed) return;
 
         if (fTimerPushLong >= 0.5f)
@@ -118,11 +138,11 @@ public class ButtonAction : MonoBehaviour
         // 画像の初期化
         if (Gamepad.all.Count > 0)
         {
-            GetComponent<Image>().sprite = spriteArrayXboxButton[rand];
+            imgButton.sprite = spriteArrayXboxButton[rand];
         }
         else
         {
-            GetComponent<Image>().sprite = spriteArrayArrow[rand];
+            imgButton.sprite = spriteArrayArrow[rand];
         }
         imgInputGauge.fillAmount = 0;
         imgRepeatGauge.sprite = spriteArrayBeer[0];

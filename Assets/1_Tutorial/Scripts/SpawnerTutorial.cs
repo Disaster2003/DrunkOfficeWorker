@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpawnerTutorial : MonoBehaviour
 {
     [SerializeField] private GameObject[] goArrayHurdle;
     private int iIndexSpawn;
     private float iIntervalSpawn;
+
+    [SerializeField] private Text txtTutorial;
 
     // Start is called before the first frame update
     void Start()
@@ -45,5 +48,18 @@ public class SpawnerTutorial : MonoBehaviour
 
         // 生成カウントを進める
         iIndexSpawn++;
+
+        switch (iIndexSpawn)
+        {
+            case 1:
+                txtTutorial.text = "おせ!!";
+                break;
+            case 2:
+                txtTutorial.text = "ながおし!!";
+                break;
+            case 3:
+                txtTutorial.text = "れんだ!!";
+                break;
+        }
     }
 }
