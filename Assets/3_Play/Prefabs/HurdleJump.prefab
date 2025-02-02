@@ -2724,6 +2724,10 @@ MonoBehaviour:
   - {fileID: 2063165324, guid: 124f88f489be4af44a3cac3ea6b0cf84, type: 3}
   ojisan:
   - {fileID: 21300000, guid: 911a7f4b9bd0e8a4f844aee5fd0bfb04, type: 3}
+  cockroach:
+  - {fileID: 21300000, guid: 631c9bd3ffcfac143a72f2c7ab741d52, type: 3}
+  puddle:
+  - {fileID: 21300000, guid: 76548a443699d624e843b8a7d3164507, type: 3}
   SE_hit: {fileID: 8300000, guid: 0792d19cc3f343142a6dd9d5e9b6e4dd, type: 3}
 --- !u!1 &8736886517745220774
 GameObject:

@@ -26,6 +26,8 @@ public class HurdleComponent : MonoBehaviour
     [SerializeField] private Sprite[] rubbish;
 
     [SerializeField] private Sprite[] ojisan;
+    [SerializeField] private Sprite[] cockroach;
+    [SerializeField] private Sprite[] puddle;
 
     private static int countDestroy;
     /// <summary>
@@ -59,6 +61,8 @@ public class HurdleComponent : MonoBehaviour
                 break;
             case PlayerComponent.STATE_PLAYER.JUMP:
                 spritesList.Add(ojisan);
+                spritesList.Add(cockroach);
+                spritesList.Add(puddle);
                 break;
         }
         spritesHurdle = spritesList[Random.Range(0, spritesList.Count)];

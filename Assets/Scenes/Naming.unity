@@ -9963,6 +9963,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state_scene: 3
   state_level: 0
+  select: {fileID: 8300000, guid: 729bc2b8622f16f4eaa8a9e79c92b444, type: 3}
 --- !u!224 &7153569618784196400
 RectTransform:
   m_ObjectHideFlags: 0
