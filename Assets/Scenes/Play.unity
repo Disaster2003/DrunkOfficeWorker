@@ -1014,6 +1014,7 @@ MonoBehaviour:
   time: 90
   spawner: {fileID: 1350815637}
   backGroundDarkken: {fileID: 784659714}
+  mainCamera: {fileID: 628041587}
 --- !u!114 &2025406027
 MonoBehaviour:
   m_ObjectHideFlags: 0

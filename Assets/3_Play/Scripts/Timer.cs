@@ -11,7 +11,7 @@ public class Timer : MonoBehaviour
     private Text txtTimer;
 
     [SerializeField, Header("制限時間")]
-    private float time = 30.0f;
+    private float time = 90.0f;
 
     private static float timer = 0;
 
@@ -26,15 +26,24 @@ public class Timer : MonoBehaviour
 
     [SerializeField] private BackGroundDarkken backGroundDarkken;
 
+    [SerializeField] private AudioSource mainCamera;
+
     /// <summary>
     /// スタートイベント
     /// </summary>
     private void Start()
     {
+        // コンポーネントの取得
         txtTimer = GetComponent<Text>();
+
+        // テキスト色の初期化
+        txtTimer.color = Color.white;
 
         // 値を初期化
         timer = time;
+
+        // 再生速度の初期化
+        mainCamera.pitch = 1f;
     }
 
     /// <summary>
@@ -52,6 +61,12 @@ public class Timer : MonoBehaviour
         }
         else
         {
+            if (timer <= 30)
+            {
+                txtTimer.color = Color.red;
+                mainCamera.pitch = 1.25f;
+            }
+
             // 時間経過
             timer -= Time.deltaTime;
         }
