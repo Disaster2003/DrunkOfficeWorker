@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 86fc6f7a1a340584caf8de037c896196
+guid: bfb21ec2099ae81458103a019166530f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -133,8 +133,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7746adb354ddcd84698f1d8d3ea281d5
-      internalID: 1275676035
+      spriteID: 15657a4c9c7105746b8bcdedab1475c4
+      internalID: -298261264
       vertices: []
       indices: 
       edges: []
@@ -154,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84f0043098515834a8ea9ed9b59523d7
-      internalID: 1695144864
+      spriteID: bb1f161cdce0b664ba4c7e300ba39180
+      internalID: 1863762589
       vertices: []
       indices: 
       edges: []
@@ -175,8 +175,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44fdc37699ce30e4e940171a18b21506
-      internalID: 499599658
+      spriteID: 373d70289da8c0844b37c639d16e9b72
+      internalID: 1337753479
       vertices: []
       indices: 
       edges: []
@@ -196,8 +196,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3dc88952371a4274881ebed2e8ee4821
-      internalID: -1510461886
+      spriteID: 25be566455f51c34987f85d92cb1c2ab
+      internalID: 357163248
       vertices: []
       indices: 
       edges: []
@@ -217,8 +217,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea58c0c544b0ac747b57b20814ac2b05
-      internalID: 1790066424
+      spriteID: 27c2042913e60e2459c148e46b373987
+      internalID: 632806676
       vertices: []
       indices: 
       edges: []
@@ -234,11 +234,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      level_0: 1275676035
-      level_1: 1695144864
-      level_2: 499599658
-      level_3: -1510461886
-      level_4: 1790066424
+      level_0: -298261264
+      level_1: 1863762589
+      level_2: 1337753479
+      level_3: 357163248
+      level_4: 632806676
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
