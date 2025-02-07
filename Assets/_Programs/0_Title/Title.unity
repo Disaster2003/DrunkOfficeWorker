@@ -792,7 +792,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 1388738774, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -831,21 +831,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   position_xGoal: 11
-  wait:
-  - {fileID: 1388738774, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
-  - {fileID: -1451749890, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
-  - {fileID: 1815286766, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
-  - {fileID: -822768816, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
-  run:
-  - {fileID: 1452682416, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
-  - {fileID: 1887477011, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
-  - {fileID: 735006947, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
-  - {fileID: 650942337, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
-  amazing:
-  - {fileID: 1259852559, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
-  - {fileID: 743733913, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
-  - {fileID: 796710202, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
-  - {fileID: -1391784630, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  namesSpriteWait:
+  - player_0
+  - player_1
+  - player_2
+  - player_3
+  namesSpriteRun:
+  - player_4
+  - player_5
+  - player_6
+  - player_7
+  namesSpriteAmazing:
+  - player_18
+  - player_19
+  - player_20
+  - player_21
   INTERVAL_ANIMATION: 0.2
   INTERVAL_AMAZING: 1
   speedMove: 2

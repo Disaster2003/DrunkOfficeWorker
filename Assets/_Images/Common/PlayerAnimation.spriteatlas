@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PlayerAnimation
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - dd790ecbec5dbfd4a8937cacbc584fd5: -38470681
+    - dd790ecbec5dbfd4a8937cacbc584fd5: -1534598238
+    - dd790ecbec5dbfd4a8937cacbc584fd5: -1884417061
+    - dd790ecbec5dbfd4a8937cacbc584fd5: 1776349926
+    - dd790ecbec5dbfd4a8937cacbc584fd5: -1249041532
+    - dd790ecbec5dbfd4a8937cacbc584fd5: -411325288
+    - dd790ecbec5dbfd4a8937cacbc584fd5: 932051379
+    - dd790ecbec5dbfd4a8937cacbc584fd5: -1462084488
+    - dd790ecbec5dbfd4a8937cacbc584fd5: 1259852559
+    - dd790ecbec5dbfd4a8937cacbc584fd5: 743733913
+    - dd790ecbec5dbfd4a8937cacbc584fd5: 628877300
+    - dd790ecbec5dbfd4a8937cacbc584fd5: -869935485
+    - dd790ecbec5dbfd4a8937cacbc584fd5: 1887477011
+    - dd790ecbec5dbfd4a8937cacbc584fd5: 1452682416
+    - dd790ecbec5dbfd4a8937cacbc584fd5: 650942337
+    - dd790ecbec5dbfd4a8937cacbc584fd5: 735006947
+    - dd790ecbec5dbfd4a8937cacbc584fd5: -1451749890
+    - dd790ecbec5dbfd4a8937cacbc584fd5: 1388738774
+    - dd790ecbec5dbfd4a8937cacbc584fd5: -822768816
+    - dd790ecbec5dbfd4a8937cacbc584fd5: 1815286766
+    - dd790ecbec5dbfd4a8937cacbc584fd5: -1391784630
+    - dd790ecbec5dbfd4a8937cacbc584fd5: 796710202
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: -38470681, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: -1534598238, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: -1884417061, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: 1776349926, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: -1249041532, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: -411325288, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: 932051379, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: -1462084488, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: 1259852559, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: 743733913, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: 628877300, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: -869935485, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: 1887477011, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: 1452682416, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: 650942337, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: 735006947, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: -1451749890, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: 1388738774, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: -822768816, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: 1815286766, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: -1391784630, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  - {fileID: 796710202, guid: dd790ecbec5dbfd4a8937cacbc584fd5, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - player_14
+  - player_15
+  - player_16
+  - player_17
+  - player_10
+  - player_11
+  - player_12
+  - player_13
+  - player_18
+  - player_19
+  - player_9
+  - player_8
+  - player_5
+  - player_4
+  - player_7
+  - player_6
+  - player_1
+  - player_0
+  - player_3
+  - player_2
+  - player_21
+  - player_20
+  m_RenderDataMap: {}
+  m_Tag: PlayerAnimation
+  m_IsVariant: 0

@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.InputSystem; // 新Inputシステムの利用に必要
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.U2D;
 
 public class PlayerTitleAnimation : MonoBehaviour
 {
@@ -17,10 +20,12 @@ public class PlayerTitleAnimation : MonoBehaviour
     private float position_xGoal;
 
     private SpriteRenderer spriteRenderer;
+    private AsyncOperationHandle<SpriteAtlas> handle;
+    private Sprite[] spritesAnimation;
     [Header("待機、驚愕、走行")]
-    [SerializeField] private Sprite[] wait;
-    [SerializeField] private Sprite[] run;
-    [SerializeField] private Sprite[] amazing;
+    [SerializeField] private string[] namesSpriteWait;
+    [SerializeField] private string[] namesSpriteRun;
+    [SerializeField] private string[] namesSpriteAmazing;
     private float fTimerAnimation;
     [SerializeField, Header("アニメーション間隔")]
     private float INTERVAL_ANIMATION;
@@ -40,6 +45,11 @@ public class PlayerTitleAnimation : MonoBehaviour
         // コンポーネントの取得
         spriteRenderer = GetComponent<SpriteRenderer>();
 
+        // スプライトシートをロード
+        handle = Addressables.LoadAssetAsync<SpriteAtlas>("PlayerAnimation");
+
+        LoadAnimationSprite(namesSpriteWait);
+
         IC = new InputControl(); // インプットアクションを取得
         IC.Player.Decide.started += OnDecide; // アクションにイベントを登録
         IC.Enable(); // インプットアクションを機能させる為に有効化する。
@@ -48,37 +58,34 @@ public class PlayerTitleAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (state_player)
+        PlayerAnimation();
+
+        if (state_player != STATE_PLAYER.RUN) return;
+
+        if (INTERVAL_AMAZING > 0)
         {
-            case STATE_PLAYER.WAIT:
-                PlayerAnimation(wait);
-                break;
-            case STATE_PLAYER.AMAZING:
-                PlayerAnimation(amazing);
-                break;
-            case STATE_PLAYER.RUN:
-                if(INTERVAL_AMAZING > 0)
-                {
-                    INTERVAL_AMAZING -= Time.deltaTime;
-                    return;
-                }
-
-                if (transform.position.x > position_xGoal)
-                {
-                    // シーン遷移の開始
-                    GameManager.GetInstance.StartChangingScene();
-
-                    // 自身の破棄
-                    Destroy(gameObject);
-                    return;
-                }
-
-                // 右移動
-                transform.Translate(speedMove * Time.deltaTime, 0, 0);
-
-                PlayerAnimation(run);
-                break;
+            INTERVAL_AMAZING -= Time.deltaTime;
+            return;
         }
+
+        if (transform.position.x > position_xGoal)
+        {
+            // シーン遷移の開始
+            GameManager.GetInstance.StartChangingScene();
+
+            // 自身の破棄
+            Destroy(gameObject);
+            return;
+        }
+
+        // 右移動
+        transform.Translate(speedMove * Time.deltaTime, 0, 0);
+    }
+
+    private void OnDestroy()
+    {
+        // ロードした画像の解放
+        Addressables.Release(handle);
     }
 
     /// <summary>
@@ -91,55 +98,84 @@ public class PlayerTitleAnimation : MonoBehaviour
 
         // 移動開始
         state_player = STATE_PLAYER.AMAZING;
+        LoadAnimationSprite(namesSpriteAmazing);
     }
 
     /// <summary>
     /// プレイヤーのアニメーション処理
     /// </summary>
-    /// <param name="sprites">アニメーションする画像配列</param>
-    private void PlayerAnimation(Sprite[] sprites)
+    private void PlayerAnimation()
     {
-        if (sprites == null) return;
+        if (spritesAnimation == null) return;
 
-        if (fTimerAnimation >= INTERVAL_ANIMATION)
+        if (fTimerAnimation < INTERVAL_ANIMATION)
         {
-            // インターバルの初期化
-            fTimerAnimation = 0;
+            // アニメーションのインターバル中
+            fTimerAnimation += Time.deltaTime;
+            return;
+        }
 
-            for (int i = 0; i < sprites.Length; i++)
+        // インターバルの初期化
+        fTimerAnimation = 0;
+
+        for (int i = 0; i < spritesAnimation.Length; i++)
+        {
+            if (spriteRenderer.sprite == spritesAnimation[i])
             {
-                if (spriteRenderer.sprite == sprites[i])
+                if (i == spritesAnimation.Length - 1)
                 {
-                    if (i == sprites.Length - 1)
+                    if (state_player == STATE_PLAYER.AMAZING)
                     {
-                        if (sprites == amazing)
-                        {
-                            state_player = STATE_PLAYER.RUN;
-                            return;
-                        }
+                        state_player = STATE_PLAYER.RUN;
+                        LoadAnimationSprite(namesSpriteRun);
+                        return;
+                    }
 
-                        // 最初の画像へ
-                        spriteRenderer.sprite = sprites[0];
-                        return;
-                    }
-                    else
-                    {
-                        // 次の画像へ
-                        spriteRenderer.sprite = sprites[i + 1];
-                        return;
-                    }
+                    // 最初の画像へ
+                    spriteRenderer.sprite = spritesAnimation[0];
+                    return;
                 }
-                else if (i == sprites.Length - 1)
+                else
                 {
-                    // 画像を変更する
-                    spriteRenderer.sprite = sprites[0];
+                    // 次の画像へ
+                    spriteRenderer.sprite = spritesAnimation[i + 1];
+                    return;
+                }
+            }
+            else if (i == spritesAnimation.Length - 1)
+            {
+                // 画像を変更する
+                spriteRenderer.sprite = spritesAnimation[0];
+            }
+        }
+    }
+
+    /// <summary>
+    /// アニメーション画像をロードする
+    /// </summary>
+    /// <param name="_namesSprite">ロードするアニメーション画像名</param>
+    private async void LoadAnimationSprite(string[] _namesSprite)
+    {
+        await handle.Task;
+
+        if (handle.Status == AsyncOperationStatus.Succeeded)
+        {
+            SpriteAtlas spriteAtlas = handle.Result;
+
+            // スプライトを配列に格納
+            spritesAnimation = new Sprite[_namesSprite.Length];
+            for (int i = 0; i < _namesSprite.Length; i++)
+            {
+                spritesAnimation[i] = spriteAtlas.GetSprite(_namesSprite[i]);
+                if (spritesAnimation[i] == null)
+                {
+                    Debug.LogError("Sprite not found: " + _namesSprite[i]);
                 }
             }
         }
         else
         {
-            // アニメーションのインターバル中
-            fTimerAnimation += Time.deltaTime;
+            Debug.LogError("Failed to load Sprite Atlas: " + handle.OperationException.Message);
         }
     }
 }
