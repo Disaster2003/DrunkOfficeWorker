@@ -183,8 +183,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   positionGoal: {x: -17.5, y: 0}
-  nomiyagai:
-  - {fileID: 21300000, guid: a151645a056fdde4884adb8dce1f302f, type: 3}
-  - {fileID: 21300000, guid: 197775b4857d05e4995993191f5d2001, type: 3}
-  station: {fileID: 21300000, guid: d0a4d123ea0593c40bbcbc51254b8895, type: 3}
+  namesNomiyagai:
+  - nomiyagai
+  - nomiyagai2
+  nameStation:
+  - station
   spawner: {fileID: 0}

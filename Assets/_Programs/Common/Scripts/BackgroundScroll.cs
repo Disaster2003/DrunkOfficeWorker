@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.U2D;
 
 public class BackgroundScroll : MonoBehaviour
 {
@@ -21,8 +24,10 @@ public class BackgroundScroll : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private SpriteRenderer spriteRendererChild;
-    [SerializeField] private Sprite[] nomiyagai;
-    [SerializeField] private Sprite station;
+    private AsyncOperationHandle<SpriteAtlas> handle;
+    private Sprite[] spritesBackground;
+    [SerializeField] private string[] namesNomiyagai;
+    [SerializeField] private string[] nameStation;
     [SerializeField] private GameObject spawner;
 
     // Start is called before the first frame update
@@ -37,6 +42,11 @@ public class BackgroundScroll : MonoBehaviour
         // コンポーネントの取得
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRendererChild = transform.GetChild(0).GetComponent<SpriteRenderer>();
+
+        // スプライトシートをロード
+        handle = Addressables.LoadAssetAsync<SpriteAtlas>("Background");
+
+        LoadBackgroundSprite(namesNomiyagai);
     }
 
     // Update is called once per frame
@@ -72,7 +82,7 @@ public class BackgroundScroll : MonoBehaviour
 
         if (transform.position.x <= positionGoal.x)
         {
-            if (spriteRendererChild.sprite == station)
+            if (spritesBackground.Length == nameStation.Length)
             {
                 // 役割終了
                 isFinished = true;
@@ -82,17 +92,54 @@ public class BackgroundScroll : MonoBehaviour
             {
                 // 駅到着
                 spriteRenderer.sprite = spriteRendererChild.sprite;
-                spriteRendererChild.sprite = station;
+
+                LoadBackgroundSprite(nameStation);
+                spriteRendererChild.sprite = spritesBackground[0];
             }
             else
             {
                 // 街中
                 spriteRenderer.sprite = spriteRendererChild.sprite;
-                spriteRendererChild.sprite = nomiyagai[Random.Range(0, nomiyagai.Length)];
+                spriteRendererChild.sprite = spritesBackground[Random.Range(0, namesNomiyagai.Length)];
             }
 
             // 初期位置へ
             transform.position = Vector3.zero;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        // ロードした画像の解放
+        Addressables.Release(handle);
+    }
+
+    /// <summary>
+    /// アニメーション画像をロードする
+    /// </summary>
+    /// <param name="_namesSprite">ロードするアニメーション画像名</param>
+    private async void LoadBackgroundSprite(string[] _namesSprite)
+    {
+        await handle.Task;
+
+        if (handle.Status == AsyncOperationStatus.Succeeded)
+        {
+            SpriteAtlas spriteAtlas = handle.Result;
+
+            // スプライトを配列に格納
+            spritesBackground = new Sprite[_namesSprite.Length];
+            for (int i = 0; i < _namesSprite.Length; i++)
+            {
+                spritesBackground[i] = spriteAtlas.GetSprite(_namesSprite[i]);
+                if (spritesBackground[i] == null)
+                {
+                    Debug.LogError("Sprite not found: " + _namesSprite[i]);
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError("Failed to load Sprite Atlas: " + handle.OperationException.Message);
         }
     }
 }
