@@ -65,5 +65,5 @@ SpriteAtlas:
   - nomiyagai2
   - nomiyagai
   m_RenderDataMap: {}
-  m_Tag: PlayBackground
+  m_Tag: Background
   m_IsVariant: 0

@@ -108,6 +108,8 @@ public class PlayerTitleAnimation : MonoBehaviour
     {
         if (spritesAnimation == null) return;
 
+        if (state_player == STATE_PLAYER.RUN && INTERVAL_AMAZING > 0) return;
+
         if (fTimerAnimation < INTERVAL_ANIMATION)
         {
             // アニメーションのインターバル中
