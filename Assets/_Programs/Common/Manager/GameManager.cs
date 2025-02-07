@@ -107,6 +107,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void OnExit()
     {
+        PlayerPrefs.DeleteAll();
+
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false; // ゲームプレイ終了
 #else
