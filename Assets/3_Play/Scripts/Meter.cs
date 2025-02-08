@@ -16,7 +16,7 @@ public class Meter : MonoBehaviour
         // コンポーネントの取得
         txtMeter = GetComponent<Text>();
 
-        fMeter = 0;
+        fMeter = 1;
     }
 
     // Update is called once per frame
