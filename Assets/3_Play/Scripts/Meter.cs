@@ -16,7 +16,7 @@ public class Meter : MonoBehaviour
         // コンポーネントの取得
         txtMeter = GetComponent<Text>();
 
-        fMeter = 1;
+        fMeter = 0;
     }
 
     // Update is called once per frame
@@ -24,7 +24,7 @@ public class Meter : MonoBehaviour
     {
         fMeter = 100 -  HurdleComponent.DestroyCount * 10;
 
-        if(fMeter <= 0)
+        if(fMeter == 0)
         {
             // 自身の破棄
             Destroy(arrow);
