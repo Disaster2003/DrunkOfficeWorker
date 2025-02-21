@@ -133,6 +133,9 @@ public class GameManager : MonoBehaviour
                 break;
             case STATE_SCENE.PLAY:
                 _state_level = state_level;
+
+                // ƒ[ƒ^[‚Ì‰Šú‰»
+                HurdleComponent.DestroyCount = 0;
                 break;
             case STATE_SCENE.RESULT:
                 if(_state_scene == STATE_SCENE.TITLE)
